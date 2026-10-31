@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="es">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/config.tailwind.js"></script>
@@ -18,86 +18,76 @@
 
   <style>
     @media print {
-      body {
-        background: #ffffff !important;
-        color: #111827 !important;
-      }
       .no-print {
         display: none !important;
       }
       .print-sheet {
-        background: #ffffff !important;
-        border: none !important;
         box-shadow: none !important;
+        border: none !important;
         padding: 0 !important;
-        max-width: 100% !important;
-      }
-      .print-text-dark {
-        color: #111827 !important;
-      }
-      .print-text-muted {
-        color: #4b5563 !important;
-      }
-      .print-border {
-        border-color: #e5e7eb !important;
       }
     }
   </style>
 </head>
 
-<body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen py-12 px-margin-mobile md:px-margin-tablet">
+<body class="bg-blueprint font-sans antialiased min-h-screen py-12 px-margin-mobile md:px-margin-tablet">
   <!-- Barra de Acciones Superior -->
   <div class="max-w-4xl mx-auto mb-6 flex flex-wrap items-center justify-between gap-3 no-print">
-    <a href="index.html" class="inline-flex items-center gap-2 font-body-sm text-body-sm px-4 py-2 rounded-lg bg-surface-container border border-white/10 text-on-surface hover:border-white/25 transition-all">
+    <a href="index.html" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:border-blue-500 hover:text-blue-600 shadow-sm transition-all">
       <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_back</span>
       <span>Volver al portafolio</span>
     </a>
-    <button onclick="window.print()" type="button" class="inline-flex items-center gap-2 font-body-sm text-body-sm font-medium px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-zinc-200 transition-all">
+    <button onclick="window.print()" type="button" class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all">
       <span class="material-symbols-outlined text-base" aria-hidden="true">print</span>
       <span>Guardar como PDF / Imprimir</span>
     </button>
   </div>
 
-  <!-- Hoja de CV Limpia -->
-  <main class="max-w-4xl mx-auto clean-card print-sheet rounded-xl p-space-lg md:p-space-xl flex flex-col gap-8">
+  <!-- Hoja de CV -->
+  <main class="max-w-4xl mx-auto identity-card print-sheet rounded-2xl p-6 sm:p-10 flex flex-col gap-8 relative overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500 no-print"></div>
+
     <!-- Encabezado -->
-    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10 print-border">
-      <div class="flex flex-col gap-1">
-        <h1 class="font-headline-lg text-primary print-text-dark tracking-tight">Edgar López</h1>
-        <p class="font-body-md text-on-surface-variant print-text-muted">Estudiante de Ingeniería Mecatrónica · Desarrollador Web y de Aplicaciones</p>
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+      <div class="flex items-center gap-4">
+        <img src="assets/logo.svg" alt="EL" width="48" height="48" class="w-12 h-12 rounded-xl shadow-sm no-print" />
+        <div class="flex flex-col gap-0.5">
+          <h1 class="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight">Edgar López</h1>
+          <p class="text-sm font-medium text-blue-600">Estudiante de Ingeniería Mecatrónica · Desarrollador Web y de Aplicaciones</p>
+        </div>
       </div>
 
-      <div class="flex flex-col gap-1 font-body-sm text-body-sm text-on-surface-variant print-text-muted">
+      <div class="flex flex-col gap-1 text-sm text-slate-600">
         <span>Caracas, Venezuela</span>
-        <a href="mailto:Socialedgar0710@gmail.com" class="hover:text-primary">Socialedgar0710@gmail.com</a>
-        <a href="https://wa.me/584129640005" target="_blank" rel="noopener noreferrer" class="hover:text-primary">+58 412-9640005</a>
-        <a href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer" class="hover:text-primary">github.com/Edgar-LT</a>
+        <a href="mailto:Socialedgar0710@gmail.com" class="hover:text-blue-600">Socialedgar0710@gmail.com</a>
+        <a href="https://wa.me/584129640005" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">+58 412-9640005</a>
+        <a href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">github.com/Edgar-LT</a>
       </div>
     </header>
 
     <!-- Perfil Profesional -->
     <section class="flex flex-col gap-2">
-      <h2 class="font-headline-sm text-body-md font-semibold text-primary print-text-dark">Perfil Profesional</h2>
-      <p class="font-body-sm text-body-sm text-on-surface-variant print-text-muted">
+      <h2 class="font-display font-bold text-base text-slate-900">Perfil Profesional</h2>
+      <p class="text-sm leading-relaxed text-slate-600">
         Desarrollador Web y de Aplicaciones con formación universitaria en Ingeniería Mecatrónica en Caracas, Venezuela. Enfocado en construir aplicaciones web modernas, interfaces móviles y soluciones que integran hardware y software con código limpio y mantenible.
       </p>
     </section>
 
     <!-- Formación & Trayectoria -->
     <section class="flex flex-col gap-3">
-      <h2 class="font-headline-sm text-body-md font-semibold text-primary print-text-dark">Formación y Trayectoria</h2>
+      <h2 class="font-display font-bold text-base text-slate-900">Formación y Trayectoria</h2>
       <div id="cv-timeline" class="flex flex-col gap-3"></div>
     </section>
 
     <!-- Habilidades & Stack -->
     <section class="flex flex-col gap-3">
-      <h2 class="font-headline-sm text-body-md font-semibold text-primary print-text-dark">Habilidades y Tecnologías</h2>
+      <h2 class="font-display font-bold text-base text-slate-900">Habilidades y Tecnologías</h2>
       <div id="cv-skills" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
     </section>
 
     <!-- Proyectos -->
     <section class="flex flex-col gap-3">
-      <h2 class="font-headline-sm text-body-md font-semibold text-primary print-text-dark">Proyectos</h2>
+      <h2 class="font-display font-bold text-base text-slate-900">Proyectos en Portafolio</h2>
       <div id="cv-projects" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
     </section>
   </main>
@@ -113,12 +103,12 @@
         timelineEl.innerHTML = data.timeline
           .map(
             (t) => `
-            <div class="p-4 rounded-lg bg-surface-container-lowest border border-white/[0.07] print-border">
-              <div class="flex justify-between font-body-sm text-body-sm">
-                <span class="text-primary print-text-dark font-semibold">${t.title}</span>
-                <span class="text-on-surface-variant print-text-muted">${t.period}</span>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-900 font-bold">${t.title}</span>
+                <span class="text-slate-500 font-mono text-xs">${t.period}</span>
               </div>
-              <p class="font-body-sm text-body-sm text-on-surface-variant print-text-muted mt-1">${t.description}</p>
+              <p class="text-sm text-slate-600 mt-1">${t.description}</p>
             </div>
           `
           )
@@ -130,13 +120,13 @@
         skillsEl.innerHTML = data.skillCategories
           .map(
             (cat) => `
-            <div class="p-4 rounded-lg bg-surface-container-lowest border border-white/[0.07] print-border">
-              <div class="font-body-sm text-body-sm text-primary print-text-dark font-semibold mb-2">${cat.title}</div>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="font-display font-bold text-sm text-slate-900 mb-2">${cat.title}</div>
               <div class="flex flex-wrap gap-1.5">
                 ${(cat.skills || [])
                   .map(
                     (s) => `
-                    <span class="px-2.5 py-0.5 rounded bg-surface-container-high border border-white/[0.07] print-border font-label-sm text-label-sm text-on-surface-variant print-text-muted">${s}</span>
+                    <span class="px-2.5 py-0.5 rounded-md bg-white border border-slate-200 font-mono text-xs text-slate-700">${s}</span>
                   `
                   )
                   .join("")}
@@ -152,13 +142,13 @@
         projectsEl.innerHTML = data.projects
           .map(
             (p) => `
-            <div class="p-4 rounded-lg bg-surface-container-lowest border border-white/[0.07] print-border flex flex-col gap-1">
-              <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant print-text-muted">
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-1">
+              <div class="flex justify-between font-mono text-xs text-slate-500">
                 <span>${p.categoryLabel}</span>
                 <span>${p.status}</span>
               </div>
-              <div class="font-body-sm text-body-sm font-semibold text-primary print-text-dark">${p.title}</div>
-              <p class="font-body-sm text-body-sm text-on-surface-variant print-text-muted">${p.shortDescription}</p>
+              <div class="font-display font-bold text-sm text-slate-900">${p.title}</div>
+              <p class="text-xs text-slate-600">${p.shortDescription}</p>
             </div>
           `
           )

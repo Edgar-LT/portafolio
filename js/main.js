@@ -4,6 +4,8 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+
   const data = window.PORTFOLIO_DATA;
   if (!data) return;
 
@@ -17,40 +19,103 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================================================
+   0. GESTIÓN DE TEMA (CLARO LUMINOSO POR DEFECTO / AZUL PIZARRA OSCURO)
+   ========================================================================== */
+function initTheme() {
+  const savedTheme = localStorage.getItem("edgar_theme");
+  const htmlEl = document.documentElement;
+  const themeBtn = document.getElementById("theme-toggle-btn");
+  const themeIcon = document.getElementById("theme-toggle-icon");
+
+  if (savedTheme === "dark") {
+    htmlEl.classList.add("dark");
+  } else {
+    htmlEl.classList.remove("dark");
+  }
+
+  function updateIcon() {
+    if (!themeIcon) return;
+    const isDark = htmlEl.classList.contains("dark");
+    themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
+  }
+
+  updateIcon();
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const isDark = htmlEl.classList.toggle("dark");
+      localStorage.setItem("edgar_theme", isDark ? "dark" : "light");
+      updateIcon();
+    });
+  }
+}
+
+/* ==========================================================================
+   PALETA DE IDENTIDAD POR DISCIPLINA (AZUL / ÍNDIGO / ESMERALDA)
+   ========================================================================== */
+function getAccentClasses(accent) {
+  switch (accent) {
+    case "indigo":
+      return {
+        badge: "bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/60",
+        iconBox: "bg-indigo-600 text-white shadow-sm shadow-indigo-500/20",
+        banner: "from-indigo-600/15 via-indigo-500/5 to-transparent dark:from-indigo-500/20 dark:via-indigo-500/5 dark:to-transparent",
+        topBar: "bg-indigo-600",
+        linkText: "text-indigo-600 dark:text-indigo-400"
+      };
+    case "teal":
+      return {
+        badge: "bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800/60",
+        iconBox: "bg-teal-600 text-white shadow-sm shadow-teal-500/20",
+        banner: "from-teal-600/15 via-teal-500/5 to-transparent dark:from-teal-500/20 dark:via-teal-500/5 dark:to-transparent",
+        topBar: "bg-teal-600",
+        linkText: "text-teal-600 dark:text-teal-400"
+      };
+    default:
+      return {
+        badge: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/60",
+        iconBox: "bg-blue-600 text-white shadow-sm shadow-blue-500/20",
+        banner: "from-blue-600/15 via-blue-500/5 to-transparent dark:from-blue-500/20 dark:via-blue-500/5 dark:to-transparent",
+        topBar: "bg-blue-600",
+        linkText: "text-blue-600 dark:text-blue-400"
+      };
+  }
+}
+
+/* ==========================================================================
    1. RENDERIZADO DINÁMICO Y FILTRADO DE PROYECTOS
    ========================================================================== */
-function renderProjectPreview(project) {
+function renderProjectPreview(project, styles) {
   if (project.image) {
     return `
-      <div class="w-full h-48 rounded-lg overflow-hidden relative bg-surface-container-lowest mb-space-md border border-white/[0.06]">
+      <div class="w-full h-48 rounded-xl overflow-hidden relative mb-4 border border-slate-200 dark:border-slate-700/70">
         <img alt="${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="${project.image}" />
       </div>
     `;
   }
 
-  // Vista previa minimalista y limpia cuando aún no hay captura real
   return `
-    <div class="w-full h-44 rounded-lg bg-surface-container-lowest bg-subtle-grid mb-space-md border border-white/[0.06] p-space-md flex flex-col justify-between relative overflow-hidden">
+    <div class="w-full h-44 rounded-xl bg-gradient-to-br ${styles.banner} bg-blueprint mb-4 border border-slate-200/80 dark:border-slate-700/60 p-5 flex flex-col justify-between relative overflow-hidden">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
-          <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
-          <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-400/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
         </div>
-        <span class="font-label-sm text-label-sm text-on-surface-variant">${project.categoryLabel}</span>
+        <span class="px-2.5 py-0.5 rounded-full border text-xs font-medium ${styles.badge}">${project.categoryLabel}</span>
       </div>
-      <div class="flex items-center gap-space-sm my-auto">
-        <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.08] flex items-center justify-center text-primary">
+      <div class="flex items-center gap-3.5 my-auto">
+        <div class="w-11 h-11 rounded-xl ${styles.iconBox} flex items-center justify-center shrink-0">
           <span class="material-symbols-outlined text-xl" aria-hidden="true">${project.icon || "folder_code"}</span>
         </div>
         <div class="flex flex-col">
-          <span class="font-headline-sm text-body-md text-primary font-medium">${project.title}</span>
-          <span class="font-label-sm text-label-sm text-on-surface-variant">${project.role}</span>
+          <span class="font-display font-semibold text-base text-slate-900 dark:text-white">${project.title}</span>
+          <span class="font-mono text-xs text-slate-500 dark:text-slate-400">${project.role}</span>
         </div>
       </div>
-      <div class="flex items-center justify-between text-xs text-outline font-label-sm">
-        <span>Vista previa del proyecto</span>
-        <span class="group-hover:text-primary transition-colors">Ver detalles →</span>
+      <div class="flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
+        <span>Estado: ${project.status}</span>
+        <span class="${styles.linkText} group-hover:translate-x-0.5 transition-transform">Ver detalles →</span>
       </div>
     </div>
   `;
@@ -67,47 +132,44 @@ function renderProjects(projects, activeFilter = "all") {
 
   grid.innerHTML = filtered
     .map((project) => {
+      const styles = getAccentClasses(project.accent);
       const tagsHtml = project.tags
         .map(
           (tag) =>
-            `<span class="px-2.5 py-1 rounded-md bg-surface-container-high border border-white/[0.06] font-label-sm text-label-sm text-on-surface-variant">${tag}</span>`
+            `<span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 font-mono text-xs text-slate-700 dark:text-slate-300">${tag}</span>`
         )
         .join("");
 
       return `
-        <article tabindex="0" role="button" aria-label="Ver detalles de ${project.title}" class="project-card animate-fade-in flex flex-col justify-between clean-card p-space-lg rounded-xl cursor-pointer group" data-project-id="${project.id}">
+        <article tabindex="0" role="button" aria-label="Ver detalles de ${project.title}" class="project-card animate-fade-in flex flex-col justify-between identity-card p-6 rounded-2xl cursor-pointer group relative overflow-hidden" data-project-id="${project.id}">
+          <div class="absolute top-0 left-0 right-0 h-1 ${styles.topBar}"></div>
           <div>
-            <div class="flex items-center justify-between pb-space-sm">
-              <span class="font-label-sm text-label-sm text-on-surface-variant">${project.categoryLabel}</span>
-              <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high border border-white/[0.07] font-label-sm text-label-sm text-on-surface-variant">${project.status}</span>
-            </div>
+            ${renderProjectPreview(project, styles)}
 
-            ${renderProjectPreview(project)}
-
-            <div class="flex flex-col gap-space-xs">
-              <h3 class="font-headline-md text-headline-md text-primary group-hover:text-white transition-colors">${project.title}</h3>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">
+            <div class="flex flex-col gap-1.5">
+              <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${project.title}</h3>
+              <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 ${project.shortDescription}
               </p>
             </div>
           </div>
 
           <div>
-            <div class="flex flex-wrap gap-1.5 py-space-md">
+            <div class="flex flex-wrap gap-1.5 py-4">
               ${tagsHtml}
             </div>
 
-            <div class="flex items-center justify-between pt-space-sm border-t border-white/[0.06]">
-              <span class="font-body-sm text-body-sm text-primary font-medium group-hover:underline flex items-center gap-1">
+            <div class="flex items-center justify-between pt-3 border-t border-slate-200/80 dark:border-slate-700/70">
+              <span class="text-sm font-semibold ${styles.linkText} flex items-center gap-1">
                 <span>Ficha del proyecto</span>
-                <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_outward</span>
+                <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
               </span>
-              <div class="flex items-center gap-space-md" onclick="event.stopPropagation()">
-                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub de ${project.title}">
+              <div class="flex items-center gap-4" onclick="event.stopPropagation()">
+                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub de ${project.title}">
                   <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
                   <span>Código</span>
                 </a>
-                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
+                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
                   <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
                   <span>Demo</span>
                 </a>
@@ -131,11 +193,11 @@ function initProjects(projects) {
       filterBtns.forEach((b) => {
         b.setAttribute("aria-pressed", "false");
         b.className =
-          "filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-surface-container text-on-surface-variant hover:text-primary border border-white/[0.07] transition-all";
+          "filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 border border-slate-200 dark:border-slate-700 transition-all shadow-sm";
       });
       btn.setAttribute("aria-pressed", "true");
       btn.className =
-        "filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-primary text-on-primary font-medium transition-all";
+        "filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-md shadow-blue-600/20 transition-all";
 
       renderProjects(projects, filter);
     });
@@ -143,7 +205,7 @@ function initProjects(projects) {
 }
 
 /* ==========================================================================
-   2. RENDERIZADO DINÁMICO DE STACK TECNOLÓGICO (CHIPS LIMPIOS)
+   2. RENDERIZADO DINÁMICO DE STACK TECNOLÓGICO
    ========================================================================== */
 function initSkills(categories) {
   const container = document.getElementById("skills-grid");
@@ -151,10 +213,11 @@ function initSkills(categories) {
 
   container.innerHTML = categories
     .map((cat) => {
+      const styles = getAccentClasses(cat.accent);
       const skillsHtml = (cat.skills || [])
         .map(
           (skill) => `
-          <span class="px-3 py-1.5 rounded-lg bg-surface-container-high border border-white/[0.07] font-body-sm text-body-sm text-on-surface hover:border-white/20 transition-colors">
+          <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:border-blue-400 transition-colors">
             ${skill}
           </span>
         `
@@ -162,17 +225,18 @@ function initSkills(categories) {
         .join("");
 
       return `
-        <div class="clean-card p-space-lg rounded-xl flex flex-col gap-space-md">
-          <div class="flex items-start justify-between gap-space-sm">
+        <div class="identity-card p-6 rounded-2xl flex flex-col gap-4 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 ${styles.topBar}"></div>
+          <div class="flex items-start justify-between gap-3">
             <div class="flex flex-col gap-1">
-              <h3 class="font-headline-sm text-headline-sm text-primary">${cat.title}</h3>
-              <p class="font-body-sm text-body-sm text-on-surface-variant">${cat.description || ""}</p>
+              <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">${cat.title}</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400">${cat.description || ""}</p>
             </div>
-            <div class="w-9 h-9 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-on-surface-variant shrink-0">
-              <span class="material-symbols-outlined text-lg" aria-hidden="true">${cat.icon}</span>
+            <div class="w-10 h-10 rounded-xl ${styles.iconBox} flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-xl" aria-hidden="true">${cat.icon}</span>
             </div>
           </div>
-          <div class="flex flex-wrap gap-2 pt-space-xs">
+          <div class="flex flex-wrap gap-2 pt-1">
             ${skillsHtml}
           </div>
         </div>
@@ -189,25 +253,27 @@ function initTimeline(timeline) {
   if (!container) return;
 
   container.innerHTML = timeline
-    .map(
-      (item) => `
-      <div class="clean-card p-space-lg rounded-xl flex flex-col gap-space-xs">
-        <div class="flex flex-wrap items-center justify-between gap-space-xs">
-          <span class="font-label-sm text-label-sm text-on-surface-variant">${item.period}</span>
-          <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">${item.badge}</span>
+    .map((item) => {
+      const styles = getAccentClasses(item.accent);
+      return `
+        <div class="identity-card p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden">
+          <div class="absolute top-0 bottom-0 left-0 w-1.5 ${styles.topBar}"></div>
+          <div class="flex flex-wrap items-center justify-between gap-2 pl-2">
+            <span class="font-mono text-xs font-medium text-slate-500 dark:text-slate-400">${item.period}</span>
+            <span class="px-2.5 py-0.5 rounded-full border text-xs font-semibold ${styles.badge}">${item.badge}</span>
+          </div>
+          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white pl-2">${item.title}</h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300 pl-2">
+            ${item.description}
+          </p>
         </div>
-        <h3 class="font-headline-sm text-headline-sm text-primary pt-1">${item.title}</h3>
-        <p class="font-body-sm text-body-sm text-on-surface-variant">
-          ${item.description}
-        </p>
-      </div>
-    `
-    )
+      `;
+    })
     .join("");
 }
 
 /* ==========================================================================
-   4. MODAL DE DETALLES DE PROYECTO (LIMPIO Y SOBRIO)
+   4. MODAL DE DETALLES DE PROYECTO
    ========================================================================== */
 function initProjectModal(projects) {
   const modal = document.getElementById("project-modal");
@@ -223,79 +289,65 @@ function initProjectModal(projects) {
     if (!project) return;
 
     lastFocusedElement = triggerEl || document.activeElement;
+    const styles = getAccentClasses(project.accent);
 
     const tagsHtml = project.tags
       .map(
         (tag) =>
-          `<span class="px-3 py-1 rounded-md bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">${tag}</span>`
+          `<span class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-xs text-slate-700 dark:text-slate-200">${tag}</span>`
       )
       .join("");
 
     const featuresHtml = (project.features || [])
       .map(
         (feat) => `
-        <li class="flex items-start gap-2.5 font-body-sm text-body-sm text-on-surface-variant">
-          <span class="material-symbols-outlined text-primary text-base mt-0.5" aria-hidden="true">check</span>
+        <li class="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
+          <span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-lg mt-0.5" aria-hidden="true">check_circle</span>
           <span>${feat}</span>
         </li>
       `
       )
       .join("");
 
-    const imageBlock = project.image
-      ? `<div class="w-full h-64 rounded-xl overflow-hidden border border-white/10 bg-surface-container-lowest">
-           <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover" />
-         </div>`
-      : "";
-
     modalContent.innerHTML = `
-      <div class="flex flex-col gap-space-lg">
-        <!-- Encabezado -->
-        <div class="flex flex-col gap-space-xs border-b border-white/[0.08] pb-space-md pr-10">
-          <div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
-            <span>${project.categoryLabel}</span>
-            <span>·</span>
-            <span>${project.role}</span>
-            <span>·</span>
-            <span class="text-on-surface">${project.status}</span>
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-2 border-b border-slate-200 dark:border-slate-700 pb-4 pr-10">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full border text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
+            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">${project.role} · ${project.status}</span>
           </div>
-          <h3 id="modal-project-title" class="font-headline-lg-mobile text-primary">${project.title}</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant">${project.shortDescription}</p>
-          <div class="flex flex-wrap gap-1.5 pt-2">
+          <h3 id="modal-project-title" class="font-display font-bold text-2xl text-slate-900 dark:text-white">${project.title}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">${project.shortDescription}</p>
+          <div class="flex flex-wrap gap-1.5 pt-1">
             ${tagsHtml}
           </div>
         </div>
 
-        ${imageBlock}
-
-        <!-- Problema & Arquitectura -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
-          <div class="bg-surface-container-lowest border border-white/[0.07] p-space-md rounded-xl flex flex-col gap-1.5">
-            <h4 class="font-headline-sm text-body-md font-semibold text-primary">El Reto</h4>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">${project.problem}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex flex-col gap-1.5">
+            <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">El Reto</h4>
+            <p class="text-sm text-slate-600 dark:text-slate-300">${project.problem}</p>
           </div>
 
-          <div class="bg-surface-container-lowest border border-white/[0.07] p-space-md rounded-xl flex flex-col gap-1.5">
-            <h4 class="font-headline-sm text-body-md font-semibold text-primary">Solución & Arquitectura</h4>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">${project.architecture}</p>
+          <div class="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex flex-col gap-1.5">
+            <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Solución & Arquitectura</h4>
+            <p class="text-sm text-slate-600 dark:text-slate-300">${project.architecture}</p>
           </div>
         </div>
 
-        <!-- Características Clave -->
-        <div class="bg-surface-container-lowest border border-white/[0.07] p-space-md rounded-xl flex flex-col gap-space-sm">
-          <h4 class="font-headline-sm text-body-md font-semibold text-primary">Aspectos Destacados</h4>
+        <div class="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex flex-col gap-2.5">
+          <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Aspectos Destacados</h4>
           <ul class="grid grid-cols-1 gap-2">
             ${featuresHtml}
           </ul>
         </div>
 
-        <!-- Botones de Acción -->
-        <div class="flex flex-wrap items-center justify-end gap-space-sm pt-space-sm border-t border-white/[0.08]">
-          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-body-sm text-body-sm px-4 py-2 rounded-lg bg-surface-container-high border border-white/10 text-on-surface hover:border-white/25 transition-all">
+        <div class="flex flex-wrap items-center justify-end gap-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 transition-all">
             <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
             <span>Ver repositorio en GitHub</span>
           </a>
-          <a href="${project.demoUrl}" class="inline-flex items-center gap-2 font-body-sm text-body-sm font-medium px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-zinc-200 transition-all">
+          <a href="${project.demoUrl}" class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all">
             <span>Abrir vista previa</span>
             <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
           </a>
@@ -394,11 +446,11 @@ function initScrollSpy() {
       if (link.getAttribute("href") === `#${currentSection}`) {
         link.setAttribute("aria-current", "page");
         link.className =
-          "nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-medium transition-all";
+          "nav-link text-sm px-3.5 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 font-semibold transition-all";
       } else {
         link.removeAttribute("aria-current");
         link.className =
-          "nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all";
+          "nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all";
       }
     });
   });

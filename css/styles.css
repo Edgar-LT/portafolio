@@ -1,69 +1,109 @@
 /* ==========================================================================
-   MINIMALIST ENGINEERING PORTFOLIO — STYLESHEET
+   IDENTITY & HIGH-CLARITY PORTFOLIO — STYLESHEET
    Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
-@layer base {
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-subtle: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 12px 28px -4px rgba(37, 99, 235, 0.1), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+}
 
-  body {
-    overscroll-behavior: none;
-    background-color: #09090b;
-    color: #f4f4f5;
-  }
+html.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #131c31;
+  --bg-card: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(96, 165, 250, 0.4);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 12px 28px -4px rgba(37, 99, 235, 0.2);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Keyboard Accessibility Focus Indicator */
 :focus-visible {
-  outline: 2px solid #e4e4e7;
+  outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
-/* Minimalist Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #94a3b8;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #64748b;
 }
 
-/* Subtle Dot Matrix Background */
-.bg-subtle-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* Subtle Architectural Grid Background */
+.bg-blueprint {
+  background-image:
+    linear-gradient(to right, rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-/* Clean Surface Card (No neon glows) */
-.clean-card {
-  background: #121216;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+html.dark .bg-blueprint {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-.clean-card:hover {
-  background: #16161b;
-  border-color: rgba(255, 255, 255, 0.16);
+/* Elevated Identity Card */
+.identity-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Clean Modal Surface */
-.clean-modal {
-  background: #121216;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7);
+.identity-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Brand Gradient Text */
+.text-brand-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #0d9488 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html.dark .text-brand-gradient {
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #2dd4bf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Smooth fade-in animation */
@@ -79,10 +119,9 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.22s ease-out forwards;
+  animation: fadeIn 0.24s ease-out forwards;
 }
 
-/* Respect Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
