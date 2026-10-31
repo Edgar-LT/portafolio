@@ -93,30 +93,16 @@ function getAccentClasses(accent) {
 function renderProjectPreview(project, styles) {
   if (project.image) {
     return `
-      <div class="w-full rounded-xl overflow-hidden relative mb-4 identity-subcard flex flex-col">
-        <div class="flex items-center justify-between px-3.5 py-2 border-b theme-border">
-          <div class="flex items-center gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-          </div>
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
-        </div>
-        <div class="w-full h-44 overflow-hidden relative bg-slate-900/5">
-          <img alt="Captura de ${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300" src="${project.image}" />
-        </div>
+      <div class="w-full h-48 rounded-xl overflow-hidden relative mb-4 identity-subcard">
+        <img alt="Captura de ${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300" src="${project.image}" />
+        <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-xs font-semibold shadow-sm ${styles.badge}">${project.categoryLabel}</span>
       </div>
     `;
   }
 
   return `
     <div class="w-full h-44 rounded-xl identity-subcard bg-blueprint mb-4 p-5 flex flex-col justify-between relative overflow-hidden">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-1.5">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-        </div>
+      <div class="flex items-center justify-end">
         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
       </div>
       <div class="flex items-center gap-3.5 my-auto">
