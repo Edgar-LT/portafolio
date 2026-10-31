@@ -93,8 +93,18 @@ function getAccentClasses(accent) {
 function renderProjectPreview(project, styles) {
   if (project.image) {
     return `
-      <div class="w-full h-48 rounded-xl overflow-hidden relative mb-4 identity-subcard">
-        <img alt="${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="${project.image}" />
+      <div class="w-full rounded-xl overflow-hidden relative mb-4 identity-subcard flex flex-col">
+        <div class="flex items-center justify-between px-3.5 py-2 border-b theme-border">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
+        </div>
+        <div class="w-full h-44 overflow-hidden relative bg-slate-900/5">
+          <img alt="Captura de ${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300" src="${project.image}" />
+        </div>
       </div>
     `;
   }
@@ -314,6 +324,14 @@ function initProjectModal(projects) {
       )
       .join("");
 
+    const modalImageHtml = project.image
+      ? `
+        <div class="w-full max-h-64 rounded-xl overflow-hidden identity-subcard">
+          <img src="${project.image}" alt="Vista de ${project.title}" class="w-full h-full object-cover object-top" loading="lazy" />
+        </div>
+      `
+      : "";
+
     modalContent.innerHTML = `
       <div class="flex flex-col gap-6">
         <div class="flex flex-col gap-2 border-b theme-border pb-4 pr-10">
@@ -327,6 +345,8 @@ function initProjectModal(projects) {
             ${tagsHtml}
           </div>
         </div>
+
+        ${modalImageHtml}
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="identity-subcard p-4 rounded-xl flex flex-col gap-1.5">
