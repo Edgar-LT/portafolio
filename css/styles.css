@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KINETIC PRECISION DESIGN SYSTEM — STYLESHEET
+   MINIMALIST ENGINEERING PORTFOLIO — STYLESHEET
    Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
@@ -12,82 +12,74 @@
 
   body {
     overscroll-behavior: none;
+    background-color: #09090b;
+    color: #f4f4f5;
   }
 }
 
-/* Keyboard Accessibility Focus Indicator (WCAG 2.1 AA) */
+/* Keyboard Accessibility Focus Indicator */
 :focus-visible {
-  outline: 2px solid #00f0ff;
+  outline: 2px solid #e4e4e7;
   outline-offset: 2px;
 }
 
-/* Custom Technical Scrollbar */
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0e16;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262a33;
+  background: #27272a;
   border-radius: 4px;
-  border: 1px solid rgba(0, 240, 255, 0.15);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00dbe9;
+  background: #3f3f46;
 }
 
-/* Subtle Cartesian Grid Background from DESIGN.md */
-.bg-tech-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+/* Subtle Dot Matrix Background */
+.bg-subtle-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Glassmorphism & Elevation Levels from DESIGN.md */
-.glass-card {
-  background: rgba(28, 32, 40, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+/* Clean Surface Card (No neon glows) */
+.clean-card {
+  background: #121216;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
-.glass-card:hover {
-  background: rgba(34, 40, 52, 0.88);
-  border-color: rgba(0, 240, 255, 0.35);
-  box-shadow:
-    0 0 24px -4px rgba(0, 240, 255, 0.15),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+.clean-card:hover {
+  background: #16161b;
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
-/* Level 3 Overlay Modal Surface */
-.glass-modal {
-  background: rgba(15, 19, 28, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  box-shadow: 0 0 40px -8px rgba(0, 240, 255, 0.22);
+/* Clean Modal Surface */
+.clean-modal {
+  background: #121216;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7);
 }
 
-/* Smooth fade-in animation for dynamic cards and modals */
-@keyframes fadeInScale {
+/* Smooth fade-in animation */
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.99);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .animate-fade-in {
-  animation: fadeInScale 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.22s ease-out forwards;
 }
 
 /* Respect Reduced Motion Preferences */

@@ -1,228 +1,200 @@
 /* ==========================================================================
-   FUENTE ÚNICA DE DATOS DEL PORTAFOLIO (DATA-DRIVEN ARCHITECTURE)
-   Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
+   FUENTE ÚNICA DE DATOS DEL PORTAFOLIO (js/data.js)
+   Edgar López — Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    --------------------------------------------------------------------------
-   Para agregar o modificar un Proyecto, Lenguaje/Habilidad o Hito de
-   Trayectoria, basta con editar este archivo sin tocar index.html.
+   Edita este archivo para actualizar tus Proyectos, Tecnologías y Trayectoria.
+   Si agregas una imagen real a un proyecto, coloca su ruta en `image`
+   (ej. image: "assets/mi-proyecto.png"). Si `image` es null, se muestra
+   automáticamente una vista previa minimalista.
    ========================================================================== */
 
 window.PORTFOLIO_DATA = {
   /* ========================================================================
-     1. PROYECTOS DESTACADOS (Con Ficha Técnica Completa para el Modal)
+     1. PROYECTOS DESTACADOS
      Categorías válidas para el filtro: "web", "app", "mecatronica"
      ======================================================================== */
   projects: [
     {
       id: "proyecto-01",
-      code: "PROYECTO // 01",
-      status: "PLANTILLA LISTA",
-      categories: ["web", "mecatronica"],
-      badgeText: "WEB / IOT",
-      badgeStyle: "border-primary-container/30 text-primary-container",
-      title: "[ Título del Proyecto 01 ]",
+      categoryLabel: "Desarrollo Web",
+      status: "En preparación",
+      categories: ["web"],
+      icon: "language",
+      title: "Proyecto Web Full-Stack 01",
       shortDescription:
-        "Espacio reservado para describir tu proyecto: el problema que resuelve, cómo lo diseñaste y qué funcionalidades clave implementaste en la interfaz o el sistema.",
-      image: "assets/project-1.png",
-      role: "Desarrollador Principal",
+        "Plantilla lista para tu primer proyecto web. Describe aquí qué problema resuelve la plataforma y cuál fue tu aporte principal en el desarrollo.",
+      image: null,
+      role: "Desarrollador Full-Stack",
       problem:
-        "Describe aquí el reto técnico o necesidad real que dio origen al proyecto (por ejemplo: monitoreo en tiempo real, automatización de un proceso o digitalización de un flujo de trabajo).",
+        "Describe el problema o necesidad real que dio origen al proyecto (por ejemplo: optimizar la gestión de datos, digitalizar un servicio o crear una interfaz rápida y accesible).",
       architecture:
-        "Explica cómo estructuraste la solución técnica: qué capas utilizaste en el frontend, cómo se procesan los datos en el backend o microcontrolador y cómo se comunican entre sí.",
+        "Explica cómo estructuraste la solución: tecnologías de frontend empleadas, consumo de APIs o estructura de base de datos.",
       features: [
-        "Interfaz responsiva de alta velocidad con telemetría y visualización de estado.",
-        "Arquitectura modular preparada para escalar nuevas funciones.",
-        "Integración limpia entre la capa de datos y la experiencia de usuario."
+        "Diseño responsivo adaptado a escritorio y dispositivos móviles.",
+        "Arquitectura modular y código mantenible.",
+        "Optimización de carga y experiencia de usuario fluida."
       ],
-      tags: [
-        { name: "[ Lenguaje Principal ]", highlight: "primary" },
-        { name: "[ Framework / Librería ]", highlight: "default" },
-        { name: "[ Base de Datos / Hardware ]", highlight: "default" }
-      ],
+      tags: ["HTML5 / CSS3", "JavaScript", "Framework Web"],
       repoUrl: "https://github.com/Edgar-LT",
-      demoUrl: "#proyectos",
-      demoLabel: "[ live_demo ]"
+      demoUrl: "#proyectos"
     },
     {
       id: "proyecto-02",
-      code: "PROYECTO // 02",
-      status: "PLANTILLA LISTA",
-      categories: ["mecatronica", "app"],
-      badgeText: "MECATRÓNICA / CONTROL",
-      badgeStyle: "border-secondary-fixed/30 text-secondary-fixed",
-      title: "[ Título del Proyecto 02 ]",
+      categoryLabel: "Aplicaciones",
+      status: "En preparación",
+      categories: ["app"],
+      icon: "smartphone",
+      title: "Aplicación Multiplataforma 02",
       shortDescription:
-        "Espacio reservado para detallar un proyecto de ingeniería mecatrónica, automatización, prototipo electrónico o aplicación conectada a hardware.",
-      image: "assets/project-2.png",
-      role: "Ingeniería & Código",
+        "Plantilla lista para una aplicación móvil o de escritorio. Detalla su propósito, la fluidez de su interfaz y las integraciones implementadas.",
+      image: null,
+      role: "Desarrollador de Aplicaciones",
       problem:
-        "Describe el requerimiento de control físico, instrumentación electrónica o cinemática que debía resolverse con precisión.",
+        "Describe qué flujo o tarea cotidiana buscabas simplificar para el usuario final mediante una aplicación dedicada.",
       architecture:
-        "Detalla la integración hardware-software: sensores/actuadores empleados, lógica de control programada y protocolo de comunicación con la interfaz de control.",
+        "Detalla cómo construiste las vistas, la navegación, el manejo de estado y el almacenamiento local o en la nube.",
       features: [
-        "Lectura y procesamiento de señales de sensores con baja latencia.",
-        "Lógica de control estructurada con validación de límites de seguridad.",
-        "Interfaz de supervisión para ajuste de parámetros de operación."
+        "Interfaz intuitiva enfocada en usabilidad y rapidez.",
+        "Sincronización de datos y manejo de estados de carga.",
+        "Diseño adaptable a múltiples resoluciones de pantalla."
       ],
-      tags: [
-        { name: "[ Lenguaje / Control ]", highlight: "secondary" },
-        { name: "[ Microcontrolador / CAD ]", highlight: "default" },
-        { name: "[ Interfaz / App ]", highlight: "default" }
-      ],
+      tags: ["Desarrollo Móvil", "UI / UX", "APIs"],
       repoUrl: "https://github.com/Edgar-LT",
-      demoUrl: "#proyectos",
-      demoLabel: "[ ver_esquema ]"
+      demoUrl: "#proyectos"
     },
     {
       id: "proyecto-03",
-      code: "PROYECTO // 03",
-      status: "PLANTILLA LISTA",
-      categories: ["web"],
-      badgeText: "FULL-STACK WEB",
-      badgeStyle: "border-primary-container/30 text-primary-container",
-      title: "[ Título del Proyecto 03 ]",
+      categoryLabel: "Mecatrónica & IoT",
+      status: "En preparación",
+      categories: ["mecatronica", "web"],
+      icon: "memory",
+      title: "Sistema de Control & Monitoreo 03",
       shortDescription:
-        "Espacio reservado para presentar una plataforma web, sistema de gestión, catálogo interactivo o aplicación web desarrollada por ti.",
-      image: "assets/project-3.png",
-      role: "Full-Stack Developer",
+        "Plantilla lista para un proyecto de Ingeniería Mecatrónica, electrónica o IoT que integre sensores/actuadores con una interfaz de software.",
+      image: null,
+      role: "Ingeniería & Software",
       problem:
-        "Describe qué necesidad tenía el usuario o negocio y qué limitaciones presentaban las soluciones previas antes de tu desarrollo.",
+        "Describe el requerimiento de control físico, instrumentación electrónica o lectura de sensores que debía resolverse.",
       architecture:
-        "Explica el diseño de la interfaz web, la estructura de componentes reutilizables, el manejo de estado y la persistencia en base de datos.",
+        "Detalla la integración entre el microcontrolador, los sensores/actuadores y la interfaz web o móvil de supervisión.",
       features: [
-        "Diseño UI/UX moderno adaptado a dispositivos móviles y escritorio.",
-        "Optimización de tiempos de carga, SEO semántico y accesibilidad.",
-        "Gestión estructurada de datos y validación de formularios."
+        "Adquisición y procesamiento confiable de señales de sensores.",
+        "Lógica de control estructurada y validación operativa.",
+        "Panel de visualización para monitoreo de variables."
       ],
-      tags: [
-        { name: "[ Frontend ]", highlight: "primary" },
-        { name: "[ Estilos / UI ]", highlight: "default" },
-        { name: "[ Backend / DB ]", highlight: "default" }
-      ],
+      tags: ["C / C++", "Microcontroladores", "Sensores & Control"],
       repoUrl: "https://github.com/Edgar-LT",
-      demoUrl: "#proyectos",
-      demoLabel: "[ ver_web ]"
+      demoUrl: "#proyectos"
     },
     {
       id: "proyecto-04",
-      code: "PROYECTO // 04",
-      status: "PLANTILLA LISTA",
-      categories: ["app"],
-      badgeText: "MOBILE / APP",
-      badgeStyle: "border-tertiary-fixed-dim/30 text-tertiary-fixed-dim",
-      title: "[ Título del Proyecto 04 ]",
+      categoryLabel: "Desarrollo Web / App",
+      status: "En preparación",
+      categories: ["web", "app"],
+      icon: "layers",
+      title: "Herramienta o Sistema Técnico 04",
       shortDescription:
-        "Espacio reservado para mostrar una aplicación móvil o multiplataforma, destacando su experiencia de usuario, flujo de pantallas e integraciones.",
-      image: "assets/project-4.png",
-      role: "App Developer",
+        "Plantilla lista para mostrar una utilidad de software, automatización o aplicación web interactiva desarrollada por ti.",
+      image: null,
+      role: "Desarrollador Principal",
       problem:
-        "Describe el flujo móvil o de aplicación que buscabas agilizar para el usuario final en su día a día o en trabajo de campo.",
+        "Describe qué proceso manual o cálculo técnico buscabas automatizar con esta herramienta.",
       architecture:
-        "Detalla cómo construiste las pantallas, la navegación, el almacenamiento local/remoto y la sincronización de estados en la aplicación.",
+        "Explica cómo organizaste la lógica de negocio, los componentes de la interfaz y el despliegue del proyecto.",
       features: [
-        "Flujo de navegación intuitivo con retroalimentación visual inmediata.",
-        "Consumo eficiente de recursos y manejo de estados sin conexión.",
-        "Integración con APIs o módulos nativos del dispositivo."
+        "Procesamiento rápido de datos directamente en la interfaz.",
+        "Diseño limpio sin distracciones enfocado en la productividad.",
+        "Despliegue web accesible desde cualquier navegador."
       ],
-      tags: [
-        { name: "[ SDK / Lenguaje App ]", highlight: "tertiary" },
-        { name: "[ Estado / API ]", highlight: "default" },
-        { name: "[ Plataforma ]", highlight: "default" }
-      ],
+      tags: ["JavaScript", "Tailwind CSS", "Git"],
       repoUrl: "https://github.com/Edgar-LT",
-      demoUrl: "#proyectos",
-      demoLabel: "[ demo_app ]"
+      demoUrl: "#proyectos"
     }
   ],
 
   /* ========================================================================
-     2. STACK TECNOLÓGICO & HABILIDADES (Por Capas Funcionales)
-     Niveles sugeridos: "Avanzado", "Intermedio", "En Formación"
+     2. STACK TECNOLÓGICO & HABILIDADES (Chips Limpios por Área)
      ======================================================================== */
   skillCategories: [
     {
-      id: "mecatronica-hw",
-      title: "01 // MECATRÓNICA & HW",
-      icon: "memory",
-      accentText: "text-secondary-fixed",
-      barColor: "bg-secondary-fixed",
-      items: [
-        { name: "[ Lenguaje / C / C++ ]", level: "En Formación", progress: 80 },
-        { name: "[ Microcontroladores ]", level: "En Formación", progress: 78 },
-        { name: "[ Electrónica & Sensores ]", level: "En Formación", progress: 75 },
-        { name: "[ Diseño CAD / Simulación ]", level: "En Formación", progress: 72 }
-      ]
-    },
-    {
       id: "frontend-web",
-      title: "02 // FRONTEND & WEB",
+      title: "Desarrollo Web",
+      description: "Interfaces modernas, responsivas y rápidas.",
       icon: "code",
-      accentText: "text-primary-container",
-      barColor: "bg-primary-container",
-      items: [
-        { name: "HTML5 / CSS3 / JavaScript", level: "Intermedio", progress: 85 },
-        { name: "Tailwind CSS & UI Responsivo", level: "Intermedio", progress: 85 },
-        { name: "[ Framework Frontend ]", level: "En Formación", progress: 75 },
-        { name: "[ Consumo de APIs / JSON ]", level: "Intermedio", progress: 80 }
+      skills: [
+        "HTML5 Semántico",
+        "CSS3 & Tailwind CSS",
+        "JavaScript (ES6+)",
+        "Diseño Responsivo",
+        "Consumo de APIs REST",
+        "[ Agregar Framework ]"
       ]
     },
     {
       id: "apps-mobile",
-      title: "03 // APPS & MOBILE",
+      title: "Aplicaciones",
+      description: "Soluciones móviles y multiplataforma.",
       icon: "smartphone",
-      accentText: "text-tertiary-fixed-dim",
-      barColor: "bg-tertiary-fixed-dim",
-      items: [
-        { name: "[ Framework Móvil / App ]", level: "En Formación", progress: 78 },
-        { name: "[ Lenguaje de Apps ]", level: "En Formación", progress: 78 },
-        { name: "Diseño de Interfaces UI/UX", level: "Intermedio", progress: 80 },
-        { name: "[ Comunicación / Servicios ]", level: "En Formación", progress: 72 }
+      skills: [
+        "Desarrollo Multiplataforma",
+        "Diseño de Interfaces (UI/UX)",
+        "Gestión de Estado",
+        "Integración de Servicios",
+        "[ Agregar Lenguaje / SDK ]"
+      ]
+    },
+    {
+      id: "mecatronica-hw",
+      title: "Ingeniería Mecatrónica",
+      description: "Sistemas embebidos, control y hardware.",
+      icon: "precision_manufacturing",
+      skills: [
+        "Lógica de Programación C / C++",
+        "Microcontroladores",
+        "Sensores & Actuadores",
+        "Sistemas de Control",
+        "Diseño CAD & Simulación"
       ]
     },
     {
       id: "backend-tools",
-      title: "04 // BACKEND & TOOLS",
-      icon: "hub",
-      accentText: "text-primary",
-      barColor: "bg-primary",
-      items: [
-        { name: "Git & GitHub Workflow", level: "Intermedio", progress: 85 },
-        { name: "[ Lenguaje Backend ]", level: "En Formación", progress: 75 },
-        { name: "[ Bases de Datos SQL/NoSQL ]", level: "En Formación", progress: 75 },
-        { name: "Despliegue Web (GitHub Pages)", level: "Intermedio", progress: 85 }
+      title: "Herramientas & Flujo",
+      description: "Control de versiones, bases de datos y entorno.",
+      icon: "terminal",
+      skills: [
+        "Git & GitHub",
+        "Bases de Datos SQL / NoSQL",
+        "VS Code / Antigravity",
+        "GitHub Pages",
+        "Documentación Técnica"
       ]
     }
   ],
 
   /* ========================================================================
-     3. LÍNEA DE TIEMPO — FORMACIÓN & TRAYECTORIA
+     3. TRAYECTORIA & FORMACIÓN
      ======================================================================== */
   timeline: [
     {
-      period: "ACTUALIDAD · CARACAS, VENEZUELA",
-      periodColor: "text-primary-container",
-      badge: "ACTIVO",
-      badgeStyle: "bg-surface-container-high border border-secondary-fixed/30 text-secondary-fixed",
-      title: "Desarrollador Web & de Aplicaciones",
+      period: "Actualidad · Caracas, Venezuela",
+      badge: "En curso",
+      title: "Desarrollador Web y de Aplicaciones",
       description:
-        "Diseño y desarrollo de páginas web modernas, interfaces responsivas y soluciones de software con arquitectura modular y control de versiones en GitHub."
+        "Diseño y construcción de sitios web modernos, interfaces responsivas y aplicaciones con arquitectura modular, buenas prácticas de código y control de versiones en GitHub."
     },
     {
-      period: "EN CURSO · FORMACIÓN UNIVERSITARIA",
-      periodColor: "text-secondary-fixed",
-      badge: "INGENIERÍA",
-      badgeStyle: "bg-surface-container-high border border-white/10 text-on-surface",
+      period: "Formación Universitaria · Caracas, Venezuela",
+      badge: "Pregrado",
       title: "Estudiante de Ingeniería Mecatrónica",
       description:
-        "Formación integral combinando ingeniería mecánica, electrónica, sistemas de control, automatización y programación para el diseño de sistemas inteligentes."
+        "Formación en sistemas mecánicos, electrónica, automatización, control y programación aplicada a la integración de hardware y software."
     },
     {
-      period: "PROYECTOS & LABORATORIO",
-      periodColor: "text-on-surface-variant",
-      badge: "PRÁCTICA TÉCNICA",
-      badgeStyle: "bg-surface-container-high border border-white/10 text-outline",
-      title: "Desarrollo de Prototipos & Software Aplicado",
+      period: "Práctica Continua",
+      badge: "Portafolio",
+      title: "Desarrollo de Proyectos & Prototipos",
       description:
-        "Construcción progresiva de un portafolio técnico integrando aplicaciones web, apps multiplataforma y proyectos de ingeniería mecatrónica."
+        "Creación progresiva de proyectos prácticos que combinan desarrollo web, aplicaciones móviles y soluciones de ingeniería."
     }
   ]
 };

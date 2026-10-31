@@ -15,12 +15,7 @@ $requiredFiles = @(
   "sitemap.xml",
   "site.webmanifest",
   "assets/favicon.svg",
-  "assets/logo.svg",
-  "assets/avatar.svg",
-  "assets/project-1.png",
-  "assets/project-2.png",
-  "assets/project-3.png",
-  "assets/project-4.png"
+  "assets/logo.svg"
 )
 
 Write-Host "==> Verificando archivos requeridos del portafolio..." -ForegroundColor Cyan
@@ -34,4 +29,4 @@ foreach ($file in $requiredFiles) {
   }
 }
 
-Write-Host "==> Todos los archivos e imagenes verificados correctamente." -ForegroundColor Green
+Write-Host "==> Todos los archivos verificados correctamente." -ForegroundColor Green

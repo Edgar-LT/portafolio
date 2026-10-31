@@ -1,6 +1,6 @@
 /* ==========================================================================
    CONTROLADOR PRINCIPAL DEL PORTAFOLIO (js/main.js)
-   Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
+   Edgar López — Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,17 +19,41 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==========================================================================
    1. RENDERIZADO DINÁMICO Y FILTRADO DE PROYECTOS
    ========================================================================== */
-function getTagStyle(highlight) {
-  switch (highlight) {
-    case "primary":
-      return "border-primary-container/30 text-primary-container";
-    case "secondary":
-      return "border-secondary-fixed/30 text-secondary-fixed";
-    case "tertiary":
-      return "border-tertiary-fixed-dim/30 text-tertiary-fixed-dim";
-    default:
-      return "border-white/[0.08] text-on-surface";
+function renderProjectPreview(project) {
+  if (project.image) {
+    return `
+      <div class="w-full h-48 rounded-lg overflow-hidden relative bg-surface-container-lowest mb-space-md border border-white/[0.06]">
+        <img alt="${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="${project.image}" />
+      </div>
+    `;
   }
+
+  // Vista previa minimalista y limpia cuando aún no hay captura real
+  return `
+    <div class="w-full h-44 rounded-lg bg-surface-container-lowest bg-subtle-grid mb-space-md border border-white/[0.06] p-space-md flex flex-col justify-between relative overflow-hidden">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
+          <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
+          <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
+        </div>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">${project.categoryLabel}</span>
+      </div>
+      <div class="flex items-center gap-space-sm my-auto">
+        <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.08] flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-xl" aria-hidden="true">${project.icon || "folder_code"}</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-body-md text-primary font-medium">${project.title}</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">${project.role}</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between text-xs text-outline font-label-sm">
+        <span>Vista previa del proyecto</span>
+        <span class="group-hover:text-primary transition-colors">Ver detalles →</span>
+      </div>
+    </div>
+  `;
 }
 
 function renderProjects(projects, activeFilter = "all") {
@@ -46,31 +70,22 @@ function renderProjects(projects, activeFilter = "all") {
       const tagsHtml = project.tags
         .map(
           (tag) =>
-            `<span class="px-space-sm py-0.5 rounded bg-surface-container-highest border ${getTagStyle(
-              tag.highlight
-            )} font-label-sm text-label-sm">${tag.name}</span>`
+            `<span class="px-2.5 py-1 rounded-md bg-surface-container-high border border-white/[0.06] font-label-sm text-label-sm text-on-surface-variant">${tag}</span>`
         )
         .join("");
 
       return `
-        <article tabindex="0" role="button" aria-label="Ver ficha técnica de ${project.title}" class="project-card animate-fade-in flex flex-col justify-between glass-card p-space-lg rounded-xl cursor-pointer group" data-project-id="${project.id}">
+        <article tabindex="0" role="button" aria-label="Ver detalles de ${project.title}" class="project-card animate-fade-in flex flex-col justify-between clean-card p-space-lg rounded-xl cursor-pointer group" data-project-id="${project.id}">
           <div>
-            <div class="flex items-center justify-between pb-space-sm font-label-sm text-label-sm">
-              <span class="text-secondary-fixed">${project.code}</span>
-              <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/10 text-on-surface">${project.status}</span>
+            <div class="flex items-center justify-between pb-space-sm">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">${project.categoryLabel}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high border border-white/[0.07] font-label-sm text-label-sm text-on-surface-variant">${project.status}</span>
             </div>
 
-            <!-- Imagen del Proyecto -->
-            <div class="w-full h-56 rounded-lg overflow-hidden relative bg-surface-container-lowest my-space-sm border border-white/[0.08]">
-              <img alt="${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" src="${project.image}" />
-              <div class="absolute bottom-2 right-2 bg-surface/90 backdrop-blur px-space-sm py-0.5 rounded border ${project.badgeStyle} font-label-sm text-label-sm">
-                ${project.badgeText}
-              </div>
-            </div>
+            ${renderProjectPreview(project)}
 
-            <!-- Título y Descripción -->
-            <div class="flex flex-col gap-space-xs pt-space-xs">
-              <h3 class="font-headline-md text-headline-md text-primary group-hover:text-primary-container transition-colors">${project.title}</h3>
+            <div class="flex flex-col gap-space-xs">
+              <h3 class="font-headline-md text-headline-md text-primary group-hover:text-white transition-colors">${project.title}</h3>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
                 ${project.shortDescription}
               </p>
@@ -78,25 +93,23 @@ function renderProjects(projects, activeFilter = "all") {
           </div>
 
           <div>
-            <!-- Lenguajes y Tecnologías -->
-            <div class="flex flex-wrap gap-space-xs py-space-md">
+            <div class="flex flex-wrap gap-1.5 py-space-md">
               ${tagsHtml}
             </div>
 
-            <!-- Acciones y Ficha Técnica -->
             <div class="flex items-center justify-between pt-space-sm border-t border-white/[0.06]">
-              <span class="open-modal-btn font-label-sm text-label-sm text-primary-container group-hover:text-primary flex items-center gap-1" data-project-id="${project.id}">
-                <span>[ ver_ficha_técnica ]</span>
-                <span class="material-symbols-outlined text-sm" aria-hidden="true">visibility</span>
+              <span class="font-body-sm text-body-sm text-primary font-medium group-hover:underline flex items-center gap-1">
+                <span>Ficha del proyecto</span>
+                <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_outward</span>
               </span>
-              <div class="flex items-center gap-space-sm" onclick="event.stopPropagation()">
-                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Repositorio GitHub de ${project.title}">
-                  <span>[ repo.git ]</span>
-                  <span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
+              <div class="flex items-center gap-space-md" onclick="event.stopPropagation()">
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub de ${project.title}">
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
+                  <span>Código</span>
                 </a>
-                <a class="font-label-sm text-label-sm text-secondary-fixed hover:text-primary flex items-center gap-1 transition-colors" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
-                  <span>${project.demoLabel}</span>
-                  <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
+                  <span>Demo</span>
                 </a>
               </div>
             </div>
@@ -118,11 +131,11 @@ function initProjects(projects) {
       filterBtns.forEach((b) => {
         b.setAttribute("aria-pressed", "false");
         b.className =
-          "filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:text-on-surface border border-white/[0.08] transition-all";
+          "filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-surface-container text-on-surface-variant hover:text-primary border border-white/[0.07] transition-all";
       });
       btn.setAttribute("aria-pressed", "true");
       btn.className =
-        "filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-primary-container text-on-primary-container font-semibold transition-all";
+        "filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-primary text-on-primary font-medium transition-all";
 
       renderProjects(projects, filter);
     });
@@ -130,7 +143,7 @@ function initProjects(projects) {
 }
 
 /* ==========================================================================
-   2. RENDERIZADO DINÁMICO DE STACK TECNOLÓGICO & HABILIDADES
+   2. RENDERIZADO DINÁMICO DE STACK TECNOLÓGICO (CHIPS LIMPIOS)
    ========================================================================== */
 function initSkills(categories) {
   const container = document.getElementById("skills-grid");
@@ -138,30 +151,29 @@ function initSkills(categories) {
 
   container.innerHTML = categories
     .map((cat) => {
-      const itemsHtml = cat.items
+      const skillsHtml = (cat.skills || [])
         .map(
-          (item) => `
-          <div class="flex flex-col gap-1">
-            <div class="flex justify-between items-center font-label-sm text-label-sm text-on-surface gap-2">
-              <span class="truncate">${item.name}</span>
-              <span class="${cat.accentText} shrink-0 text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-container-high border border-white/[0.06]">${item.level}</span>
-            </div>
-            <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden" role="progressbar" aria-label="${item.name}: ${item.level}" aria-valuenow="${item.progress}" aria-valuemin="0" aria-valuemax="100">
-              <div class="h-full ${cat.barColor} rounded-full transition-all duration-700" style="width: ${item.progress}%;"></div>
-            </div>
-          </div>
+          (skill) => `
+          <span class="px-3 py-1.5 rounded-lg bg-surface-container-high border border-white/[0.07] font-body-sm text-body-sm text-on-surface hover:border-white/20 transition-colors">
+            ${skill}
+          </span>
         `
         )
         .join("");
 
       return `
-        <div class="glass-card p-space-md rounded-xl flex flex-col gap-space-sm">
-          <div class="flex items-center justify-between pb-space-xs border-b border-white/[0.06]">
-            <span class="font-label-sm text-label-sm ${cat.accentText} uppercase">${cat.title}</span>
-            <span class="material-symbols-outlined ${cat.accentText} text-sm" aria-hidden="true">${cat.icon}</span>
+        <div class="clean-card p-space-lg rounded-xl flex flex-col gap-space-md">
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex flex-col gap-1">
+              <h3 class="font-headline-sm text-headline-sm text-primary">${cat.title}</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">${cat.description || ""}</p>
+            </div>
+            <div class="w-9 h-9 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-on-surface-variant shrink-0">
+              <span class="material-symbols-outlined text-lg" aria-hidden="true">${cat.icon}</span>
+            </div>
           </div>
-          <div class="flex flex-col gap-space-sm pt-space-xs">
-            ${itemsHtml}
+          <div class="flex flex-wrap gap-2 pt-space-xs">
+            ${skillsHtml}
           </div>
         </div>
       `;
@@ -179,12 +191,12 @@ function initTimeline(timeline) {
   container.innerHTML = timeline
     .map(
       (item) => `
-      <div class="glass-card p-space-md rounded-xl flex flex-col gap-space-xs">
-        <div class="flex flex-wrap items-center justify-between gap-space-xs font-label-sm text-label-sm">
-          <span class="${item.periodColor} font-semibold">${item.period}</span>
-          <span class="px-space-sm py-0.5 rounded ${item.badgeStyle}">${item.badge}</span>
+      <div class="clean-card p-space-lg rounded-xl flex flex-col gap-space-xs">
+        <div class="flex flex-wrap items-center justify-between gap-space-xs">
+          <span class="font-label-sm text-label-sm text-on-surface-variant">${item.period}</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">${item.badge}</span>
         </div>
-        <h3 class="font-headline-sm text-headline-sm text-primary">${item.title}</h3>
+        <h3 class="font-headline-sm text-headline-sm text-primary pt-1">${item.title}</h3>
         <p class="font-body-sm text-body-sm text-on-surface-variant">
           ${item.description}
         </p>
@@ -195,7 +207,7 @@ function initTimeline(timeline) {
 }
 
 /* ==========================================================================
-   4. MODAL DE CASO DE ESTUDIO (FICHA TÉCNICA DE INGENIERÍA)
+   4. MODAL DE DETALLES DE PROYECTO (LIMPIO Y SOBRIO)
    ========================================================================== */
 function initProjectModal(projects) {
   const modal = document.getElementById("project-modal");
@@ -215,87 +227,77 @@ function initProjectModal(projects) {
     const tagsHtml = project.tags
       .map(
         (tag) =>
-          `<span class="px-space-sm py-1 rounded bg-surface-container-highest border ${getTagStyle(
-            tag.highlight
-          )} font-label-sm text-label-sm">${tag.name}</span>`
+          `<span class="px-3 py-1 rounded-md bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">${tag}</span>`
       )
       .join("");
 
     const featuresHtml = (project.features || [])
       .map(
         (feat) => `
-        <li class="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
-          <span class="material-symbols-outlined text-secondary-fixed text-base mt-0.5" aria-hidden="true">check_circle</span>
+        <li class="flex items-start gap-2.5 font-body-sm text-body-sm text-on-surface-variant">
+          <span class="material-symbols-outlined text-primary text-base mt-0.5" aria-hidden="true">check</span>
           <span>${feat}</span>
         </li>
       `
       )
       .join("");
 
+    const imageBlock = project.image
+      ? `<div class="w-full h-64 rounded-xl overflow-hidden border border-white/10 bg-surface-container-lowest">
+           <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover" />
+         </div>`
+      : "";
+
     modalContent.innerHTML = `
       <div class="flex flex-col gap-space-lg">
-        <!-- Encabezado Técnico -->
-        <div class="flex flex-wrap items-center justify-between gap-space-sm border-b border-white/10 pb-space-sm pr-10">
-          <div class="flex items-center gap-space-sm font-label-sm text-label-sm">
-            <span class="text-secondary-fixed font-semibold">${project.code}</span>
-            <span class="text-outline">//</span>
-            <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/10 text-on-surface">${project.status}</span>
-            <span class="px-space-sm py-0.5 rounded bg-surface-container-high border ${project.badgeStyle}">${project.badgeText}</span>
+        <!-- Encabezado -->
+        <div class="flex flex-col gap-space-xs border-b border-white/[0.08] pb-space-md pr-10">
+          <div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+            <span>${project.categoryLabel}</span>
+            <span>·</span>
+            <span>${project.role}</span>
+            <span>·</span>
+            <span class="text-on-surface">${project.status}</span>
           </div>
-          <span class="font-label-sm text-label-sm text-on-surface-variant">ROL: ${project.role}</span>
+          <h3 id="modal-project-title" class="font-headline-lg-mobile text-primary">${project.title}</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">${project.shortDescription}</p>
+          <div class="flex flex-wrap gap-1.5 pt-2">
+            ${tagsHtml}
+          </div>
         </div>
 
-        <!-- Imagen & Título -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
-          <div class="lg:col-span-6 w-full h-64 rounded-xl overflow-hidden border border-white/10 bg-surface-container-lowest">
-            <img src="${project.image}" alt="${project.title}" width="640" height="360" decoding="async" class="w-full h-full object-cover" />
-          </div>
-          <div class="lg:col-span-6 flex flex-col gap-space-sm">
-            <span class="font-label-sm text-label-sm text-primary-container uppercase">// FICHA TÉCNICA DE PROYECTO</span>
-            <h3 id="modal-project-title" class="font-headline-lg-mobile text-primary">${project.title}</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">${project.shortDescription}</p>
-            <div class="flex flex-wrap gap-space-xs pt-space-xs">
-              ${tagsHtml}
-            </div>
-          </div>
-        </div>
+        ${imageBlock}
 
         <!-- Problema & Arquitectura -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
-          <div class="bg-surface-container-low border border-white/[0.08] p-space-md rounded-xl flex flex-col gap-space-xs">
-            <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-primary-container uppercase">
-              <span class="material-symbols-outlined text-base" aria-hidden="true">flag</span>
-              <span>01 // El Problema & Reto</span>
-            </div>
+          <div class="bg-surface-container-lowest border border-white/[0.07] p-space-md rounded-xl flex flex-col gap-1.5">
+            <h4 class="font-headline-sm text-body-md font-semibold text-primary">El Reto</h4>
             <p class="font-body-sm text-body-sm text-on-surface-variant">${project.problem}</p>
           </div>
 
-          <div class="bg-surface-container-low border border-white/[0.08] p-space-md rounded-xl flex flex-col gap-space-xs">
-            <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary-fixed uppercase">
-              <span class="material-symbols-outlined text-base" aria-hidden="true">account_tree</span>
-              <span>02 // Arquitectura & Solución</span>
-            </div>
+          <div class="bg-surface-container-lowest border border-white/[0.07] p-space-md rounded-xl flex flex-col gap-1.5">
+            <h4 class="font-headline-sm text-body-md font-semibold text-primary">Solución & Arquitectura</h4>
             <p class="font-body-sm text-body-sm text-on-surface-variant">${project.architecture}</p>
           </div>
         </div>
 
         <!-- Características Clave -->
-        <div class="bg-surface-container-low border border-white/[0.08] p-space-md rounded-xl flex flex-col gap-space-sm">
-          <span class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase">03 // Características & Especificaciones Clave</span>
-          <ul class="grid grid-cols-1 gap-space-xs">
+        <div class="bg-surface-container-lowest border border-white/[0.07] p-space-md rounded-xl flex flex-col gap-space-sm">
+          <h4 class="font-headline-sm text-body-md font-semibold text-primary">Aspectos Destacados</h4>
+          <ul class="grid grid-cols-1 gap-2">
             ${featuresHtml}
           </ul>
         </div>
 
         <!-- Botones de Acción -->
-        <div class="flex flex-wrap items-center justify-end gap-space-md pt-space-xs border-t border-white/10">
-          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-space-xs font-label-md text-label-md px-space-lg py-space-sm rounded-lg bg-surface-container-high border border-white/15 text-on-surface hover:border-primary-container hover:text-primary-container transition-all">
-            <span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
-            <span>Ver Código en GitHub</span>
+        <div class="flex flex-wrap items-center justify-end gap-space-sm pt-space-sm border-t border-white/[0.08]">
+          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-body-sm text-body-sm px-4 py-2 rounded-lg bg-surface-container-high border border-white/10 text-on-surface hover:border-white/25 transition-all">
+            <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
+            <span>Ver repositorio en GitHub</span>
           </a>
-          <a href="${project.demoUrl}" class="inline-flex items-center gap-space-xs font-headline-sm text-body-sm font-semibold px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-primary-fixed shadow-[0_0_16px_rgba(0,240,255,0.25)] transition-all">
-            <span>Abrir Demo / Vista Previa</span>
-            <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
+          <a href="${project.demoUrl}" class="inline-flex items-center gap-2 font-body-sm text-body-sm font-medium px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-zinc-200 transition-all">
+            <span>Abrir vista previa</span>
+            <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
           </a>
         </div>
       </div>
@@ -392,11 +394,11 @@ function initScrollSpy() {
       if (link.getAttribute("href") === `#${currentSection}`) {
         link.setAttribute("aria-current", "page");
         link.className =
-          "nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container font-semibold transition-all";
+          "nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-medium transition-all";
       } else {
         link.removeAttribute("aria-current");
         link.className =
-          "nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all";
+          "nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all";
       }
     });
   });
@@ -420,7 +422,7 @@ function initContactForm() {
     const message = document.getElementById("message")?.value || "";
 
     const subject = encodeURIComponent(
-      `Portafolio Web: ${projectType} - ${name}`
+      `Contacto Portafolio: ${projectType} - ${name}`
     );
     const body = encodeURIComponent(
       `Nombre / Empresa: ${name}\nCorreo: ${email}\nÁrea: ${projectType}\n\nMensaje:\n${message}`

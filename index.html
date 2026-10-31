@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Edgar López | Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones</title>
+  <title>Edgar López | Desarrollador Web, Aplicaciones & Ingeniería Mecatrónica</title>
   <meta name="description" content="Portafolio profesional de Edgar López — Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones en Caracas, Venezuela." />
   <meta name="author" content="Edgar López" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0f131c" />
+  <meta name="theme-color" content="#09090b" />
   <link rel="canonical" href="https://edgar-lt.github.io/portafolio/" />
   <link rel="manifest" href="site.webmanifest" />
 
@@ -15,15 +15,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_VE" />
   <meta property="og:url" content="https://edgar-lt.github.io/portafolio/" />
-  <meta property="og:title" content="Edgar López | Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones" />
-  <meta property="og:description" content="Soluciones que conectan interfaces web modernas, aplicaciones multiplataforma y sistemas físicos con rigor de ingeniería." />
-  <meta property="og:image" content="https://edgar-lt.github.io/portafolio/assets/project-1.png" />
+  <meta property="og:title" content="Edgar López | Desarrollador Web, Aplicaciones & Ingeniería Mecatrónica" />
+  <meta property="og:description" content="Desarrollo de aplicaciones web modernas, interfaces móviles y soluciones de ingeniería en Caracas, Venezuela." />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Edgar López | Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones" />
-  <meta name="twitter:description" content="Portafolio profesional de Edgar López — Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones en Caracas, Venezuela." />
-  <meta name="twitter:image" content="https://edgar-lt.github.io/portafolio/assets/project-1.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Edgar López | Desarrollador Web, Aplicaciones & Ingeniería Mecatrónica" />
+  <meta name="twitter:description" content="Portafolio profesional de Edgar López — Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones." />
 
   <!-- Schema.org JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -62,7 +60,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS & Modular Design System Configuration -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -70,191 +68,151 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
-<body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-white selection:text-black">
 
-  <!-- Skip to Main Content (Accessibility WCAG 2.1 AA) -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-space-md focus:py-space-xs focus:rounded-lg focus:bg-primary-container focus:text-on-primary-container focus:font-label-md">
+  <!-- Skip to Main Content -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-on-primary focus:font-body-sm">
     Saltar al contenido principal
   </a>
 
   <!-- ===================================================================== -->
   <!-- HEADER & NAVIGATION                                                   -->
   <!-- ===================================================================== -->
-  <header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-white/[0.08]">
-    <div class="h-20 max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin flex items-center justify-between gap-space-md">
+  <header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-md border-b border-white/[0.07]">
+    <div class="h-16 max-w-6xl mx-auto px-margin-mobile md:px-margin-tablet flex items-center justify-between gap-space-md">
       <!-- Brand Identity -->
-      <a href="#inicio" class="flex items-center gap-space-sm group" aria-label="Edgar López — Inicio">
-        <img alt="Monograma Edgar López" width="36" height="36" class="h-9 w-9 object-contain" src="assets/logo.svg" />
-        <div class="flex flex-col">
-          <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight group-hover:text-primary-container transition-colors">EDGAR LÓPEZ // DEV</span>
-          <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">MECHATRONICS · WEB · APPS</span>
-        </div>
+      <a href="#inicio" class="flex items-center gap-3 group" aria-label="Edgar López — Inicio">
+        <img alt="EL" width="32" height="32" class="h-8 w-8 object-contain" src="assets/logo.svg" />
+        <span class="font-headline-sm text-body-md font-semibold text-primary tracking-tight">Edgar López</span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav aria-label="Navegación principal" class="hidden xl:flex items-center gap-space-xs" id="desktop-nav">
-        <a aria-current="page" class="nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container font-semibold transition-all" href="#inicio">Inicio</a>
-        <a class="nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all" href="#disciplinas">Tríada</a>
-        <a class="nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all" href="#proyectos">Proyectos</a>
-        <a class="nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all" href="#stack">Habilidades & Stack</a>
-        <a class="nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all" href="#experiencia">Trayectoria</a>
-        <a class="nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all" href="#contacto">Contacto</a>
+      <nav aria-label="Navegación principal" class="hidden md:flex items-center gap-1" id="desktop-nav">
+        <a aria-current="page" class="nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-medium transition-all" href="#inicio">Inicio</a>
+        <a class="nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all" href="#disciplinas">Áreas</a>
+        <a class="nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all" href="#proyectos">Proyectos</a>
+        <a class="nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all" href="#stack">Stack</a>
+        <a class="nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all" href="#experiencia">Trayectoria</a>
+        <a class="nav-link font-body-sm text-body-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary transition-all" href="#contacto">Contacto</a>
       </nav>
 
       <!-- Header Actions -->
-      <div class="flex items-center gap-space-sm">
-        <a class="hidden sm:inline-flex items-center gap-space-xs font-label-md text-label-md px-space-md py-space-xs rounded border border-white/10 text-primary hover:border-primary-container hover:text-primary-container hover:bg-surface-container-high transition-all" href="cv.html" title="Ver o Descargar CV en PDF">
-          <span>[ cv.pdf ]</span>
-          <span class="material-symbols-outlined text-sm" aria-hidden="true">description</span>
+      <div class="flex items-center gap-2.5">
+        <a class="hidden sm:inline-flex items-center gap-1.5 font-body-sm text-body-sm px-3.5 py-1.5 rounded-lg border border-white/10 text-on-surface-variant hover:text-primary hover:border-white/25 transition-all" href="cv.html">
+          <span>Ver CV</span>
         </a>
-        <a class="hidden sm:inline-flex items-center gap-space-xs font-label-md text-label-md px-space-md py-space-xs rounded bg-primary-container text-on-primary-container font-semibold hover:bg-primary-fixed-dim shadow-[0_0_16px_rgba(0,240,255,0.25)] transition-all" href="#contacto">
-          <span>Hablemos</span>
-          <span class="material-symbols-outlined text-sm" aria-hidden="true">send</span>
+        <a class="hidden sm:inline-flex items-center gap-1.5 font-body-sm text-body-sm font-medium px-3.5 py-1.5 rounded-lg bg-primary text-on-primary hover:bg-zinc-200 transition-all" href="#contacto">
+          <span>Contactar</span>
         </a>
-        <img alt="Insignia Edgar López" width="36" height="36" class="w-9 h-9 rounded-full object-cover" src="assets/avatar.svg" />
 
         <!-- Mobile Menu Button -->
-        <button aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu" class="xl:hidden p-2 rounded-lg bg-surface-container text-on-surface hover:text-primary-container border border-white/10" id="mobile-menu-btn" type="button">
+        <button aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-lg bg-surface-container text-on-surface hover:text-primary border border-white/10" id="mobile-menu-btn" type="button">
           <span class="material-symbols-outlined text-xl" id="mobile-menu-icon" aria-hidden="true">menu</span>
         </button>
       </div>
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <nav aria-label="Navegación móvil" class="xl:hidden hidden bg-surface-container-lowest/95 backdrop-blur-xl border-b border-white/10 px-margin-mobile py-space-md" id="mobile-menu">
-      <div class="flex flex-col gap-space-xs">
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-on-surface hover:bg-surface-container hover:text-primary-container transition-colors" href="#inicio">01 // Inicio</a>
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-on-surface hover:bg-surface-container hover:text-primary-container transition-colors" href="#disciplinas">02 // La Tríada Tecnológica</a>
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-on-surface hover:bg-surface-container hover:text-primary-container transition-colors" href="#proyectos">03 // Proyectos Destacados</a>
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-on-surface hover:bg-surface-container hover:text-primary-container transition-colors" href="#stack">04 // Habilidades & Stack</a>
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-on-surface hover:bg-surface-container hover:text-primary-container transition-colors" href="#experiencia">05 // Filosofía & Trayectoria</a>
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-on-surface hover:bg-surface-container hover:text-primary-container transition-colors" href="#contacto">06 // Contacto</a>
-        <a class="mobile-nav-link font-label-md text-label-md px-space-md py-space-sm rounded-lg text-primary-container hover:bg-surface-container transition-colors" href="cv.html">07 // Ver CV [ cv.pdf ]</a>
+    <nav aria-label="Navegación móvil" class="md:hidden hidden bg-surface-container-lowest border-b border-white/10 px-margin-mobile py-space-md" id="mobile-menu">
+      <div class="flex flex-col gap-1">
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors" href="#inicio">Inicio</a>
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors" href="#disciplinas">Áreas de Enfoque</a>
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors" href="#proyectos">Proyectos</a>
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors" href="#stack">Stack & Habilidades</a>
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors" href="#experiencia">Trayectoria</a>
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors" href="#contacto">Contacto</a>
+        <a class="mobile-nav-link font-body-sm text-body-sm px-3 py-2 rounded-lg text-primary font-medium hover:bg-surface-container transition-colors" href="cv.html">Ver Currículum Vitae</a>
       </div>
     </nav>
   </header>
 
-  <main class="w-full pt-20 bg-surface" id="main-content">
+  <main class="w-full pt-16 bg-surface" id="main-content">
     <div class="flex flex-col w-full">
 
       <!-- ===================================================================== -->
-      <!-- TOP DIAGNOSTIC / TELEMETRY STRIP                                      -->
+      <!-- SECTION 1: HERO SECTION (LIMPIO Y EDITORIAL)                          -->
       <!-- ===================================================================== -->
-      <div class="w-full bg-surface-container-lowest border-b border-white/[0.06] py-space-xs px-margin-mobile md:px-margin-tablet lg:px-margin">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant">
-          <div class="flex items-center gap-space-md">
-            <span class="flex items-center gap-space-xs text-secondary-fixed">
-              <span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span>
-              SYS.ONLINE: EDGAR_LOPEZ_PORTFOLIO
-            </span>
-            <span class="hidden sm:inline text-outline">|</span>
-            <span class="hidden sm:inline">PERFIL: ING. MECATRÓNICA // WEB DEV // APP DEV</span>
-          </div>
-          <div class="flex items-center gap-space-sm font-label-sm">
-            <span class="text-primary-container">STATUS: OPEN_TO_WORK</span>
-            <span class="text-outline">::</span>
-            <span>LOC: Caracas, Venezuela (UTC-4)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===================================================================== -->
-      <!-- SECTION 1: HERO SECTION                                               -->
-      <!-- ===================================================================== -->
-      <section class="relative w-full overflow-hidden bg-surface bg-tech-grid py-space-xl lg:py-28 px-margin-mobile md:px-margin-tablet lg:px-margin" id="inicio">
-        <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
-        <div class="absolute top-1/2 -right-48 w-[30rem] h-[30rem] rounded-full bg-secondary-container/10 blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center relative z-10">
+      <section class="relative w-full py-20 lg:py-28 px-margin-mobile md:px-margin-tablet border-b border-white/[0.06]" id="inicio">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <!-- Left Column: Copy & CTAs -->
-          <div class="lg:col-span-7 flex flex-col gap-space-lg">
-            <div class="flex flex-col gap-space-xs">
-              <span class="font-label-md text-label-md text-primary-container uppercase tracking-wider">// EDGAR LÓPEZ · ARQUITECTURA HÍBRIDA FÍSICO-DIGITAL</span>
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            <div class="flex flex-col gap-3">
+              <span class="font-label-md text-label-md text-on-surface-variant">
+                Edgar López · Caracas, Venezuela
+              </span>
               <h1 class="font-headline-xl-mobile md:text-headline-xl text-primary tracking-tight">
-                Ingeniería Mecatrónica <span class="text-primary-container font-light">+</span> Web <span class="text-secondary-fixed font-light">+</span> Apps
+                Desarrollo web, aplicaciones e ingeniería mecatrónica.
               </h1>
             </div>
 
-            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-              Desarrollador Web y de Aplicaciones con formación en Ingeniería Mecatrónica en Caracas, Venezuela. Construyo soluciones que conectan interfaces web modernas, aplicaciones móviles y sistemas físicos con precisión técnica y diseño centrado en el rendimiento.
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+              Soy estudiante de Ingeniería Mecatrónica y desarrollador de software. Construyo aplicaciones web modernas, soluciones móviles e integraciones con sistemas físicos priorizando código limpio, rendimiento y claridad.
             </p>
 
-            <div class="flex flex-wrap items-center gap-space-md pt-space-xs">
-              <a class="inline-flex items-center gap-space-xs font-headline-sm text-body-md font-semibold px-space-lg py-space-md rounded-lg bg-primary-container text-on-primary-container hover:bg-primary-fixed shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all" href="#proyectos">
-                <span>Ver Proyectos</span>
-                <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <a class="inline-flex items-center gap-2 font-body-md text-body-sm font-medium px-5 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-zinc-200 transition-all" href="#proyectos">
+                <span>Ver proyectos</span>
+                <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
               </a>
-              <a class="inline-flex items-center gap-space-xs font-headline-sm text-body-md font-medium px-space-lg py-space-md rounded-lg bg-surface-container-high border border-white/15 text-on-surface hover:border-primary-container hover:text-white transition-all" href="#contacto">
-                <span>Contactar</span>
-                <span class="material-symbols-outlined text-sm" aria-hidden="true">chat</span>
+              <a class="inline-flex items-center gap-2 font-body-md text-body-sm font-medium px-5 py-2.5 rounded-lg bg-surface-container border border-white/10 text-on-surface hover:border-white/25 transition-all" href="cv.html">
+                <span>Currículum Vitae</span>
+                <span class="material-symbols-outlined text-base" aria-hidden="true">description</span>
               </a>
-              <a class="inline-flex items-center gap-space-xs font-label-md text-label-md px-space-md py-space-md rounded text-primary-container hover:text-primary transition-colors" href="cv.html">
-                <span>[ descargar_cv.pdf ]</span>
-                <span class="material-symbols-outlined text-sm" aria-hidden="true">file_download</span>
+              <a class="inline-flex items-center gap-1.5 font-body-sm text-body-sm px-3 py-2.5 text-on-surface-variant hover:text-primary transition-colors" href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer">
+                <span>GitHub</span>
+                <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
               </a>
-            </div>
-
-            <div class="grid grid-cols-3 gap-space-md pt-space-lg">
-              <div class="flex flex-col glass-card p-space-md rounded-lg">
-                <span class="font-headline-lg-mobile md:text-headline-lg text-primary leading-tight">03</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Áreas Integradas</span>
-              </div>
-              <div class="flex flex-col glass-card p-space-md rounded-lg">
-                <span class="font-headline-lg-mobile md:text-headline-lg text-secondary-fixed leading-tight">Web & App</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Enfoque de Desarrollo</span>
-              </div>
-              <div class="flex flex-col glass-card p-space-md rounded-lg">
-                <span class="font-headline-lg-mobile md:text-headline-lg text-primary-container leading-tight">100%</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Rigor de Ingeniería</span>
-              </div>
             </div>
           </div>
 
-          <!-- Right Column: Interactive Blueprint / Tech Graphic -->
-          <div class="lg:col-span-5 flex flex-col items-center justify-center relative">
-            <div class="w-full max-w-md glass-card p-space-lg rounded-xl shadow-xl flex flex-col gap-space-md relative overflow-hidden">
-              <div class="flex items-center justify-between pb-space-xs border-b border-white/[0.06]">
-                <div class="flex items-center gap-space-xs">
-                  <span class="w-2.5 h-2.5 rounded-full bg-error-container"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
-                  <span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
-                  <span class="font-label-sm text-label-sm text-outline ml-space-xs">edgar_nexus.sys</span>
+          <!-- Right Column: Clean Profile Summary Card -->
+          <div class="lg:col-span-5">
+            <div class="clean-card rounded-xl p-space-lg flex flex-col gap-5">
+              <div class="flex items-center justify-between pb-4 border-b border-white/[0.06]">
+                <div class="flex flex-col">
+                  <span class="font-headline-sm text-body-md font-semibold text-primary">Perfil Técnico</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Enfoque multidisciplinario</span>
                 </div>
-                <span class="font-label-sm text-label-sm text-secondary-fixed">ACTIVE_NODE</span>
+                <span class="px-2.5 py-1 rounded-full bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">
+                  Disponible
+                </span>
               </div>
 
-              <div class="w-full aspect-square bg-surface-container-lowest rounded-lg border border-white/[0.06] p-space-md flex flex-col items-center justify-center relative">
-                <svg aria-hidden="true" class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <pattern height="24" id="blueprint-grid" patternUnits="userSpaceOnUse" width="24">
-                      <path class="text-primary-container" d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" stroke-width="0.5"></path>
-                    </pattern>
-                  </defs>
-                  <rect fill="url(#blueprint-grid)" height="100%" width="100%"></rect>
-                </svg>
+              <div class="flex flex-col gap-3.5">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-on-surface shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-body-sm text-body-sm font-medium text-primary">Desarrollo Web</span>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">Interfaces responsivas, arquitectura modular y APIs.</span>
+                  </div>
+                </div>
 
-                <svg aria-label="Esquema vectorial de sistemas mecatrónicos y software" class="w-48 h-48 text-primary-container relative z-10 animate-pulse" fill="none" role="img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <polygon class="opacity-60" points="50,5 88,27 88,73 50,95 12,73 12,27" stroke="currentColor" stroke-width="1.5"></polygon>
-                  <polyline points="20,50 8,50 18,34" stroke="currentColor" stroke-width="2"></polyline>
-                  <polyline points="80,50 92,50 82,34" stroke="currentColor" stroke-width="2"></polyline>
-                  <circle cx="50" cy="50" r="34" stroke="currentColor" stroke-dasharray="4 2" stroke-width="2"></circle>
-                  <circle class="text-secondary-fixed" cx="50" cy="50" r="26" stroke="currentColor" stroke-width="1.5"></circle>
-                  <path d="M 50 24 L 50 38 M 32 50 L 42 50 M 68 50 L 58 50 M 50 76 L 50 62" stroke="currentColor" stroke-width="1.8"></path>
-                  <circle cx="50" cy="24" fill="currentColor" r="2.5"></circle>
-                  <circle cx="32" cy="50" fill="currentColor" r="2.5"></circle>
-                  <circle cx="68" cy="50" fill="currentColor" r="2.5"></circle>
-                  <circle cx="50" cy="76" fill="currentColor" r="2.5"></circle>
-                  <circle cx="50" cy="50" r="8" stroke="currentColor" stroke-width="2"></circle>
-                  <circle class="text-secondary-fixed" cx="50" cy="50" fill="currentColor" r="4"></circle>
-                </svg>
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-on-surface shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-base" aria-hidden="true">smartphone</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-body-sm text-body-sm font-medium text-primary">Desarrollo de Aplicaciones</span>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">Apps móviles y soluciones multiplataforma.</span>
+                  </div>
+                </div>
 
-                <div class="absolute bottom-2 left-3 font-label-sm text-label-sm text-on-surface-variant/80">CCS: 10.4806° N // 66.9036° W</div>
-                <div class="absolute top-2 right-3 font-label-sm text-label-sm text-secondary-fixed">MECHATRONICS + DEV</div>
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-on-surface shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-base" aria-hidden="true">precision_manufacturing</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-body-sm text-body-sm font-medium text-primary">Ingeniería Mecatrónica</span>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">Electrónica, microcontroladores y control físico.</span>
+                  </div>
+                </div>
               </div>
 
-              <div class="flex items-center justify-between font-label-sm text-label-sm">
-                <span class="text-on-surface-variant">MODE: FULL_STACK & EMBEDDED</span>
-                <span class="text-primary-container">SYS: READY</span>
+              <div class="pt-3 border-t border-white/[0.06] flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+                <span>Caracas, Venezuela (UTC-4)</span>
+                <a href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">github.com/Edgar-LT</a>
               </div>
             </div>
           </div>
@@ -262,94 +220,76 @@
       </section>
 
       <!-- ===================================================================== -->
-      <!-- SECTION 2: LA TRÍADA TECNOLÓGICA (CORE PILLARS)                       -->
+      <!-- SECTION 2: LA TRÍADA TECNOLÓGICA (ÁREAS DE ENFOQUE)                   -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-surface-container-lowest py-space-xl lg:py-24 px-margin-mobile md:px-margin-tablet lg:px-margin border-t border-white/[0.06]" id="disciplinas">
-        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
-          <div class="flex flex-col gap-space-xs max-w-2xl">
-            <span class="font-label-md text-label-md text-primary-container uppercase">// DOMINIOS CENTRALES</span>
+      <section class="w-full bg-surface-container-lowest py-20 px-margin-mobile md:px-margin-tablet border-b border-white/[0.06]" id="disciplinas">
+        <div class="max-w-6xl mx-auto flex flex-col gap-12">
+          <div class="flex flex-col gap-2 max-w-2xl">
+            <span class="font-label-md text-label-md text-on-surface-variant">Áreas de especialidad</span>
             <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">La Tríada Tecnológica</h2>
             <p class="font-body-md text-body-md text-on-surface-variant">
-              Mi formación en Ingeniería Mecatrónica combinada con el desarrollo de software me permite abordar proyectos desde la lógica física y el control hasta interfaces web modernas y aplicaciones multiplataforma.
+              Combino mi formación en Ingeniería Mecatrónica con el desarrollo de software para construir soluciones completas, desde la lógica de bajo nivel hasta la interfaz del usuario.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
-            <!-- Pillar 1: Ingeniería Mecatrónica -->
-            <div class="flex flex-col justify-between glass-card p-space-lg rounded-xl group">
-              <div class="flex flex-col gap-space-md">
-                <div class="w-12 h-12 rounded-lg bg-surface-container-high border border-white/10 flex items-center justify-center text-secondary-fixed group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
-                  <span class="material-symbols-outlined text-2xl" aria-hidden="true">precision_manufacturing</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Área 1: Desarrollo Web -->
+            <div class="clean-card p-space-lg rounded-xl flex flex-col justify-between gap-6">
+              <div class="flex flex-col gap-4">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.08] flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-xl" aria-hidden="true">terminal</span>
                 </div>
-                <div class="flex flex-col gap-space-xs">
-                  <span class="font-label-sm text-label-sm text-secondary-fixed font-semibold uppercase">01 // HARDWARE & CONTROL</span>
-                  <h3 class="font-headline-sm text-headline-sm text-primary">Ingeniería Mecatrónica & Sistemas Embebidos</h3>
-                </div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">
-                  Integración de electrónica, sensores, actuadores, automatización y programación de microcontroladores para sistemas físicos inteligentes e IoT.
-                </p>
-                <div class="flex flex-wrap gap-space-xs pt-space-xs">
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Microcontroladores</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Sensores & Actuadores</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Automatización / IoT</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Diseño & Modelado</span>
+                <div class="flex flex-col gap-1.5">
+                  <h3 class="font-headline-sm text-headline-sm text-primary">Desarrollo Web</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Construcción de sitios y aplicaciones web rápidas, accesibles y adaptables a cualquier pantalla, cuidando tanto la estructura del código como la experiencia visual.
+                  </p>
                 </div>
               </div>
-              <div class="pt-space-md mt-space-md border-t border-white/[0.06] flex items-center gap-space-xs font-label-sm text-label-sm text-secondary-fixed">
-                <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
-                <span>ENFOQUE: INTEGRACIÓN HARDWARE-SOFTWARE</span>
+              <div class="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">Frontend</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">UI Responsiva</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">APIs & Backend</span>
               </div>
             </div>
 
-            <!-- Pillar 2: Desarrollo Web -->
-            <div class="flex flex-col justify-between glass-card p-space-lg rounded-xl group">
-              <div class="flex flex-col gap-space-md">
-                <div class="w-12 h-12 rounded-lg bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-container group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
-                  <span class="material-symbols-outlined text-2xl" aria-hidden="true">terminal</span>
+            <!-- Área 2: Desarrollo de Aplicaciones -->
+            <div class="clean-card p-space-lg rounded-xl flex flex-col justify-between gap-6">
+              <div class="flex flex-col gap-4">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.08] flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-xl" aria-hidden="true">phone_iphone</span>
                 </div>
-                <div class="flex flex-col gap-space-xs">
-                  <span class="font-label-sm text-label-sm text-primary-container font-semibold uppercase">02 // WEB DEVELOPMENT</span>
-                  <h3 class="font-headline-sm text-headline-sm text-primary">Desarrollo Web Full-Stack</h3>
-                </div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">
-                  Diseño y construcción de sitios web responsivos, paneles de control interactivos, plataformas web modernas y consumo/creación de APIs.
-                </p>
-                <div class="flex flex-wrap gap-space-xs pt-space-xs">
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Frontend Moderno</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Diseño Responsivo UI/UX</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Backend & APIs</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Bases de Datos</span>
-                </div>
-              </div>
-              <div class="pt-space-md mt-space-md border-t border-white/[0.06] flex items-center gap-space-xs font-label-sm text-label-sm text-primary-container">
-                <span class="w-2 h-2 rounded-full bg-primary-container"></span>
-                <span>ENFOQUE: ARQUITECTURA & RENDIMIENTO WEB</span>
-              </div>
-            </div>
-
-            <!-- Pillar 3: Desarrollo de Aplicaciones -->
-            <div class="flex flex-col justify-between glass-card p-space-lg rounded-xl group">
-              <div class="flex flex-col gap-space-md">
-                <div class="w-12 h-12 rounded-lg bg-surface-container-high border border-white/10 flex items-center justify-center text-tertiary-fixed-dim group-hover:bg-tertiary-fixed-dim group-hover:text-on-tertiary-fixed transition-colors">
-                  <span class="material-symbols-outlined text-2xl" aria-hidden="true">phone_iphone</span>
-                </div>
-                <div class="flex flex-col gap-space-xs">
-                  <span class="font-label-sm text-label-sm text-tertiary-fixed-dim font-semibold uppercase">03 // MOBILE & APPS</span>
+                <div class="flex flex-col gap-1.5">
                   <h3 class="font-headline-sm text-headline-sm text-primary">Desarrollo de Aplicaciones</h3>
-                </div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">
-                  Creación de aplicaciones móviles e interfaces intuitivas orientadas al usuario final, gestión de datos en tiempo real y conexión con servicios o dispositivos.
-                </p>
-                <div class="flex flex-wrap gap-space-xs pt-space-xs">
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Apps Multiplataforma</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Interfaces Móviles</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Integración de Servicios</span>
-                  <span class="px-space-sm py-0.5 rounded bg-surface-container-high border border-white/[0.08] font-label-sm text-label-sm text-on-surface">Apps Conectadas</span>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Creación de aplicaciones móviles y multiplataforma orientadas a resolver tareas concretas con flujos claros, gestión de datos y comunicación con servicios externos.
+                  </p>
                 </div>
               </div>
-              <div class="pt-space-md mt-space-md border-t border-white/[0.06] flex items-center gap-space-xs font-label-sm text-label-sm text-tertiary-fixed-dim">
-                <span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
-                <span>ENFOQUE: SOLUCIONES MÓVILES & DESKTOP</span>
+              <div class="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">Apps Móviles</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">Multiplataforma</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">Integraciones</span>
+              </div>
+            </div>
+
+            <!-- Área 3: Ingeniería Mecatrónica -->
+            <div class="clean-card p-space-lg rounded-xl flex flex-col justify-between gap-6">
+              <div class="flex flex-col gap-4">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.08] flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-xl" aria-hidden="true">precision_manufacturing</span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <h3 class="font-headline-sm text-headline-sm text-primary">Ingeniería Mecatrónica</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Integración de electrónica, sensores, actuadores y programación de microcontroladores para automatización, prototipos funcionales y sistemas IoT.
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">Microcontroladores</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">Control & Sensores</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">IoT</span>
               </div>
             </div>
           </div>
@@ -357,204 +297,194 @@
       </section>
 
       <!-- ===================================================================== -->
-      <!-- SECTION 3: PROYECTOS DESTACADOS (RENDERIZADO DESDE js/data.js)        -->
+      <!-- SECTION 3: PROYECTOS DESTACADOS (DESDE js/data.js)                    -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-surface py-space-xl lg:py-28 px-margin-mobile md:px-margin-tablet lg:px-margin border-t border-white/[0.06]" id="proyectos">
-        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
-          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
-            <div class="flex flex-col gap-space-xs">
-              <span class="font-label-md text-label-md text-primary-container uppercase">// PORTAFOLIO DE INGENIERÍA & SOFTWARE</span>
-              <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Proyectos Destacados</h2>
+      <section class="w-full bg-surface py-20 lg:py-24 px-margin-mobile md:px-margin-tablet border-b border-white/[0.06]" id="proyectos">
+        <div class="max-w-6xl mx-auto flex flex-col gap-10">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div class="flex flex-col gap-2">
+              <span class="font-label-md text-label-md text-on-surface-variant">Portafolio de trabajo</span>
+              <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Proyectos</h2>
             </div>
 
             <!-- Interactive Category Filter -->
-            <div aria-label="Filtrar proyectos por categoría" class="flex flex-wrap items-center gap-space-xs" id="project-filters" role="group">
-              <button aria-pressed="true" class="filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-primary-container text-on-primary-container font-semibold transition-all" data-filter="all" type="button">Todos</button>
-              <button aria-pressed="false" class="filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:text-on-surface border border-white/[0.08] transition-all" data-filter="web" type="button">Desarrollo Web</button>
-              <button aria-pressed="false" class="filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:text-on-surface border border-white/[0.08] transition-all" data-filter="app" type="button">Aplicaciones</button>
-              <button aria-pressed="false" class="filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:text-on-surface border border-white/[0.08] transition-all" data-filter="mecatronica" type="button">Mecatrónica</button>
+            <div aria-label="Filtrar proyectos por categoría" class="flex flex-wrap items-center gap-2" id="project-filters" role="group">
+              <button aria-pressed="true" class="filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-primary text-on-primary font-medium transition-all" data-filter="all" type="button">Todos</button>
+              <button aria-pressed="false" class="filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-surface-container text-on-surface-variant hover:text-primary border border-white/[0.07] transition-all" data-filter="web" type="button">Desarrollo Web</button>
+              <button aria-pressed="false" class="filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-surface-container text-on-surface-variant hover:text-primary border border-white/[0.07] transition-all" data-filter="app" type="button">Aplicaciones</button>
+              <button aria-pressed="false" class="filter-btn px-3.5 py-1.5 rounded-lg font-body-sm text-body-sm bg-surface-container text-on-surface-variant hover:text-primary border border-white/[0.07] transition-all" data-filter="mecatronica" type="button">Mecatrónica</button>
             </div>
           </div>
 
           <!-- Dynamic Project Cards Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg" id="projects-grid"></div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="projects-grid"></div>
         </div>
       </section>
 
       <!-- ===================================================================== -->
-      <!-- SECTION 4: STACK TECNOLÓGICO & HABILIDADES (DESDE js/data.js)         -->
+      <!-- SECTION 4: STACK TECNOLÓGICO & HERRAMIENTAS (DESDE js/data.js)        -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-surface-container-lowest py-space-xl lg:py-24 px-margin-mobile md:px-margin-tablet lg:px-margin border-t border-white/[0.06]" id="stack">
-        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
-          <div class="flex flex-col gap-space-xs">
-            <span class="font-label-md text-label-md text-primary-container uppercase">// ESPECIFICACIONES & COMPETENCIAS</span>
-            <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Stack Tecnológico & Habilidades</h2>
-            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
-              Competencias organizadas por capas funcionales con nivel técnico verificable, actualizadas de forma continua conforme se incorporan nuevos proyectos al portafolio.
+      <section class="w-full bg-surface-container-lowest py-20 px-margin-mobile md:px-margin-tablet border-b border-white/[0.06]" id="stack">
+        <div class="max-w-6xl mx-auto flex flex-col gap-10">
+          <div class="flex flex-col gap-2 max-w-2xl">
+            <span class="font-label-md text-label-md text-on-surface-variant">Tecnologías y herramientas</span>
+            <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Stack & Habilidades</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Lenguajes, tecnologías y entorno de trabajo organizados por área, actualizados a medida que desarrollo nuevos proyectos.
             </p>
           </div>
 
           <!-- Dynamic Skills Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md" id="skills-grid"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="skills-grid"></div>
         </div>
       </section>
 
       <!-- ===================================================================== -->
-      <!-- SECTION 5: TRAYECTORIA & FILOSOFÍA DE TRABAJO (DESDE js/data.js)      -->
+      <!-- SECTION 5: TRAYECTORIA & ENFOQUE DE INGENIERÍA (DESDE js/data.js)     -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-surface py-space-xl lg:py-28 px-margin-mobile md:px-margin-tablet lg:px-margin border-t border-white/[0.06]" id="experiencia">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+      <section class="w-full bg-surface py-20 lg:py-24 px-margin-mobile md:px-margin-tablet border-b border-white/[0.06]" id="experiencia">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <!-- Philosophy Statement -->
-          <div class="lg:col-span-5 flex flex-col gap-space-md">
-            <span class="font-label-md text-label-md text-primary-container uppercase">// PARADIGMA INTERDISCIPLINAR</span>
-            <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">
-              La Mentalidad Mecatrónica en el Software
-            </h2>
+          <div class="lg:col-span-5 flex flex-col gap-5">
+            <div class="flex flex-col gap-2">
+              <span class="font-label-md text-label-md text-on-surface-variant">Metodología</span>
+              <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">
+                Rigor de ingeniería aplicado al software
+              </h2>
+            </div>
             <p class="font-body-md text-body-md text-on-surface-variant">
-              En mecatrónica, una falla de lógica no solo muestra un mensaje en pantalla: afecta directamente a un sistema físico.
-            </p>
-            <p class="font-body-md text-body-md text-on-surface-variant">
-              Como estudiante de Ingeniería Mecatrónica, traslado esa disciplina analítica directamente al desarrollo de páginas web y aplicaciones:
+              Estudiar Ingeniería Mecatrónica enseña que cada componente de un sistema tiene un propósito y debe responder de forma predecible. Aplico esa misma forma de pensar al construir páginas web y aplicaciones:
             </p>
 
-            <div class="flex flex-col gap-space-sm pt-space-xs">
-              <div class="flex items-start gap-space-sm glass-card p-space-sm rounded-lg">
-                <span class="material-symbols-outlined text-secondary-fixed mt-0.5" aria-hidden="true">verified</span>
-                <div class="flex flex-col">
-                  <span class="font-headline-sm text-body-md font-semibold text-primary">Resolución estructurada de problemas</span>
-                  <span class="font-body-sm text-body-sm text-on-surface-variant">División modular de sistemas complejos en componentes limpios y mantenibles.</span>
+            <div class="flex flex-col gap-3 pt-1">
+              <div class="clean-card p-4 rounded-xl flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-lg mt-0.5" aria-hidden="true">check_circle</span>
+                <div class="flex flex-col gap-0.5">
+                  <span class="font-body-sm text-body-sm font-semibold text-primary">Código estructurado y mantenible</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Separación clara entre datos, estilos y lógica para escalar sin fricción.</span>
                 </div>
               </div>
-              <div class="flex items-start gap-space-sm glass-card p-space-sm rounded-lg">
-                <span class="material-symbols-outlined text-primary-container mt-0.5" aria-hidden="true">verified</span>
-                <div class="flex flex-col">
-                  <span class="font-headline-sm text-body-md font-semibold text-primary">Eficiencia y optimización</span>
-                  <span class="font-body-sm text-body-sm text-on-surface-variant">Interfaces rápidas, código ligero y atención al detalle en cada interacción.</span>
+              <div class="clean-card p-4 rounded-xl flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-lg mt-0.5" aria-hidden="true">check_circle</span>
+                <div class="flex flex-col gap-0.5">
+                  <span class="font-body-sm text-body-sm font-semibold text-primary">Atención al rendimiento</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Interfaces ligeras, tiempos de carga rápidos y diseño limpio sin elementos innecesarios.</span>
                 </div>
               </div>
-              <div class="flex items-start gap-space-sm glass-card p-space-sm rounded-lg">
-                <span class="material-symbols-outlined text-tertiary-fixed-dim mt-0.5" aria-hidden="true">verified</span>
-                <div class="flex flex-col">
-                  <span class="font-headline-sm text-body-md font-semibold text-primary">Visión de extremo a extremo</span>
-                  <span class="font-body-sm text-body-sm text-on-surface-variant">Capacidad para conectar desde un sensor o microcontrolador hasta una app móvil o la nube.</span>
+              <div class="clean-card p-4 rounded-xl flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-lg mt-0.5" aria-hidden="true">check_circle</span>
+                <div class="flex flex-col gap-0.5">
+                  <span class="font-body-sm text-body-sm font-semibold text-primary">Visión integral</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Comprensión tanto del funcionamiento del hardware como de la experiencia del usuario final.</span>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Dynamic Timeline Component -->
-          <div class="lg:col-span-7 flex flex-col gap-space-lg">
-            <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">// FORMACIÓN & EVOLUCIÓN</span>
-            <div class="flex flex-col gap-space-md" id="timeline-list"></div>
+          <div class="lg:col-span-7 flex flex-col gap-4">
+            <span class="font-label-md text-label-md text-on-surface-variant">Formación y evolución</span>
+            <div class="flex flex-col gap-4" id="timeline-list"></div>
           </div>
         </div>
       </section>
 
       <!-- ===================================================================== -->
-      <!-- SECTION 6: CONTACTO DIRECTO & CANALES                                 -->
+      <!-- SECTION 6: CONTACTO DIRECTO                                           -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-surface-container-lowest py-space-xl lg:py-28 px-margin-mobile md:px-margin-tablet lg:px-margin relative border-t border-white/[0.06]" id="contacto">
-        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
-            <!-- Left: Contact Details -->
-            <div class="lg:col-span-5 flex flex-col gap-space-lg">
-              <div class="flex flex-col gap-space-xs">
-                <span class="font-label-md text-label-md text-primary-container uppercase">// CANAL DE COMUNICACIÓN ABIERTO</span>
-                <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Hablemos de tu Proyecto</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant">
-                  ¿Buscas desarrollar una página web, una aplicación móvil o un proyecto que integre ingeniería mecatrónica y software? Escríbeme y conversemos.
-                </p>
-              </div>
-
-              <!-- Fast Contact Cards -->
-              <div class="flex flex-col gap-space-sm">
-                <a class="flex items-center gap-space-md glass-card p-space-md rounded-xl group" href="mailto:Socialedgar0710@gmail.com">
-                  <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
-                    <span class="material-symbols-outlined text-lg" aria-hidden="true">alternate_email</span>
-                  </div>
-                  <div class="flex flex-col">
-                    <span class="font-label-sm text-label-sm text-on-surface-variant">CORREO ELECTRÓNICO</span>
-                    <span class="font-headline-sm text-body-md font-semibold text-primary">Socialedgar0710@gmail.com</span>
-                  </div>
-                </a>
-
-                <a class="flex items-center gap-space-md glass-card p-space-md rounded-xl group" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">
-                  <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                    <span class="material-symbols-outlined text-lg" aria-hidden="true">code</span>
-                  </div>
-                  <div class="flex flex-col">
-                    <span class="font-label-sm text-label-sm text-on-surface-variant">GITHUB REPOSITORIES</span>
-                    <span class="font-headline-sm text-body-md font-semibold text-primary">github.com/Edgar-LT</span>
-                  </div>
-                </a>
-
-                <a class="flex items-center gap-space-md glass-card p-space-md rounded-xl group" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">
-                  <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary-container group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
-                    <span class="material-symbols-outlined text-lg" aria-hidden="true">chat</span>
-                  </div>
-                  <div class="flex flex-col">
-                    <span class="font-label-sm text-label-sm text-on-surface-variant">WHATSAPP DIRECTO</span>
-                    <span class="font-headline-sm text-body-md font-semibold text-primary">+58 412-9640005</span>
-                  </div>
-                </a>
-              </div>
-
-              <div class="font-label-sm text-label-sm text-on-surface-variant">
-                UBICACIÓN: CARACAS, VENEZUELA (UTC-4) · DISPONIBLE REMOTO & LOCAL
-              </div>
+      <section class="w-full bg-surface-container-lowest py-20 lg:py-24 px-margin-mobile md:px-margin-tablet" id="contacto">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Left: Contact Details -->
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+              <span class="font-label-md text-label-md text-on-surface-variant">Contacto</span>
+              <h2 class="font-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Hablemos</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Si tienes un proyecto web, una aplicación en mente o buscas colaborar en un desarrollo técnico, puedes escribirme directamente por cualquiera de estos canales.
+              </p>
             </div>
 
-            <!-- Right: Modern Clean Form (Correo Electrónico) -->
-            <div class="lg:col-span-7 glass-card p-space-xl rounded-xl shadow-xl flex flex-col gap-space-md">
-              <div class="flex items-center justify-between pb-space-xs border-b border-white/[0.06]">
-                <span class="font-label-sm text-label-sm text-primary-container font-semibold uppercase">// ENVIAR MENSAJE POR CORREO</span>
-                <span class="font-label-sm text-label-sm text-secondary-fixed">DESTINO: SOCIALEDGAR0710@GMAIL.COM</span>
+            <!-- Contact Cards -->
+            <div class="flex flex-col gap-3">
+              <a class="flex items-center gap-4 clean-card p-4 rounded-xl group" href="mailto:Socialedgar0710@gmail.com">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-lg" aria-hidden="true">mail</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">Correo electrónico</span>
+                  <span class="font-body-sm text-body-sm font-medium text-primary group-hover:underline">Socialedgar0710@gmail.com</span>
+                </div>
+              </a>
+
+              <a class="flex items-center gap-4 clean-card p-4 rounded-xl group" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-lg" aria-hidden="true">code</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">GitHub</span>
+                  <span class="font-body-sm text-body-sm font-medium text-primary group-hover:underline">github.com/Edgar-LT</span>
+                </div>
+              </a>
+
+              <a class="flex items-center gap-4 clean-card p-4 rounded-xl group" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">
+                <div class="w-10 h-10 rounded-lg bg-surface-container-high border border-white/[0.07] flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-lg" aria-hidden="true">chat</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">WhatsApp</span>
+                  <span class="font-body-sm text-body-sm font-medium text-primary group-hover:underline">+58 412-9640005</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Clean Email Form -->
+          <div class="lg:col-span-7 clean-card p-space-lg md:p-space-xl rounded-xl flex flex-col gap-5">
+            <div class="flex flex-col gap-1 border-b border-white/[0.06] pb-4">
+              <h3 class="font-headline-sm text-headline-sm text-primary">Enviar un mensaje</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">El formulario preparará un correo directo a Socialedgar0710@gmail.com.</p>
+            </div>
+
+            <form class="flex flex-col gap-4" id="contact-form">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <label class="font-body-sm text-body-sm text-on-surface" for="name">Nombre o empresa</label>
+                  <input autocomplete="name" class="w-full bg-surface-container-lowest border border-white/10 text-on-surface placeholder:text-outline font-body-sm text-body-sm px-3.5 py-2.5 rounded-lg focus:outline-none focus:border-white/40 transition-all" id="name" placeholder="Tu nombre" required type="text" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="font-body-sm text-body-sm text-on-surface" for="email">Correo electrónico</label>
+                  <input autocomplete="email" class="w-full bg-surface-container-lowest border border-white/10 text-on-surface placeholder:text-outline font-body-sm text-body-sm px-3.5 py-2.5 rounded-lg focus:outline-none focus:border-white/40 transition-all" id="email" placeholder="correo@ejemplo.com" required type="email" />
+                </div>
               </div>
 
-              <form class="flex flex-col gap-space-md" id="contact-form">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
-                  <div class="flex flex-col gap-1">
-                    <label class="font-label-sm text-label-sm text-on-surface" for="name">Nombre / Empresa</label>
-                    <input autocomplete="name" class="w-full bg-surface-container-lowest border border-white/10 text-on-surface placeholder:text-outline font-body-sm text-body-sm px-space-md py-space-sm rounded-lg focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="name" placeholder="Tu nombre o empresa" required type="text" />
-                  </div>
-                  <div class="flex flex-col gap-1">
-                    <label class="font-label-sm text-label-sm text-on-surface" for="email">Correo Electrónico</label>
-                    <input autocomplete="email" class="w-full bg-surface-container-lowest border border-white/10 text-on-surface placeholder:text-outline font-body-sm text-body-sm px-space-md py-space-sm rounded-lg focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="email" placeholder="correo@ejemplo.com" required type="email" />
-                  </div>
-                </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="font-body-sm text-body-sm text-on-surface" for="project-type">Área de interés</label>
+                <select class="w-full bg-surface-container-lowest border border-white/10 text-on-surface font-body-sm text-body-sm px-3.5 py-2.5 rounded-lg focus:outline-none focus:border-white/40 transition-all" id="project-type">
+                  <option value="web">Desarrollo Web</option>
+                  <option value="app">Desarrollo de Aplicación</option>
+                  <option value="meca">Ingeniería Mecatrónica / IoT</option>
+                  <option value="integral">Proyecto Integral (Hardware + Software)</option>
+                  <option value="otro">Otra consulta</option>
+                </select>
+              </div>
 
-                <div class="flex flex-col gap-1">
-                  <label class="font-label-sm text-label-sm text-on-surface" for="project-type">Tipo de Proyecto / Área</label>
-                  <select class="w-full bg-surface-container-lowest border border-white/10 text-on-surface font-body-sm text-body-sm px-space-md py-space-sm rounded-lg focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" id="project-type">
-                    <option value="web">Desarrollo Web (Sitio Web / Plataforma / Full-Stack)</option>
-                    <option value="app">Desarrollo de Aplicación (Móvil / Multiplataforma)</option>
-                    <option value="meca">Proyecto de Ingeniería Mecatrónica / IoT</option>
-                    <option value="integral">Proyecto Integral (Hardware + Web + App)</option>
-                    <option value="otro">Colaboración / Otra Consulta</option>
-                  </select>
-                </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="font-body-sm text-body-sm text-on-surface" for="message">Mensaje</label>
+                <textarea class="w-full bg-surface-container-lowest border border-white/10 text-on-surface placeholder:text-outline font-body-sm text-body-sm px-3.5 py-2.5 rounded-lg focus:outline-none focus:border-white/40 transition-all resize-none" id="message" placeholder="Cuéntame sobre el proyecto o idea..." required rows="4"></textarea>
+              </div>
 
-                <div class="flex flex-col gap-1">
-                  <label class="font-label-sm text-label-sm text-on-surface" for="message">Mensaje / Detalles del Proyecto</label>
-                  <textarea class="w-full bg-surface-container-lowest border border-white/10 text-on-surface placeholder:text-outline font-body-sm text-body-sm px-space-md py-space-sm rounded-lg focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all resize-none" id="message" placeholder="Cuéntame sobre tu idea, alcance o requerimientos..." required rows="4"></textarea>
-                </div>
+              <div class="flex items-center justify-end pt-2">
+                <button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-body-sm text-body-sm font-medium px-6 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-zinc-200 transition-all" type="submit">
+                  <span>Enviar mensaje</span>
+                  <span class="material-symbols-outlined text-base" aria-hidden="true">send</span>
+                </button>
+              </div>
 
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-xs">
-                  <span class="font-label-sm text-label-sm text-on-surface-variant text-center sm:text-left">
-                    Envío directo a Socialedgar0710@gmail.com.
-                  </span>
-                  <button class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs font-headline-sm text-body-md font-semibold px-space-xl py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-primary-fixed shadow-[0_0_16px_rgba(0,240,255,0.25)] transition-all" type="submit">
-                    <span>Enviar por Correo</span>
-                    <span class="material-symbols-outlined text-sm" aria-hidden="true">mail</span>
-                  </button>
-                </div>
-
-                <div aria-live="polite" class="hidden p-space-sm rounded-lg bg-surface-container-high border border-secondary-fixed/40 text-secondary-fixed font-label-sm text-label-sm flex items-center gap-space-xs" id="form-status" role="status">
-                  <span class="material-symbols-outlined text-sm" aria-hidden="true">check_circle</span>
-                  <span>¡Correo preparado! Confirma el envío desde tu aplicación de correo.</span>
-                </div>
-              </form>
-            </div>
+              <div aria-live="polite" class="hidden p-3 rounded-lg bg-surface-container-high border border-white/15 text-on-surface font-body-sm text-body-sm flex items-center gap-2" id="form-status" role="status">
+                <span class="material-symbols-outlined text-base" aria-hidden="true">check_circle</span>
+                <span>Correo listo. Confirma el envío desde tu aplicación de correo.</span>
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -563,11 +493,11 @@
   </main>
 
   <!-- ===================================================================== -->
-  <!-- MODAL DE CASO DE ESTUDIO (FICHA TÉCNICA DE INGENIERÍA)                -->
+  <!-- MODAL DE DETALLES DEL PROYECTO                                        -->
   <!-- ===================================================================== -->
   <div aria-hidden="true" aria-labelledby="modal-project-title" aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-margin-mobile md:p-margin-tablet overflow-y-auto" id="project-modal" role="dialog">
-    <div class="glass-modal animate-fade-in w-full max-w-4xl rounded-xl p-space-lg md:p-space-xl relative my-auto max-h-[90vh] overflow-y-auto">
-      <button aria-label="Cerrar ficha técnica" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-surface-container-high border border-white/15 text-on-surface hover:border-primary-container hover:text-primary-container flex items-center justify-center transition-colors" id="close-modal-btn" type="button">
+    <div class="clean-modal animate-fade-in w-full max-w-3xl rounded-xl p-space-lg md:p-space-xl relative my-auto max-h-[90vh] overflow-y-auto">
+      <button aria-label="Cerrar ventana" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-surface-container-high border border-white/10 text-on-surface-variant hover:text-primary hover:border-white/25 flex items-center justify-center transition-colors" id="close-modal-btn" type="button">
         <span class="material-symbols-outlined text-lg" aria-hidden="true">close</span>
       </button>
       <div id="project-modal-body"></div>
@@ -577,59 +507,20 @@
   <!-- ===================================================================== -->
   <!-- FOOTER                                                                -->
   <!-- ===================================================================== -->
-  <footer class="w-full bg-surface-container-lowest border-t border-white/[0.08] py-space-xl">
-    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-tablet lg:px-margin">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl pb-space-lg border-b border-white/[0.06]">
-        <div class="md:col-span-2 flex flex-col gap-space-sm">
-          <div class="flex items-center gap-space-sm">
-            <img alt="Monograma Edgar López" width="28" height="28" class="h-7 w-7 object-contain" src="assets/logo.svg" />
-            <span class="font-headline-sm text-headline-sm text-primary tracking-tight">EDGAR LÓPEZ // MECHATRONICS & DEV</span>
-          </div>
-          <p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
-            Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones en Caracas, Venezuela. Construyendo soluciones donde el software moderno y la ingeniería convergen.
-          </p>
-          <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary-fixed">
-            <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
-            <span>SYS.STATUS: DISPONIBLE PARA PROYECTOS & COLABORACIONES</span>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-space-xs">
-          <span class="font-label-md text-label-md text-primary uppercase">Navegación</span>
-          <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary-container transition-colors" href="#inicio">Inicio</a>
-          <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary-container transition-colors" href="#disciplinas">La Tríada Tecnológica</a>
-          <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary-container transition-colors" href="#proyectos">Proyectos Destacados</a>
-          <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary-container transition-colors" href="#stack">Habilidades & Stack</a>
-          <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary-container transition-colors" href="#experiencia">Trayectoria</a>
-          <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary-container transition-colors" href="cv.html">Currículum Vitae (PDF)</a>
-        </div>
-
-        <div class="flex flex-col gap-space-xs">
-          <span class="font-label-md text-label-md text-primary uppercase">Canales & Redes</span>
-          <a class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container transition-colors" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">
-            <span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
-            <span>github.com/Edgar-LT</span>
-          </a>
-          <a class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container transition-colors" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">
-            <span class="material-symbols-outlined text-sm" aria-hidden="true">chat</span>
-            <span>+58 412-9640005</span>
-          </a>
-          <a class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container transition-colors" href="mailto:Socialedgar0710@gmail.com">
-            <span class="material-symbols-outlined text-sm" aria-hidden="true">alternate_email</span>
-            <span>Socialedgar0710@gmail.com</span>
-          </a>
-        </div>
+  <footer class="w-full bg-surface border-t border-white/[0.07] py-12">
+    <div class="max-w-6xl mx-auto px-margin-mobile md:px-margin-tablet flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img alt="EL" width="24" height="24" class="h-6 w-6 object-contain" src="assets/logo.svg" />
+        <span class="font-body-sm text-body-sm text-on-surface-variant">
+          © 2026 Edgar López · Caracas, Venezuela
+        </span>
       </div>
 
-      <div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm">
-        <div class="font-label-sm text-label-sm text-on-surface-variant">
-          © 2026 Edgar López. Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones.
-        </div>
-        <div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-space-md">
-          <span>CARACAS, VE</span>
-          <span>UTC-4</span>
-          <span class="text-primary-container">KINETIC PRECISION UI</span>
-        </div>
+      <div class="flex flex-wrap items-center gap-5 font-body-sm text-body-sm text-on-surface-variant">
+        <a class="hover:text-primary transition-colors" href="cv.html">Currículum</a>
+        <a class="hover:text-primary transition-colors" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a class="hover:text-primary transition-colors" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+        <a class="hover:text-primary transition-colors" href="mailto:Socialedgar0710@gmail.com">Correo</a>
       </div>
     </div>
   </footer>

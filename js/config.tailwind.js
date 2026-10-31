@@ -1,5 +1,6 @@
 /* ==========================================================================
-   TAILWIND DESIGN TOKENS — KINETIC PRECISION (DESIGN.md)
+   TAILWIND DESIGN TOKENS — CLEAN MINIMALIST DARK THEME
+   Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
 tailwind.config = {
@@ -7,60 +8,30 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        "tertiary-container": "#aee0ff",
-        "on-primary-fixed": "#002022",
-        "surface-container-high": "#262a33",
-        "inverse-primary": "#006970",
-        "on-tertiary-container": "#00668b",
-        "surface-dim": "#0f131c",
-        "on-secondary": "#003822",
-        "tertiary-fixed": "#c4e7ff",
-        "primary-fixed-dim": "#00dbe9",
-        "surface-container-lowest": "#0a0e16",
-        "on-background": "#dfe2ee",
-        "on-tertiary": "#00354a",
-        "error-container": "#93000a",
-        "on-primary-fixed-variant": "#004f54",
-        "on-error-container": "#ffdad6",
-        "surface-container-highest": "#31353e",
-        "on-primary": "#00363a",
-        "on-primary-container": "#006970",
-        "tertiary": "#eef7ff",
-        "surface-bright": "#353942",
-        "outline-variant": "#3b494b",
-        "secondary": "#70ffba",
-        "on-error": "#690005",
-        "background": "#0f131c",
-        "on-secondary-fixed-variant": "#005234",
-        "secondary-fixed": "#4dffb2",
-        "on-surface": "#dfe2ee",
-        "inverse-surface": "#dfe2ee",
-        "surface-container-low": "#181c24",
-        "tertiary-fixed-dim": "#7bd0ff",
-        "surface-container": "#1c2028",
-        "secondary-fixed-dim": "#00e297",
-        "on-tertiary-fixed-variant": "#004c69",
-        "surface-tint": "#00dbe9",
-        "primary-container": "#00f0ff",
-        "inverse-on-surface": "#2c3039",
-        "secondary-container": "#01e599",
-        "on-tertiary-fixed": "#001e2c",
-        "on-surface-variant": "#b9cacb",
-        "primary-fixed": "#7df4ff",
-        "on-secondary-container": "#00613e",
-        "primary": "#dbfcff",
-        "surface": "#0f131c",
-        "on-secondary-fixed": "#002112",
-        "surface-variant": "#31353e",
-        "outline": "#849495",
-        "error": "#ffb4ab"
+        "surface": "#09090b",
+        "surface-container-lowest": "#0c0c0f",
+        "surface-container-low": "#121216",
+        "surface-container": "#141419",
+        "surface-container-high": "#1c1c22",
+        "surface-container-highest": "#27272f",
+        "primary": "#fafafa",
+        "on-primary": "#09090b",
+        "primary-container": "#fafafa",
+        "on-primary-container": "#09090b",
+        "secondary": "#a1a1aa",
+        "secondary-fixed": "#e4e4e7",
+        "tertiary-fixed-dim": "#93c5fd",
+        "on-surface": "#f4f4f5",
+        "on-surface-variant": "#a1a1aa",
+        "outline": "#52525b",
+        "outline-variant": "#27272a"
       },
       borderRadius: {
-        "sm": "0.125rem",
-        "DEFAULT": "0.25rem",
-        "md": "0.375rem",
-        "lg": "0.5rem",
-        "xl": "0.75rem",
+        "sm": "0.25rem",
+        "DEFAULT": "0.375rem",
+        "md": "0.5rem",
+        "lg": "0.625rem",
+        "xl": "0.875rem",
         "full": "9999px"
       },
       spacing: {
@@ -90,18 +61,18 @@ tailwind.config = {
         "label-sm": ["JetBrains Mono", "monospace"]
       },
       fontSize: {
-        "headline-xl": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
-        "headline-xl-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
-        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-        "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
-        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-        "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
-        "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
-        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
-        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }],
-        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "400" }]
+        "headline-xl": ["52px", { "lineHeight": "1.12", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+        "headline-xl-mobile": ["34px", { "lineHeight": "1.18", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+        "headline-lg": ["34px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+        "headline-lg-mobile": ["26px", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+        "headline-md": ["22px", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+        "headline-sm": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+        "body-lg": ["17px", { "lineHeight": "1.65", "fontWeight": "400" }],
+        "body-md": ["15px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "body-sm": ["14px", { "lineHeight": "1.55", "fontWeight": "400" }],
+        "label-lg": ["13px", { "lineHeight": "1.4", "fontWeight": "500" }],
+        "label-md": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+        "label-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "500" }]
       }
     }
   }
