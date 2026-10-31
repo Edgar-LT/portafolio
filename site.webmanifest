@@ -1,0 +1,16 @@
+{
+  "name": "Edgar López | Portafolio de Ingeniería & Desarrollo",
+  "short_name": "Edgar López",
+  "description": "Portafolio profesional de Edgar López — Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones en Caracas, Venezuela.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f131c",
+  "theme_color": "#0f131c",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -53,7 +53,7 @@ function renderProjects(projects, activeFilter = "all") {
         .join("");
 
       return `
-        <article class="project-card animate-fade-in flex flex-col justify-between glass-card p-space-lg rounded-xl cursor-pointer group" data-project-id="${project.id}">
+        <article tabindex="0" role="button" aria-label="Ver ficha técnica de ${project.title}" class="project-card animate-fade-in flex flex-col justify-between glass-card p-space-lg rounded-xl cursor-pointer group" data-project-id="${project.id}">
           <div>
             <div class="flex items-center justify-between pb-space-sm font-label-sm text-label-sm">
               <span class="text-secondary-fixed">${project.code}</span>
@@ -62,7 +62,7 @@ function renderProjects(projects, activeFilter = "all") {
 
             <!-- Imagen del Proyecto -->
             <div class="w-full h-56 rounded-lg overflow-hidden relative bg-surface-container-lowest my-space-sm border border-white/[0.08]">
-              <img alt="${project.title}" loading="lazy" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" src="${project.image}" />
+              <img alt="${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" src="${project.image}" />
               <div class="absolute bottom-2 right-2 bg-surface/90 backdrop-blur px-space-sm py-0.5 rounded border ${project.badgeStyle} font-label-sm text-label-sm">
                 ${project.badgeText}
               </div>
@@ -85,18 +85,18 @@ function renderProjects(projects, activeFilter = "all") {
 
             <!-- Acciones y Ficha Técnica -->
             <div class="flex items-center justify-between pt-space-sm border-t border-white/[0.06]">
-              <button type="button" class="open-modal-btn font-label-sm text-label-sm text-primary-container hover:text-primary flex items-center gap-1" data-project-id="${project.id}">
+              <span class="open-modal-btn font-label-sm text-label-sm text-primary-container group-hover:text-primary flex items-center gap-1" data-project-id="${project.id}">
                 <span>[ ver_ficha_técnica ]</span>
-                <span class="material-symbols-outlined text-sm">visibility</span>
-              </button>
+                <span class="material-symbols-outlined text-sm" aria-hidden="true">visibility</span>
+              </span>
               <div class="flex items-center gap-space-sm" onclick="event.stopPropagation()">
-                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer">
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-container flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Repositorio GitHub de ${project.title}">
                   <span>[ repo.git ]</span>
-                  <span class="material-symbols-outlined text-sm">code</span>
+                  <span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
                 </a>
-                <a class="font-label-sm text-label-sm text-secondary-fixed hover:text-primary flex items-center gap-1 transition-colors" href="${project.demoUrl}">
+                <a class="font-label-sm text-label-sm text-secondary-fixed hover:text-primary flex items-center gap-1 transition-colors" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
                   <span>${project.demoLabel}</span>
-                  <span class="material-symbols-outlined text-sm">open_in_new</span>
+                  <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
                 </a>
               </div>
             </div>
@@ -116,9 +116,11 @@ function initProjects(projects) {
       const filter = btn.getAttribute("data-filter") || "all";
 
       filterBtns.forEach((b) => {
+        b.setAttribute("aria-pressed", "false");
         b.className =
           "filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-on-surface-variant hover:text-on-surface border border-white/[0.08] transition-all";
       });
+      btn.setAttribute("aria-pressed", "true");
       btn.className =
         "filter-btn px-space-md py-space-xs rounded-lg font-label-sm text-label-sm bg-primary-container text-on-primary-container font-semibold transition-all";
 
@@ -144,7 +146,7 @@ function initSkills(categories) {
               <span class="truncate">${item.name}</span>
               <span class="${cat.accentText} shrink-0 text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-container-high border border-white/[0.06]">${item.level}</span>
             </div>
-            <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+            <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden" role="progressbar" aria-label="${item.name}: ${item.level}" aria-valuenow="${item.progress}" aria-valuemin="0" aria-valuemax="100">
               <div class="h-full ${cat.barColor} rounded-full transition-all duration-700" style="width: ${item.progress}%;"></div>
             </div>
           </div>
@@ -156,7 +158,7 @@ function initSkills(categories) {
         <div class="glass-card p-space-md rounded-xl flex flex-col gap-space-sm">
           <div class="flex items-center justify-between pb-space-xs border-b border-white/[0.06]">
             <span class="font-label-sm text-label-sm ${cat.accentText} uppercase">${cat.title}</span>
-            <span class="material-symbols-outlined ${cat.accentText} text-sm">${cat.icon}</span>
+            <span class="material-symbols-outlined ${cat.accentText} text-sm" aria-hidden="true">${cat.icon}</span>
           </div>
           <div class="flex flex-col gap-space-sm pt-space-xs">
             ${itemsHtml}
@@ -200,12 +202,15 @@ function initProjectModal(projects) {
   const modalContent = document.getElementById("project-modal-body");
   const closeBtn = document.getElementById("close-modal-btn");
   const grid = document.getElementById("projects-grid");
+  let lastFocusedElement = null;
 
   if (!modal || !modalContent || !grid) return;
 
-  function openModal(projectId) {
+  function openModal(projectId, triggerEl) {
     const project = projects.find((p) => p.id === projectId);
     if (!project) return;
+
+    lastFocusedElement = triggerEl || document.activeElement;
 
     const tagsHtml = project.tags
       .map(
@@ -220,7 +225,7 @@ function initProjectModal(projects) {
       .map(
         (feat) => `
         <li class="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
-          <span class="material-symbols-outlined text-secondary-fixed text-base mt-0.5">check_circle</span>
+          <span class="material-symbols-outlined text-secondary-fixed text-base mt-0.5" aria-hidden="true">check_circle</span>
           <span>${feat}</span>
         </li>
       `
@@ -230,7 +235,7 @@ function initProjectModal(projects) {
     modalContent.innerHTML = `
       <div class="flex flex-col gap-space-lg">
         <!-- Encabezado Técnico -->
-        <div class="flex flex-wrap items-center justify-between gap-space-sm border-b border-white/10 pb-space-sm">
+        <div class="flex flex-wrap items-center justify-between gap-space-sm border-b border-white/10 pb-space-sm pr-10">
           <div class="flex items-center gap-space-sm font-label-sm text-label-sm">
             <span class="text-secondary-fixed font-semibold">${project.code}</span>
             <span class="text-outline">//</span>
@@ -243,11 +248,11 @@ function initProjectModal(projects) {
         <!-- Imagen & Título -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
           <div class="lg:col-span-6 w-full h-64 rounded-xl overflow-hidden border border-white/10 bg-surface-container-lowest">
-            <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover" />
+            <img src="${project.image}" alt="${project.title}" width="640" height="360" decoding="async" class="w-full h-full object-cover" />
           </div>
           <div class="lg:col-span-6 flex flex-col gap-space-sm">
             <span class="font-label-sm text-label-sm text-primary-container uppercase">// FICHA TÉCNICA DE PROYECTO</span>
-            <h3 class="font-headline-lg-mobile text-primary">${project.title}</h3>
+            <h3 id="modal-project-title" class="font-headline-lg-mobile text-primary">${project.title}</h3>
             <p class="font-body-md text-body-md text-on-surface-variant">${project.shortDescription}</p>
             <div class="flex flex-wrap gap-space-xs pt-space-xs">
               ${tagsHtml}
@@ -259,7 +264,7 @@ function initProjectModal(projects) {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
           <div class="bg-surface-container-low border border-white/[0.08] p-space-md rounded-xl flex flex-col gap-space-xs">
             <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-primary-container uppercase">
-              <span class="material-symbols-outlined text-base">flag</span>
+              <span class="material-symbols-outlined text-base" aria-hidden="true">flag</span>
               <span>01 // El Problema & Reto</span>
             </div>
             <p class="font-body-sm text-body-sm text-on-surface-variant">${project.problem}</p>
@@ -267,7 +272,7 @@ function initProjectModal(projects) {
 
           <div class="bg-surface-container-low border border-white/[0.08] p-space-md rounded-xl flex flex-col gap-space-xs">
             <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary-fixed uppercase">
-              <span class="material-symbols-outlined text-base">account_tree</span>
+              <span class="material-symbols-outlined text-base" aria-hidden="true">account_tree</span>
               <span>02 // Arquitectura & Solución</span>
             </div>
             <p class="font-body-sm text-body-sm text-on-surface-variant">${project.architecture}</p>
@@ -285,12 +290,12 @@ function initProjectModal(projects) {
         <!-- Botones de Acción -->
         <div class="flex flex-wrap items-center justify-end gap-space-md pt-space-xs border-t border-white/10">
           <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-space-xs font-label-md text-label-md px-space-lg py-space-sm rounded-lg bg-surface-container-high border border-white/15 text-on-surface hover:border-primary-container hover:text-primary-container transition-all">
-            <span class="material-symbols-outlined text-sm">code</span>
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
             <span>Ver Código en GitHub</span>
           </a>
           <a href="${project.demoUrl}" class="inline-flex items-center gap-space-xs font-headline-sm text-body-sm font-semibold px-space-lg py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-primary-fixed shadow-[0_0_16px_rgba(0,240,255,0.25)] transition-all">
             <span>Abrir Demo / Vista Previa</span>
-            <span class="material-symbols-outlined text-sm">open_in_new</span>
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
           </a>
         </div>
       </div>
@@ -298,19 +303,33 @@ function initProjectModal(projects) {
 
     modal.classList.remove("hidden");
     modal.classList.add("flex");
+    modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    if (closeBtn) closeBtn.focus();
   }
 
   function closeModal() {
     modal.classList.add("hidden");
     modal.classList.remove("flex");
+    modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (lastFocusedElement) lastFocusedElement.focus();
   }
 
   grid.addEventListener("click", (e) => {
     const card = e.target.closest(".project-card");
     if (card) {
-      openModal(card.getAttribute("data-project-id"));
+      openModal(card.getAttribute("data-project-id"), card);
+    }
+  });
+
+  grid.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const card = e.target.closest(".project-card");
+      if (card) {
+        e.preventDefault();
+        openModal(card.getAttribute("data-project-id"), card);
+      }
     }
   });
 
@@ -341,6 +360,7 @@ function initMobileMenu() {
 
   mobileMenuBtn.addEventListener("click", () => {
     const isHidden = mobileMenu.classList.toggle("hidden");
+    mobileMenuBtn.setAttribute("aria-expanded", String(!isHidden));
     if (mobileMenuIcon) {
       mobileMenuIcon.textContent = isHidden ? "menu" : "close";
     }
@@ -349,6 +369,7 @@ function initMobileMenu() {
   document.querySelectorAll(".mobile-nav-link").forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu.classList.add("hidden");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
       if (mobileMenuIcon) mobileMenuIcon.textContent = "menu";
     });
   });
@@ -369,9 +390,11 @@ function initScrollSpy() {
 
     navLinks.forEach((link) => {
       if (link.getAttribute("href") === `#${currentSection}`) {
+        link.setAttribute("aria-current", "page");
         link.className =
           "nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container font-semibold transition-all";
       } else {
+        link.removeAttribute("aria-current");
         link.className =
           "nav-link font-label-md text-label-md px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface transition-all";
       }

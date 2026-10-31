@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>CV · Edgar López | Ingeniería Mecatrónica, Desarrollo Web & Apps</title>
+  <meta name="description" content="Currículum Vitae de Edgar López — Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones en Caracas, Venezuela." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.tailwind.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #111827 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-sheet {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .print-text-dark {
+        color: #111827 !important;
+      }
+      .print-text-muted {
+        color: #4b5563 !important;
+      }
+      .print-border {
+        border-color: #e5e7eb !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-surface bg-tech-grid font-body-md text-body-md text-on-surface antialiased min-h-screen py-space-xl px-margin-mobile md:px-margin-tablet">
+  <!-- Barra de Acciones Superior (No se imprime en PDF) -->
+  <div class="max-w-4xl mx-auto mb-space-lg flex flex-wrap items-center justify-between gap-space-sm no-print">
+    <a href="index.html" class="inline-flex items-center gap-space-xs font-label-md text-label-md px-space-md py-space-xs rounded-lg bg-surface-container-high border border-white/10 text-on-surface hover:border-primary-container hover:text-primary-container transition-all">
+      <span class="material-symbols-outlined text-sm">arrow_back</span>
+      <span>Volver al Portafolio</span>
+    </a>
+    <button onclick="window.print()" type="button" class="inline-flex items-center gap-space-xs font-headline-sm text-body-sm font-semibold px-space-lg py-space-xs rounded-lg bg-primary-container text-on-primary-container hover:bg-primary-fixed shadow-[0_0_16px_rgba(0,240,255,0.25)] transition-all">
+      <span class="material-symbols-outlined text-sm">print</span>
+      <span>Guardar como PDF / Imprimir</span>
+    </button>
+  </div>
+
+  <!-- Hoja de CV Técnica -->
+  <main class="max-w-4xl mx-auto glass-card print-sheet rounded-xl p-space-lg md:p-space-xl flex flex-col gap-space-lg">
+    <!-- Encabezado de Identidad -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-lg border-b border-white/10 print-border">
+      <div class="flex items-center gap-space-md">
+        <img src="assets/logo.svg" alt="Logo Edgar López" class="w-14 h-14 object-contain no-print" />
+        <div class="flex flex-col gap-0.5">
+          <span class="font-label-sm text-label-sm text-primary-container print-text-muted uppercase tracking-wider">// CURRICULUM VITAE · PERFIL TÉCNICO</span>
+          <h1 class="font-headline-lg text-primary print-text-dark tracking-tight">Edgar López</h1>
+          <p class="font-headline-sm text-secondary-fixed print-text-muted">Estudiante de Ingeniería Mecatrónica · Desarrollador Web & de Aplicaciones</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1 font-label-sm text-label-sm text-on-surface-variant print-text-muted">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm text-primary-container">location_on</span>
+          <span>Caracas, Venezuela (UTC-4)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm text-primary-container">mail</span>
+          <a href="mailto:Socialedgar0710@gmail.com" class="hover:text-primary-container">Socialedgar0710@gmail.com</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm text-primary-container">chat</span>
+          <a href="https://wa.me/584129640005" target="_blank" rel="noopener noreferrer" class="hover:text-primary-container">+58 412-9640005</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm text-primary-container">code</span>
+          <a href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer" class="hover:text-primary-container">github.com/Edgar-LT</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Perfil Profesional -->
+    <section class="flex flex-col gap-space-xs">
+      <h2 class="font-label-md text-label-md text-primary-container print-text-dark uppercase tracking-wider">01 // Resumen Profesional</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant print-text-muted">
+        Desarrollador Web y de Aplicaciones con formación universitaria en Ingeniería Mecatrónica en Caracas, Venezuela. Especializado en integrar la lógica analítica y resolución estructurada de problemas de la ingeniería con el desarrollo de interfaces web modernas, aplicaciones multiplataforma y sistemas físicos conectados.
+      </p>
+    </section>
+
+    <!-- Formación & Trayectoria (Dinámico desde js/data.js) -->
+    <section class="flex flex-col gap-space-sm">
+      <h2 class="font-label-md text-label-md text-primary-container print-text-dark uppercase tracking-wider">02 // Formación & Trayectoria</h2>
+      <div id="cv-timeline" class="flex flex-col gap-space-sm"></div>
+    </section>
+
+    <!-- Habilidades & Stack (Dinámico desde js/data.js) -->
+    <section class="flex flex-col gap-space-sm">
+      <h2 class="font-label-md text-label-md text-primary-container print-text-dark uppercase tracking-wider">03 // Competencias & Stack Tecnológico</h2>
+      <div id="cv-skills" class="grid grid-cols-1 md:grid-cols-2 gap-space-md"></div>
+    </section>
+
+    <!-- Proyectos Destacados (Dinámico desde js/data.js) -->
+    <section class="flex flex-col gap-space-sm">
+      <h2 class="font-label-md text-label-md text-primary-container print-text-dark uppercase tracking-wider">04 // Proyectos en Portafolio</h2>
+      <div id="cv-projects" class="grid grid-cols-1 md:grid-cols-2 gap-space-sm"></div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const data = window.PORTFOLIO_DATA;
+      if (!data) return;
+
+      const timelineEl = document.getElementById("cv-timeline");
+      if (timelineEl) {
+        timelineEl.innerHTML = data.timeline
+          .map(
+            (t) => `
+            <div class="p-space-sm rounded-lg bg-surface-container-low border border-white/[0.08] print-border">
+              <div class="flex justify-between font-label-sm text-label-sm">
+                <span class="text-primary-container print-text-dark font-semibold">${t.title}</span>
+                <span class="text-on-surface-variant print-text-muted">${t.period}</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant print-text-muted mt-1">${t.description}</p>
+            </div>
+          `
+          )
+          .join("");
+      }
+
+      const skillsEl = document.getElementById("cv-skills");
+      if (skillsEl) {
+        skillsEl.innerHTML = data.skillCategories
+          .map(
+            (cat) => `
+            <div class="p-space-sm rounded-lg bg-surface-container-low border border-white/[0.08] print-border">
+              <div class="font-label-sm text-label-sm ${cat.accentText} print-text-dark font-semibold mb-1.5">${cat.title}</div>
+              <ul class="flex flex-col gap-1">
+                ${cat.items
+                  .map(
+                    (i) => `
+                    <li class="flex justify-between font-body-sm text-body-sm text-on-surface-variant print-text-muted">
+                      <span>${i.name}</span>
+                      <span class="font-label-sm text-label-sm text-on-surface print-text-dark">${i.level}</span>
+                    </li>
+                  `
+                  )
+                  .join("")}
+              </ul>
+            </div>
+          `
+          )
+          .join("");
+      }
+
+      const projectsEl = document.getElementById("cv-projects");
+      if (projectsEl) {
+        projectsEl.innerHTML = data.projects
+          .map(
+            (p) => `
+            <div class="p-space-sm rounded-lg bg-surface-container-low border border-white/[0.08] print-border flex flex-col gap-1">
+              <div class="flex justify-between font-label-sm text-label-sm">
+                <span class="text-secondary-fixed print-text-dark font-semibold">${p.code}</span>
+                <span class="text-on-surface-variant print-text-muted">${p.badgeText}</span>
+              </div>
+              <div class="font-headline-sm text-body-md font-semibold text-primary print-text-dark">${p.title}</div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant print-text-muted">${p.shortDescription}</p>
+            </div>
+          `
+          )
+          .join("");
+      }
+    });
+  </script>
+</body>
+</html>

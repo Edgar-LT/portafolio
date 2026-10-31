@@ -15,6 +15,12 @@
   }
 }
 
+/* Keyboard Accessibility Focus Indicator (WCAG 2.1 AA) */
+:focus-visible {
+  outline: 2px solid #00f0ff;
+  outline-offset: 2px;
+}
+
 /* Custom Technical Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -82,4 +88,16 @@
 
 .animate-fade-in {
   animation: fadeInScale 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
