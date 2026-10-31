@@ -62,13 +62,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS & Modular Design System Configuration -->
+  <!-- Inicialización temprana del tema para evitar parpadeos -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem("edgar_theme");
+      if (saved === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    })();
+  </script>
+
+  <!-- Tailwind CSS & Inline Class-Mode Config -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="js/config.tailwind.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          spacing: {
+            "margin-tablet": "2rem",
+            "margin-mobile": "1.25rem"
+          },
+          fontFamily: {
+            "display": ["Space Grotesk", "sans-serif"],
+            "sans": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
-<body class="font-sans antialiased selection:bg-blue-600 selection:text-white">
+<body class="theme-page font-sans antialiased selection:bg-blue-600 selection:text-white">
 
   <!-- Skip to Main Content -->
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-blue-600 focus:text-white focus:text-sm focus:font-semibold">
@@ -78,34 +107,35 @@
   <!-- ===================================================================== -->
   <!-- HEADER & NAVIGATION                                                   -->
   <!-- ===================================================================== -->
-  <header class="fixed top-0 w-full z-50 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
+  <header class="fixed top-0 w-full z-50 theme-header">
     <div class="h-16 max-w-6xl mx-auto px-margin-mobile md:px-margin-tablet flex items-center justify-between gap-4">
       <!-- Brand Identity -->
       <a href="#inicio" class="flex items-center gap-3 group" aria-label="Edgar López — Inicio">
-        <img alt="EL" width="34" height="34" class="h-8.5 w-8.5 object-contain shadow-sm rounded-lg" src="assets/logo.svg" />
+        <img alt="EL" width="36" height="36" class="h-9 w-9 object-contain shadow-sm rounded-lg" src="assets/logo.svg" />
         <div class="flex flex-col">
-          <span class="font-display font-bold text-base text-slate-900 dark:text-white leading-tight tracking-tight">Edgar López</span>
-          <span class="font-mono text-[10px] font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wider">Web · Apps · Mecatrónica</span>
+          <span class="font-display font-bold text-base theme-heading leading-tight tracking-tight">Edgar López</span>
+          <span class="font-mono text-[10px] font-semibold theme-accent uppercase tracking-wider">Web · Apps · Mecatrónica</span>
         </div>
       </a>
 
       <!-- Desktop Navigation -->
       <nav aria-label="Navegación principal" class="hidden md:flex items-center gap-1" id="desktop-nav">
-        <a aria-current="page" class="nav-link text-sm px-3.5 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 font-semibold transition-all" href="#inicio">Inicio</a>
-        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all" href="#disciplinas">Áreas</a>
-        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all" href="#proyectos">Proyectos</a>
-        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all" href="#stack">Stack</a>
-        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all" href="#experiencia">Trayectoria</a>
-        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all" href="#contacto">Contacto</a>
+        <a aria-current="page" class="nav-link text-sm px-3.5 py-1.5 rounded-lg bg-blue-600 text-white font-semibold transition-all" href="#inicio">Inicio</a>
+        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#disciplinas">Áreas</a>
+        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#proyectos">Proyectos</a>
+        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#stack">Stack</a>
+        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#experiencia">Trayectoria</a>
+        <a class="nav-link text-sm px-3.5 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#contacto">Contacto</a>
       </nav>
 
       <!-- Header Actions & Theme Switcher -->
       <div class="flex items-center gap-2">
-        <button aria-label="Cambiar entre tema claro y oscuro" title="Cambiar tema (Claro / Oscuro)" id="theme-toggle-btn" type="button" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200 dark:border-slate-700 transition-all">
-          <span class="material-symbols-outlined text-lg block" id="theme-toggle-icon" aria-hidden="true">dark_mode</span>
+        <button aria-label="Cambiar entre tema claro y oscuro" aria-pressed="false" title="Cambiar entre tema Claro y Oscuro" id="theme-toggle-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl identity-btn-secondary text-xs font-semibold transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-base" id="theme-toggle-icon" aria-hidden="true">dark_mode</span>
+          <span id="theme-toggle-label">Oscuro</span>
         </button>
 
-        <a class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 hover:text-blue-600 transition-all" href="cv.html">
+        <a class="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold px-3.5 py-1.5 rounded-xl identity-btn-secondary transition-all" href="cv.html">
           <span>Ver CV</span>
         </a>
         <a class="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-1.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-sm shadow-blue-600/20 transition-all" href="#contacto">
@@ -113,22 +143,22 @@
         </a>
 
         <!-- Mobile Menu Button -->
-        <button aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700" id="mobile-menu-btn" type="button">
+        <button aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 rounded-xl identity-btn-secondary" id="mobile-menu-btn" type="button">
           <span class="material-symbols-outlined text-xl block" id="mobile-menu-icon" aria-hidden="true">menu</span>
         </button>
       </div>
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <nav aria-label="Navegación móvil" class="md:hidden hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-margin-mobile py-4" id="mobile-menu">
-      <div class="flex flex-col gap-1">
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#inicio">Inicio</a>
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#disciplinas">Áreas de Especialidad</a>
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#proyectos">Proyectos</a>
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#stack">Stack & Habilidades</a>
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#experiencia">Trayectoria</a>
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#contacto">Contacto</a>
-        <a class="mobile-nav-link text-sm px-3 py-2 rounded-lg text-blue-600 dark:text-blue-400 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="cv.html">Ver Currículum Vitae</a>
+    <nav aria-label="Navegación móvil" class="md:hidden hidden theme-page border-b theme-border px-margin-mobile py-4" id="mobile-menu">
+      <div class="flex flex-col gap-1.5">
+        <a class="mobile-nav-link text-sm font-medium px-3 py-2 rounded-lg theme-heading hover:underline" href="#inicio">Inicio</a>
+        <a class="mobile-nav-link text-sm font-medium px-3 py-2 rounded-lg theme-heading hover:underline" href="#disciplinas">Áreas de Especialidad</a>
+        <a class="mobile-nav-link text-sm font-medium px-3 py-2 rounded-lg theme-heading hover:underline" href="#proyectos">Proyectos</a>
+        <a class="mobile-nav-link text-sm font-medium px-3 py-2 rounded-lg theme-heading hover:underline" href="#stack">Stack & Habilidades</a>
+        <a class="mobile-nav-link text-sm font-medium px-3 py-2 rounded-lg theme-heading hover:underline" href="#experiencia">Trayectoria</a>
+        <a class="mobile-nav-link text-sm font-medium px-3 py-2 rounded-lg theme-heading hover:underline" href="#contacto">Contacto</a>
+        <a class="mobile-nav-link text-sm font-semibold px-3 py-2 rounded-lg theme-accent hover:underline" href="cv.html">Ver Currículum Vitae</a>
       </div>
     </nav>
   </header>
@@ -137,101 +167,97 @@
     <div class="flex flex-col w-full">
 
       <!-- ===================================================================== -->
-      <!-- SECTION 1: HERO SECTION (CON IDENTIDAD, LUZ Y COLOR)                  -->
+      <!-- SECTION 1: HERO SECTION                                               -->
       <!-- ===================================================================== -->
-      <section class="relative w-full overflow-hidden bg-blueprint py-20 lg:py-28 px-margin-mobile md:px-margin-tablet border-b border-slate-200/80 dark:border-slate-800" id="inicio">
-        <!-- Soft Ambient Color Accents -->
-        <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-500/10 dark:bg-blue-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-teal-500/10 dark:bg-teal-500/15 blur-3xl pointer-events-none"></div>
-
+      <section class="relative w-full overflow-hidden theme-page bg-blueprint py-20 lg:py-28 px-margin-mobile md:px-margin-tablet border-b theme-border" id="inicio">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           <!-- Left Column: Copy & CTAs -->
           <div class="lg:col-span-7 flex flex-col gap-6">
             <div class="flex flex-col gap-3">
-              <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                <span class="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"></span>
+              <div class="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider theme-accent">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
                 <span>Edgar López · Caracas, Venezuela</span>
               </div>
-              <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-[54px] text-slate-900 dark:text-white leading-[1.12] tracking-tight">
+              <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-[52px] theme-heading leading-[1.12] tracking-tight">
                 Desarrollo <span class="text-brand-gradient">Web y Aplicaciones</span> con visión de Ingeniería Mecatrónica.
               </h1>
             </div>
 
-            <p class="text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300 max-w-xl">
+            <p class="text-base sm:text-lg leading-relaxed theme-body max-w-xl">
               Estudiante de Ingeniería Mecatrónica y desarrollador de software. Diseño y construyo páginas web modernas, aplicaciones multiplataforma y sistemas conectados combinando estética limpia con precisión técnica.
             </p>
 
             <div class="flex flex-wrap items-center gap-3 pt-1">
-              <a class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all" href="#proyectos">
+              <a class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/25 transition-all" href="#proyectos">
                 <span>Explorar proyectos</span>
                 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
               </a>
-              <a class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white hover:border-blue-500 transition-all shadow-sm" href="cv.html">
+              <a class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-3 rounded-xl identity-btn-secondary transition-all" href="cv.html">
                 <span>Currículum Vitae</span>
-                <span class="material-symbols-outlined text-base text-blue-600 dark:text-blue-400" aria-hidden="true">description</span>
+                <span class="material-symbols-outlined text-base theme-accent" aria-hidden="true">description</span>
               </a>
-              <a class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-3 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer">
+              <a class="inline-flex items-center gap-1.5 text-sm font-semibold px-3 py-3 theme-body hover:underline transition-colors" href="https://github.com/Edgar-LT" target="_blank" rel="noopener noreferrer">
                 <span>github.com/Edgar-LT</span>
                 <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
               </a>
             </div>
           </div>
 
-          <!-- Right Column: Identity Card with Tricolor Bar -->
+          <!-- Right Column: Elevated Identity Card -->
           <div class="lg:col-span-5">
             <div class="identity-card rounded-2xl p-6 sm:p-7 flex flex-col gap-5 relative overflow-hidden">
               <!-- Tricolor Identity Bar -->
-              <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500"></div>
+              <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500"></div>
 
-              <div class="flex items-center justify-between pb-4 border-b border-slate-200/80 dark:border-slate-700/70">
+              <div class="flex items-center justify-between pb-4 border-b theme-border">
                 <div class="flex items-center gap-3">
-                  <img src="assets/logo.svg" alt="EL" width="40" height="40" class="w-10 h-10 rounded-xl shadow-sm" />
+                  <img src="assets/logo.svg" alt="EL" width="42" height="42" class="w-10.5 h-10.5 rounded-xl shadow-sm" />
                   <div class="flex flex-col">
-                    <span class="font-display font-bold text-base text-slate-900 dark:text-white">Edgar López</span>
-                    <span class="text-xs text-slate-500 dark:text-slate-400">Ingeniería & Desarrollo de Software</span>
+                    <span class="font-display font-bold text-base theme-heading">Edgar López</span>
+                    <span class="text-xs font-medium theme-muted">Ingeniería & Desarrollo de Software</span>
                   </div>
                 </div>
-                <span class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                <span class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-semibold">
                   Disponible
                 </span>
               </div>
 
-              <!-- The 3 Pillars with Distinct Color Identity -->
-              <div class="flex flex-col gap-3.5">
-                <div class="flex items-start gap-3.5 p-3 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/40">
+              <!-- The 3 Pillars inside distinct subcards -->
+              <div class="flex flex-col gap-3">
+                <div class="flex items-start gap-3.5 p-3.5 rounded-xl identity-subcard">
                   <div class="w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     <span class="material-symbols-outlined text-lg" aria-hidden="true">code</span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm text-slate-900 dark:text-white">Desarrollo Web Full-Stack</span>
-                    <span class="text-xs text-slate-600 dark:text-slate-300">Sitios responsivos, paneles modernos y APIs.</span>
+                    <span class="font-display font-bold text-sm theme-heading">Desarrollo Web Full-Stack</span>
+                    <span class="text-xs theme-body">Sitios responsivos, paneles modernos y APIs.</span>
                   </div>
                 </div>
 
-                <div class="flex items-start gap-3.5 p-3 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40">
+                <div class="flex items-start gap-3.5 p-3.5 rounded-xl identity-subcard">
                   <div class="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     <span class="material-symbols-outlined text-lg" aria-hidden="true">smartphone</span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm text-slate-900 dark:text-white">Desarrollo de Aplicaciones</span>
-                    <span class="text-xs text-slate-600 dark:text-slate-300">Aplicaciones móviles e interfaces multiplataforma.</span>
+                    <span class="font-display font-bold text-sm theme-heading">Desarrollo de Aplicaciones</span>
+                    <span class="text-xs theme-body">Aplicaciones móviles e interfaces multiplataforma.</span>
                   </div>
                 </div>
 
-                <div class="flex items-start gap-3.5 p-3 rounded-xl bg-teal-50/60 dark:bg-teal-950/30 border border-teal-100 dark:border-teal-900/40">
+                <div class="flex items-start gap-3.5 p-3.5 rounded-xl identity-subcard">
                   <div class="w-9 h-9 rounded-lg bg-teal-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     <span class="material-symbols-outlined text-lg" aria-hidden="true">precision_manufacturing</span>
                   </div>
                   <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm text-slate-900 dark:text-white">Ingeniería Mecatrónica</span>
-                    <span class="text-xs text-slate-600 dark:text-slate-300">Electrónica, microcontroladores y automatización.</span>
+                    <span class="font-display font-bold text-sm theme-heading">Ingeniería Mecatrónica</span>
+                    <span class="text-xs theme-body">Electrónica, microcontroladores y automatización.</span>
                   </div>
                 </div>
               </div>
 
-              <div class="pt-3 border-t border-slate-200/80 dark:border-slate-700/70 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+              <div class="pt-3 border-t theme-border flex items-center justify-between text-xs font-mono font-medium theme-muted">
                 <span>Caracas, VE (UTC-4)</span>
-                <a href="#contacto" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">Iniciar conversación →</a>
+                <a href="#contacto" class="font-bold theme-accent hover:underline">Iniciar conversación →</a>
               </div>
             </div>
           </div>
@@ -241,12 +267,12 @@
       <!-- ===================================================================== -->
       <!-- SECTION 2: LA TRÍADA TECNOLÓGICA                                      -->
       <!-- ===================================================================== -->
-      <section class="w-full py-20 px-margin-mobile md:px-margin-tablet border-b border-slate-200/80 dark:border-slate-800" id="disciplinas">
+      <section class="w-full theme-section-alt py-20 px-margin-mobile md:px-margin-tablet border-b theme-border" id="disciplinas">
         <div class="max-w-6xl mx-auto flex flex-col gap-12">
           <div class="flex flex-col gap-2 max-w-2xl">
-            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">Especialidades</span>
-            <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">La Tríada Tecnológica</h2>
-            <p class="text-base text-slate-600 dark:text-slate-300">
+            <span class="font-mono text-xs font-bold uppercase tracking-wider theme-accent">Especialidades</span>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl theme-heading tracking-tight">La Tríada Tecnológica</h2>
+            <p class="text-base theme-body">
               Mi perfil une tres áreas complementarias para desarrollar proyectos de extremo a extremo, desde la lógica de control hasta la aplicación que utiliza el usuario.
             </p>
           </div>
@@ -260,16 +286,16 @@
                   <span class="material-symbols-outlined text-2xl" aria-hidden="true">terminal</span>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Desarrollo Web</h3>
-                  <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  <h3 class="font-display font-bold text-xl theme-heading">Desarrollo Web</h3>
+                  <p class="text-sm leading-relaxed theme-body">
                     Diseño y programación de páginas web modernas, paneles interactivos y plataformas escalables enfocadas en velocidad y claridad visual.
                   </p>
                 </div>
               </div>
-              <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-200/80 dark:border-slate-700/70">
-                <span class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-medium">Frontend Moderno</span>
-                <span class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-medium">UI Responsiva</span>
-                <span class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-medium">APIs</span>
+              <div class="flex flex-wrap gap-1.5 pt-3 border-t theme-border">
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">Frontend Moderno</span>
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">UI Responsiva</span>
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">APIs</span>
               </div>
             </div>
 
@@ -281,16 +307,16 @@
                   <span class="material-symbols-outlined text-2xl" aria-hidden="true">phone_iphone</span>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Aplicaciones</h3>
-                  <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  <h3 class="font-display font-bold text-xl theme-heading">Aplicaciones</h3>
+                  <p class="text-sm leading-relaxed theme-body">
                     Creación de aplicaciones móviles y multiplataforma intuitivas, con manejo eficiente de datos y conexión fluida con servicios o dispositivos.
                   </p>
                 </div>
               </div>
-              <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-200/80 dark:border-slate-700/70">
-                <span class="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-mono text-xs font-medium">Apps Móviles</span>
-                <span class="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-mono text-xs font-medium">Multiplataforma</span>
-                <span class="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-mono text-xs font-medium">UX/UI</span>
+              <div class="flex flex-wrap gap-1.5 pt-3 border-t theme-border">
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">Apps Móviles</span>
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">Multiplataforma</span>
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">UX/UI</span>
               </div>
             </div>
 
@@ -302,16 +328,16 @@
                   <span class="material-symbols-outlined text-2xl" aria-hidden="true">precision_manufacturing</span>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Ingeniería Mecatrónica</h3>
-                  <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  <h3 class="font-display font-bold text-xl theme-heading">Ingeniería Mecatrónica</h3>
+                  <p class="text-sm leading-relaxed theme-body">
                     Integración de electrónica, sensores, actuadores y programación de microcontroladores para automatización, control y proyectos IoT.
                   </p>
                 </div>
               </div>
-              <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-200/80 dark:border-slate-700/70">
-                <span class="px-2.5 py-1 rounded-md bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-mono text-xs font-medium">Microcontroladores</span>
-                <span class="px-2.5 py-1 rounded-md bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-mono text-xs font-medium">Sensores & Control</span>
-                <span class="px-2.5 py-1 rounded-md bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-mono text-xs font-medium">IoT</span>
+              <div class="flex flex-wrap gap-1.5 pt-3 border-t theme-border">
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">Microcontroladores</span>
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">Sensores & Control</span>
+                <span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">IoT</span>
               </div>
             </div>
           </div>
@@ -321,20 +347,20 @@
       <!-- ===================================================================== -->
       <!-- SECTION 3: PROYECTOS DESTACADOS (DESDE js/data.js)                    -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-slate-100/70 dark:bg-slate-900/50 py-20 lg:py-24 px-margin-mobile md:px-margin-tablet border-b border-slate-200/80 dark:border-slate-800" id="proyectos">
+      <section class="w-full theme-page py-20 lg:py-24 px-margin-mobile md:px-margin-tablet border-b theme-border" id="proyectos">
         <div class="max-w-6xl mx-auto flex flex-col gap-10">
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div class="flex flex-col gap-2">
-              <span class="font-mono text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">Portafolio de trabajo</span>
-              <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">Proyectos Destacados</h2>
+              <span class="font-mono text-xs font-bold uppercase tracking-wider theme-accent">Portafolio de trabajo</span>
+              <h2 class="font-display font-bold text-3xl sm:text-4xl theme-heading tracking-tight">Proyectos Destacados</h2>
             </div>
 
             <!-- Interactive Category Filter -->
             <div aria-label="Filtrar proyectos por categoría" class="flex flex-wrap items-center gap-2" id="project-filters" role="group">
               <button aria-pressed="true" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-md shadow-blue-600/20 transition-all" data-filter="all" type="button">Todos</button>
-              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 border border-slate-200 dark:border-slate-700 transition-all shadow-sm" data-filter="web" type="button">Desarrollo Web</button>
-              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 border border-slate-200 dark:border-slate-700 transition-all shadow-sm" data-filter="app" type="button">Aplicaciones</button>
-              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 border border-slate-200 dark:border-slate-700 transition-all shadow-sm" data-filter="mecatronica" type="button">Mecatrónica</button>
+              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all" data-filter="web" type="button">Desarrollo Web</button>
+              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all" data-filter="app" type="button">Aplicaciones</button>
+              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all" data-filter="mecatronica" type="button">Mecatrónica</button>
             </div>
           </div>
 
@@ -346,12 +372,12 @@
       <!-- ===================================================================== -->
       <!-- SECTION 4: STACK TECNOLÓGICO & HERRAMIENTAS (DESDE js/data.js)        -->
       <!-- ===================================================================== -->
-      <section class="w-full py-20 px-margin-mobile md:px-margin-tablet border-b border-slate-200/80 dark:border-slate-800" id="stack">
+      <section class="w-full theme-section-alt py-20 px-margin-mobile md:px-margin-tablet border-b theme-border" id="stack">
         <div class="max-w-6xl mx-auto flex flex-col gap-10">
           <div class="flex flex-col gap-2 max-w-2xl">
-            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">Competencias técnicas</span>
-            <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">Stack & Habilidades</h2>
-            <p class="text-base text-slate-600 dark:text-slate-300">
+            <span class="font-mono text-xs font-bold uppercase tracking-wider theme-accent">Competencias técnicas</span>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl theme-heading tracking-tight">Stack & Habilidades</h2>
+            <p class="text-base theme-body">
               Lenguajes, tecnologías y herramientas organizados por área, actualizados a medida que incorporo nuevos proyectos.
             </p>
           </div>
@@ -364,40 +390,40 @@
       <!-- ===================================================================== -->
       <!-- SECTION 5: TRAYECTORIA & ENFOQUE DE INGENIERÍA (DESDE js/data.js)     -->
       <!-- ===================================================================== -->
-      <section class="w-full bg-slate-100/70 dark:bg-slate-900/50 py-20 lg:py-24 px-margin-mobile md:px-margin-tablet border-b border-slate-200/80 dark:border-slate-800" id="experiencia">
+      <section class="w-full theme-page py-20 lg:py-24 px-margin-mobile md:px-margin-tablet border-b theme-border" id="experiencia">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <!-- Philosophy Statement -->
           <div class="lg:col-span-5 flex flex-col gap-5">
             <div class="flex flex-col gap-2">
-              <span class="font-mono text-xs font-semibold uppercase tracking-wider text-teal-600 dark:text-teal-400">Filosofía de trabajo</span>
-              <h2 class="font-display font-bold text-3xl text-slate-900 dark:text-white tracking-tight">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider theme-accent">Filosofía de trabajo</span>
+              <h2 class="font-display font-bold text-3xl theme-heading tracking-tight">
                 Mentalidad de ingeniería en cada línea de código
               </h2>
             </div>
-            <p class="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300">
+            <p class="text-sm sm:text-base leading-relaxed theme-body">
               La Ingeniería Mecatrónica exige entender cómo interactúan todas las piezas de un sistema. Llevo ese mismo enfoque estructurado al desarrollo de páginas web y aplicaciones:
             </p>
 
             <div class="flex flex-col gap-3 pt-1">
               <div class="identity-card p-4 rounded-xl flex items-start gap-3">
-                <span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-xl mt-0.5" aria-hidden="true">verified</span>
+                <span class="material-symbols-outlined theme-accent text-xl mt-0.5" aria-hidden="true">verified</span>
                 <div class="flex flex-col gap-0.5">
-                  <span class="font-display font-bold text-sm text-slate-900 dark:text-white">Arquitectura limpia y modular</span>
-                  <span class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Código organizado y fácil de escalar o mantener en equipo.</span>
+                  <span class="font-display font-bold text-sm theme-heading">Arquitectura limpia y modular</span>
+                  <span class="text-xs sm:text-sm theme-body">Código organizado y fácil de escalar o mantener en equipo.</span>
                 </div>
               </div>
               <div class="identity-card p-4 rounded-xl flex items-start gap-3">
-                <span class="material-symbols-outlined text-indigo-600 dark:text-indigo-400 text-xl mt-0.5" aria-hidden="true">verified</span>
+                <span class="material-symbols-outlined theme-accent text-xl mt-0.5" aria-hidden="true">verified</span>
                 <div class="flex flex-col gap-0.5">
-                  <span class="font-display font-bold text-sm text-slate-900 dark:text-white">Enfoque en la experiencia de usuario</span>
-                  <span class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Interfaces claras, rápidas y agradables de usar en móvil y escritorio.</span>
+                  <span class="font-display font-bold text-sm theme-heading">Enfoque en la experiencia de usuario</span>
+                  <span class="text-xs sm:text-sm theme-body">Interfaces claras, rápidas y agradables de usar en móvil y escritorio.</span>
                 </div>
               </div>
               <div class="identity-card p-4 rounded-xl flex items-start gap-3">
-                <span class="material-symbols-outlined text-teal-600 dark:text-teal-400 text-xl mt-0.5" aria-hidden="true">verified</span>
+                <span class="material-symbols-outlined theme-accent text-xl mt-0.5" aria-hidden="true">verified</span>
                 <div class="flex flex-col gap-0.5">
-                  <span class="font-display font-bold text-sm text-slate-900 dark:text-white">Conexión físico-digital</span>
-                  <span class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Capacidad de integrar sensores y hardware con aplicaciones en la nube.</span>
+                  <span class="font-display font-bold text-sm theme-heading">Conexión físico-digital</span>
+                  <span class="text-xs sm:text-sm theme-body">Capacidad de integrar sensores y hardware con aplicaciones en la nube.</span>
                 </div>
               </div>
             </div>
@@ -405,7 +431,7 @@
 
           <!-- Dynamic Timeline Component -->
           <div class="lg:col-span-7 flex flex-col gap-4">
-            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">Formación y evolución</span>
+            <span class="font-mono text-xs font-bold uppercase tracking-wider theme-accent">Formación y evolución</span>
             <div class="flex flex-col gap-4" id="timeline-list"></div>
           </div>
         </div>
@@ -414,14 +440,14 @@
       <!-- ===================================================================== -->
       <!-- SECTION 6: CONTACTO DIRECTO                                           -->
       <!-- ===================================================================== -->
-      <section class="w-full py-20 lg:py-24 px-margin-mobile md:px-margin-tablet" id="contacto">
+      <section class="w-full theme-section-alt py-20 lg:py-24 px-margin-mobile md:px-margin-tablet" id="contacto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <!-- Left: Contact Details -->
           <div class="lg:col-span-5 flex flex-col gap-6">
             <div class="flex flex-col gap-2">
-              <span class="font-mono text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">Contacto directo</span>
-              <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight">Hablemos de tu proyecto</h2>
-              <p class="text-base text-slate-600 dark:text-slate-300">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider theme-accent">Contacto directo</span>
+              <h2 class="font-display font-bold text-3xl sm:text-4xl theme-heading tracking-tight">Hablemos de tu proyecto</h2>
+              <p class="text-base theme-body">
                 Si buscas desarrollar una página web, una aplicación o colaborar en un proyecto de ingeniería y software, contáctame por cualquiera de estos medios.
               </p>
             </div>
@@ -429,32 +455,32 @@
             <!-- Contact Cards -->
             <div class="flex flex-col gap-3">
               <a class="flex items-center gap-4 identity-card p-4 rounded-xl group" href="mailto:Socialedgar0710@gmail.com">
-                <div class="w-11 h-11 rounded-xl bg-blue-600 text-white shadow-sm shadow-blue-600/20 flex items-center justify-center shrink-0">
+                <div class="w-11 h-11 rounded-xl bg-blue-600 text-white shadow-sm flex items-center justify-center shrink-0">
                   <span class="material-symbols-outlined text-xl" aria-hidden="true">mail</span>
                 </div>
                 <div class="flex flex-col">
-                  <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Correo electrónico</span>
-                  <span class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Socialedgar0710@gmail.com</span>
+                  <span class="font-mono text-xs theme-muted">Correo electrónico</span>
+                  <span class="text-sm font-bold theme-heading group-hover:underline">Socialedgar0710@gmail.com</span>
                 </div>
               </a>
 
               <a class="flex items-center gap-4 identity-card p-4 rounded-xl group" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">
-                <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-600/20 flex items-center justify-center shrink-0">
+                <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white shadow-sm flex items-center justify-center shrink-0">
                   <span class="material-symbols-outlined text-xl" aria-hidden="true">code</span>
                 </div>
                 <div class="flex flex-col">
-                  <span class="font-mono text-xs text-slate-500 dark:text-slate-400">GitHub</span>
-                  <span class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">github.com/Edgar-LT</span>
+                  <span class="font-mono text-xs theme-muted">GitHub</span>
+                  <span class="text-sm font-bold theme-heading group-hover:underline">github.com/Edgar-LT</span>
                 </div>
               </a>
 
               <a class="flex items-center gap-4 identity-card p-4 rounded-xl group" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">
-                <div class="w-11 h-11 rounded-xl bg-teal-600 text-white shadow-sm shadow-teal-600/20 flex items-center justify-center shrink-0">
+                <div class="w-11 h-11 rounded-xl bg-teal-600 text-white shadow-sm flex items-center justify-center shrink-0">
                   <span class="material-symbols-outlined text-xl" aria-hidden="true">chat</span>
                 </div>
                 <div class="flex flex-col">
-                  <span class="font-mono text-xs text-slate-500 dark:text-slate-400">WhatsApp</span>
-                  <span class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">+58 412-9640005</span>
+                  <span class="font-mono text-xs theme-muted">WhatsApp</span>
+                  <span class="text-sm font-bold theme-heading group-hover:underline">+58 412-9640005</span>
                 </div>
               </a>
             </div>
@@ -462,27 +488,27 @@
 
           <!-- Right: Clean Email Form -->
           <div class="lg:col-span-7 identity-card p-6 sm:p-8 rounded-2xl flex flex-col gap-5 relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500"></div>
-            <div class="flex flex-col gap-1 border-b border-slate-200 dark:border-slate-700 pb-4">
-              <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Enviar un mensaje por correo</h3>
-              <p class="text-sm text-slate-600 dark:text-slate-400">Completa los datos para enviar tu consulta directamente a Socialedgar0710@gmail.com.</p>
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500"></div>
+            <div class="flex flex-col gap-1 border-b theme-border pb-4">
+              <h3 class="font-display font-bold text-xl theme-heading">Enviar un mensaje por correo</h3>
+              <p class="text-sm theme-body">Completa los datos para enviar tu consulta directamente a Socialedgar0710@gmail.com.</p>
             </div>
 
             <form class="flex flex-col gap-4" id="contact-form">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-sm font-medium text-slate-700 dark:text-slate-200" for="name">Nombre o empresa</label>
-                  <input autocomplete="name" class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm px-3.5 py-2.5 rounded-xl focus:outline-none focus:border-blue-600 transition-all" id="name" placeholder="Tu nombre" required type="text" />
+                  <label class="text-sm font-semibold theme-heading" for="name">Nombre o empresa</label>
+                  <input autocomplete="name" class="w-full identity-input text-sm px-3.5 py-2.5 rounded-xl transition-all" id="name" placeholder="Tu nombre" required type="text" />
                 </div>
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-sm font-medium text-slate-700 dark:text-slate-200" for="email">Correo electrónico</label>
-                  <input autocomplete="email" class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm px-3.5 py-2.5 rounded-xl focus:outline-none focus:border-blue-600 transition-all" id="email" placeholder="correo@ejemplo.com" required type="email" />
+                  <label class="text-sm font-semibold theme-heading" for="email">Correo electrónico</label>
+                  <input autocomplete="email" class="w-full identity-input text-sm px-3.5 py-2.5 rounded-xl transition-all" id="email" placeholder="correo@ejemplo.com" required type="email" />
                 </div>
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label class="text-sm font-medium text-slate-700 dark:text-slate-200" for="project-type">Área del proyecto</label>
-                <select class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm px-3.5 py-2.5 rounded-xl focus:outline-none focus:border-blue-600 transition-all" id="project-type">
+                <label class="text-sm font-semibold theme-heading" for="project-type">Área del proyecto</label>
+                <select class="w-full identity-input text-sm px-3.5 py-2.5 rounded-xl transition-all" id="project-type">
                   <option value="web">Desarrollo Web</option>
                   <option value="app">Desarrollo de Aplicación</option>
                   <option value="meca">Ingeniería Mecatrónica / IoT</option>
@@ -492,18 +518,18 @@
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label class="text-sm font-medium text-slate-700 dark:text-slate-200" for="message">Mensaje</label>
-                <textarea class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm px-3.5 py-2.5 rounded-xl focus:outline-none focus:border-blue-600 transition-all resize-none" id="message" placeholder="Cuéntame sobre tu proyecto o idea..." required rows="4"></textarea>
+                <label class="text-sm font-semibold theme-heading" for="message">Mensaje</label>
+                <textarea class="w-full identity-input text-sm px-3.5 py-2.5 rounded-xl transition-all resize-none" id="message" placeholder="Cuéntame sobre tu proyecto o idea..." required rows="4"></textarea>
               </div>
 
               <div class="flex items-center justify-end pt-2">
-                <button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all" type="submit">
+                <button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all cursor-pointer" type="submit">
                   <span>Enviar por correo</span>
                   <span class="material-symbols-outlined text-base" aria-hidden="true">send</span>
                 </button>
               </div>
 
-              <div aria-live="polite" class="hidden p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-sm flex items-center gap-2" id="form-status" role="status">
+              <div aria-live="polite" class="hidden p-3 rounded-xl bg-emerald-600 text-white text-sm font-medium flex items-center gap-2" id="form-status" role="status">
                 <span class="material-symbols-outlined text-base" aria-hidden="true">check_circle</span>
                 <span>Correo listo. Confirma el envío desde tu aplicación de correo.</span>
               </div>
@@ -518,9 +544,9 @@
   <!-- ===================================================================== -->
   <!-- MODAL DE DETALLES DEL PROYECTO                                        -->
   <!-- ===================================================================== -->
-  <div aria-hidden="true" aria-labelledby="modal-project-title" aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-margin-mobile md:p-margin-tablet overflow-y-auto" id="project-modal" role="dialog">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-2xl animate-fade-in w-full max-w-3xl rounded-2xl p-6 sm:p-8 relative my-auto max-h-[90vh] overflow-y-auto">
-      <button aria-label="Cerrar ventana" class="absolute top-4 right-4 w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600 flex items-center justify-center transition-colors" id="close-modal-btn" type="button">
+  <div aria-hidden="true" aria-labelledby="modal-project-title" aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 backdrop-blur-sm p-margin-mobile md:p-margin-tablet overflow-y-auto" id="project-modal" role="dialog">
+    <div class="identity-card animate-fade-in w-full max-w-3xl rounded-2xl p-6 sm:p-8 relative my-auto max-h-[90vh] overflow-y-auto">
+      <button aria-label="Cerrar ventana" class="absolute top-4 right-4 w-9 h-9 rounded-xl identity-btn-secondary flex items-center justify-center transition-colors cursor-pointer" id="close-modal-btn" type="button">
         <span class="material-symbols-outlined text-lg" aria-hidden="true">close</span>
       </button>
       <div id="project-modal-body"></div>
@@ -530,20 +556,20 @@
   <!-- ===================================================================== -->
   <!-- FOOTER                                                                -->
   <!-- ===================================================================== -->
-  <footer class="w-full bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 py-10">
+  <footer class="w-full theme-page border-t theme-border py-10">
     <div class="max-w-6xl mx-auto px-margin-mobile md:px-margin-tablet flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <img alt="EL" width="28" height="28" class="h-7 w-7 object-contain rounded-lg" src="assets/logo.svg" />
-        <span class="text-sm text-slate-600 dark:text-slate-400">
+        <span class="text-sm font-medium theme-body">
           © 2026 Edgar López · Caracas, Venezuela
         </span>
       </div>
 
-      <div class="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-400">
-        <a class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="cv.html">Currículum</a>
-        <a class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">GitHub</a>
-        <a class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">WhatsApp</a>
-        <a class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="mailto:Socialedgar0710@gmail.com">Correo</a>
+      <div class="flex flex-wrap items-center gap-5 text-sm font-semibold theme-body">
+        <a class="hover:underline" href="cv.html">Currículum</a>
+        <a class="hover:underline" href="https://github.com/Edgar-LT" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a class="hover:underline" href="https://wa.me/584129640005" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+        <a class="hover:underline" href="mailto:Socialedgar0710@gmail.com">Correo</a>
       </div>
     </div>
   </footer>

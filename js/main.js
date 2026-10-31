@@ -19,33 +19,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================================================
-   0. GESTIÓN DE TEMA (CLARO LUMINOSO POR DEFECTO / AZUL PIZARRA OSCURO)
+   0. GESTIÓN DE TEMA (CLARO LUMINOSO / AZUL NOCHE)
    ========================================================================== */
 function initTheme() {
-  const savedTheme = localStorage.getItem("edgar_theme");
   const htmlEl = document.documentElement;
   const themeBtn = document.getElementById("theme-toggle-btn");
   const themeIcon = document.getElementById("theme-toggle-icon");
+  const themeLabel = document.getElementById("theme-toggle-label");
 
+  const savedTheme = localStorage.getItem("edgar_theme");
   if (savedTheme === "dark") {
     htmlEl.classList.add("dark");
   } else {
     htmlEl.classList.remove("dark");
   }
 
-  function updateIcon() {
-    if (!themeIcon) return;
+  function syncThemeUI() {
     const isDark = htmlEl.classList.contains("dark");
-    themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
+    if (themeIcon) {
+      themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
+    }
+    if (themeLabel) {
+      themeLabel.textContent = isDark ? "Claro" : "Oscuro";
+    }
+    if (themeBtn) {
+      themeBtn.setAttribute("aria-pressed", String(isDark));
+    }
   }
 
-  updateIcon();
+  syncThemeUI();
 
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
       const isDark = htmlEl.classList.toggle("dark");
       localStorage.setItem("edgar_theme", isDark ? "dark" : "light");
-      updateIcon();
+      syncThemeUI();
     });
   }
 }
@@ -57,25 +65,22 @@ function getAccentClasses(accent) {
   switch (accent) {
     case "indigo":
       return {
-        badge: "bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/60",
-        iconBox: "bg-indigo-600 text-white shadow-sm shadow-indigo-500/20",
-        banner: "from-indigo-600/15 via-indigo-500/5 to-transparent dark:from-indigo-500/20 dark:via-indigo-500/5 dark:to-transparent",
+        badge: "bg-indigo-600 text-white",
+        iconBox: "bg-indigo-600 text-white shadow-sm",
         topBar: "bg-indigo-600",
         linkText: "text-indigo-600 dark:text-indigo-400"
       };
     case "teal":
       return {
-        badge: "bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800/60",
-        iconBox: "bg-teal-600 text-white shadow-sm shadow-teal-500/20",
-        banner: "from-teal-600/15 via-teal-500/5 to-transparent dark:from-teal-500/20 dark:via-teal-500/5 dark:to-transparent",
+        badge: "bg-teal-600 text-white",
+        iconBox: "bg-teal-600 text-white shadow-sm",
         topBar: "bg-teal-600",
         linkText: "text-teal-600 dark:text-teal-400"
       };
     default:
       return {
-        badge: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/60",
-        iconBox: "bg-blue-600 text-white shadow-sm shadow-blue-500/20",
-        banner: "from-blue-600/15 via-blue-500/5 to-transparent dark:from-blue-500/20 dark:via-blue-500/5 dark:to-transparent",
+        badge: "bg-blue-600 text-white",
+        iconBox: "bg-blue-600 text-white shadow-sm",
         topBar: "bg-blue-600",
         linkText: "text-blue-600 dark:text-blue-400"
       };
@@ -88,34 +93,34 @@ function getAccentClasses(accent) {
 function renderProjectPreview(project, styles) {
   if (project.image) {
     return `
-      <div class="w-full h-48 rounded-xl overflow-hidden relative mb-4 border border-slate-200 dark:border-slate-700/70">
+      <div class="w-full h-48 rounded-xl overflow-hidden relative mb-4 identity-subcard">
         <img alt="${project.title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="${project.image}" />
       </div>
     `;
   }
 
   return `
-    <div class="w-full h-44 rounded-xl bg-gradient-to-br ${styles.banner} bg-blueprint mb-4 border border-slate-200/80 dark:border-slate-700/60 p-5 flex flex-col justify-between relative overflow-hidden">
+    <div class="w-full h-44 rounded-xl identity-subcard bg-blueprint mb-4 p-5 flex flex-col justify-between relative overflow-hidden">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-1.5">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-400/80"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
         </div>
-        <span class="px-2.5 py-0.5 rounded-full border text-xs font-medium ${styles.badge}">${project.categoryLabel}</span>
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
       </div>
       <div class="flex items-center gap-3.5 my-auto">
         <div class="w-11 h-11 rounded-xl ${styles.iconBox} flex items-center justify-center shrink-0">
           <span class="material-symbols-outlined text-xl" aria-hidden="true">${project.icon || "folder_code"}</span>
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-semibold text-base text-slate-900 dark:text-white">${project.title}</span>
-          <span class="font-mono text-xs text-slate-500 dark:text-slate-400">${project.role}</span>
+          <span class="font-display font-bold text-base theme-heading">${project.title}</span>
+          <span class="font-mono text-xs theme-muted">${project.role}</span>
         </div>
       </div>
-      <div class="flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
+      <div class="flex items-center justify-between text-xs font-semibold theme-muted">
         <span>Estado: ${project.status}</span>
-        <span class="${styles.linkText} group-hover:translate-x-0.5 transition-transform">Ver detalles →</span>
+        <span class="theme-accent group-hover:translate-x-0.5 transition-transform">Ver detalles →</span>
       </div>
     </div>
   `;
@@ -136,19 +141,19 @@ function renderProjects(projects, activeFilter = "all") {
       const tagsHtml = project.tags
         .map(
           (tag) =>
-            `<span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 font-mono text-xs text-slate-700 dark:text-slate-300">${tag}</span>`
+            `<span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">${tag}</span>`
         )
         .join("");
 
       return `
         <article tabindex="0" role="button" aria-label="Ver detalles de ${project.title}" class="project-card animate-fade-in flex flex-col justify-between identity-card p-6 rounded-2xl cursor-pointer group relative overflow-hidden" data-project-id="${project.id}">
-          <div class="absolute top-0 left-0 right-0 h-1 ${styles.topBar}"></div>
+          <div class="absolute top-0 left-0 right-0 h-1.5 ${styles.topBar}"></div>
           <div>
             ${renderProjectPreview(project, styles)}
 
             <div class="flex flex-col gap-1.5">
-              <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${project.title}</h3>
-              <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              <h3 class="font-display font-bold text-xl theme-heading">${project.title}</h3>
+              <p class="text-sm leading-relaxed theme-body">
                 ${project.shortDescription}
               </p>
             </div>
@@ -159,17 +164,17 @@ function renderProjects(projects, activeFilter = "all") {
               ${tagsHtml}
             </div>
 
-            <div class="flex items-center justify-between pt-3 border-t border-slate-200/80 dark:border-slate-700/70">
-              <span class="text-sm font-semibold ${styles.linkText} flex items-center gap-1">
+            <div class="flex items-center justify-between pt-3 border-t theme-border">
+              <span class="text-sm font-semibold theme-accent flex items-center gap-1">
                 <span>Ficha del proyecto</span>
                 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
               </span>
               <div class="flex items-center gap-4" onclick="event.stopPropagation()">
-                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub de ${project.title}">
+                <a class="text-sm font-semibold theme-body hover:underline flex items-center gap-1" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub de ${project.title}">
                   <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
                   <span>Código</span>
                 </a>
-                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
+                <a class="text-sm font-semibold theme-body hover:underline flex items-center gap-1" href="${project.demoUrl}" aria-label="Demo de ${project.title}">
                   <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
                   <span>Demo</span>
                 </a>
@@ -193,7 +198,7 @@ function initProjects(projects) {
       filterBtns.forEach((b) => {
         b.setAttribute("aria-pressed", "false");
         b.className =
-          "filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 border border-slate-200 dark:border-slate-700 transition-all shadow-sm";
+          "filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all";
       });
       btn.setAttribute("aria-pressed", "true");
       btn.className =
@@ -217,7 +222,7 @@ function initSkills(categories) {
       const skillsHtml = (cat.skills || [])
         .map(
           (skill) => `
-          <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:border-blue-400 transition-colors">
+          <span class="px-3 py-1.5 rounded-lg identity-chip text-sm font-medium">
             ${skill}
           </span>
         `
@@ -226,11 +231,11 @@ function initSkills(categories) {
 
       return `
         <div class="identity-card p-6 rounded-2xl flex flex-col gap-4 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 ${styles.topBar}"></div>
+          <div class="absolute top-0 left-0 right-0 h-1.5 ${styles.topBar}"></div>
           <div class="flex items-start justify-between gap-3">
             <div class="flex flex-col gap-1">
-              <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">${cat.title}</h3>
-              <p class="text-sm text-slate-600 dark:text-slate-400">${cat.description || ""}</p>
+              <h3 class="font-display font-bold text-lg theme-heading">${cat.title}</h3>
+              <p class="text-sm theme-muted">${cat.description || ""}</p>
             </div>
             <div class="w-10 h-10 rounded-xl ${styles.iconBox} flex items-center justify-center shrink-0">
               <span class="material-symbols-outlined text-xl" aria-hidden="true">${cat.icon}</span>
@@ -259,11 +264,11 @@ function initTimeline(timeline) {
         <div class="identity-card p-6 rounded-2xl flex flex-col gap-2 relative overflow-hidden">
           <div class="absolute top-0 bottom-0 left-0 w-1.5 ${styles.topBar}"></div>
           <div class="flex flex-wrap items-center justify-between gap-2 pl-2">
-            <span class="font-mono text-xs font-medium text-slate-500 dark:text-slate-400">${item.period}</span>
-            <span class="px-2.5 py-0.5 rounded-full border text-xs font-semibold ${styles.badge}">${item.badge}</span>
+            <span class="font-mono text-xs font-semibold theme-muted">${item.period}</span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${item.badge}</span>
           </div>
-          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white pl-2">${item.title}</h3>
-          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300 pl-2">
+          <h3 class="font-display font-bold text-lg theme-heading pl-2">${item.title}</h3>
+          <p class="text-sm leading-relaxed theme-body pl-2">
             ${item.description}
           </p>
         </div>
@@ -294,15 +299,15 @@ function initProjectModal(projects) {
     const tagsHtml = project.tags
       .map(
         (tag) =>
-          `<span class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-xs text-slate-700 dark:text-slate-200">${tag}</span>`
+          `<span class="px-3 py-1 rounded-md identity-chip font-mono text-xs font-medium">${tag}</span>`
       )
       .join("");
 
     const featuresHtml = (project.features || [])
       .map(
         (feat) => `
-        <li class="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-          <span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-lg mt-0.5" aria-hidden="true">check_circle</span>
+        <li class="flex items-start gap-2.5 text-sm theme-body">
+          <span class="material-symbols-outlined theme-accent text-lg mt-0.5" aria-hidden="true">check_circle</span>
           <span>${feat}</span>
         </li>
       `
@@ -311,39 +316,39 @@ function initProjectModal(projects) {
 
     modalContent.innerHTML = `
       <div class="flex flex-col gap-6">
-        <div class="flex flex-col gap-2 border-b border-slate-200 dark:border-slate-700 pb-4 pr-10">
+        <div class="flex flex-col gap-2 border-b theme-border pb-4 pr-10">
           <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-full border text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
-            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">${project.role} · ${project.status}</span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${project.categoryLabel}</span>
+            <span class="text-xs font-mono theme-muted">${project.role} · ${project.status}</span>
           </div>
-          <h3 id="modal-project-title" class="font-display font-bold text-2xl text-slate-900 dark:text-white">${project.title}</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">${project.shortDescription}</p>
+          <h3 id="modal-project-title" class="font-display font-bold text-2xl theme-heading">${project.title}</h3>
+          <p class="text-sm theme-body">${project.shortDescription}</p>
           <div class="flex flex-wrap gap-1.5 pt-1">
             ${tagsHtml}
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex flex-col gap-1.5">
-            <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">El Reto</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-300">${project.problem}</p>
+          <div class="identity-subcard p-4 rounded-xl flex flex-col gap-1.5">
+            <h4 class="font-display font-bold text-sm theme-heading">El Reto</h4>
+            <p class="text-sm theme-body">${project.problem}</p>
           </div>
 
-          <div class="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex flex-col gap-1.5">
-            <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Solución & Arquitectura</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-300">${project.architecture}</p>
+          <div class="identity-subcard p-4 rounded-xl flex flex-col gap-1.5">
+            <h4 class="font-display font-bold text-sm theme-heading">Solución & Arquitectura</h4>
+            <p class="text-sm theme-body">${project.architecture}</p>
           </div>
         </div>
 
-        <div class="bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex flex-col gap-2.5">
-          <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Aspectos Destacados</h4>
+        <div class="identity-subcard p-4 rounded-xl flex flex-col gap-2.5">
+          <h4 class="font-display font-bold text-sm theme-heading">Aspectos Destacados</h4>
           <ul class="grid grid-cols-1 gap-2">
             ${featuresHtml}
           </ul>
         </div>
 
-        <div class="flex flex-wrap items-center justify-end gap-3 pt-3 border-t border-slate-200 dark:border-slate-700">
-          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 transition-all">
+        <div class="flex flex-wrap items-center justify-end gap-3 pt-3 border-t theme-border">
+          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl identity-btn-secondary transition-all">
             <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
             <span>Ver repositorio en GitHub</span>
           </a>
@@ -446,11 +451,11 @@ function initScrollSpy() {
       if (link.getAttribute("href") === `#${currentSection}`) {
         link.setAttribute("aria-current", "page");
         link.className =
-          "nav-link text-sm px-3.5 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 font-semibold transition-all";
+          "nav-link text-sm px-3.5 py-1.5 rounded-lg bg-blue-600 text-white font-semibold transition-all";
       } else {
         link.removeAttribute("aria-current");
         link.className =
-          "nav-link text-sm px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all";
+          "nav-link text-sm px-3.5 py-1.5 rounded-lg theme-body hover:underline transition-all";
       }
     });
   });

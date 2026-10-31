@@ -1,97 +1,177 @@
 /* ==========================================================================
-   IDENTITY & HIGH-CLARITY PORTFOLIO — STYLESHEET
+   HIGH-CONTRAST IDENTITY THEME SYSTEM — STYLESHEET
    Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
+   --------------------------------------------------------------------------
+   Controla todos los fondos, cuadros, bordes y tipografía mediante variables
+   vinculadas a `html` (Modo Claro) y `html.dark` (Modo Azul Noche).
    ========================================================================== */
 
 :root {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #f1f5f9;
+  /* MODO CLARO: Fondo Gris-Azulado Arquitectónico vs Cuadros Blancos Puros */
+  --bg-page: #eaeff5;
+  --bg-section-alt: #dfe6ef;
+  --bg-header: rgba(255, 255, 255, 0.92);
   --bg-card: #ffffff;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --border-subtle: #e2e8f0;
-  --border-hover: #cbd5e1;
-  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
-  --shadow-hover: 0 12px 28px -4px rgba(37, 99, 235, 0.1), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  --bg-card-hover: #ffffff;
+  --bg-card-inner: #f1f5f9;
+  --bg-chip: #f1f5f9;
+  --bg-input: #f8fafc;
+
+  /* Tipografía en Modo Claro (Alto Contraste) */
+  --text-heading: #0f172a;
+  --text-body: #334155;
+  --text-muted: #475569;
+  --text-accent: #1d4ed8;
+
+  /* Bordes y Sombras en Modo Claro */
+  --border-card: #cbd5e1;
+  --border-card-hover: #2563eb;
+  --border-subtle: #cbd5e1;
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 20px 30px -8px rgba(37, 99, 235, 0.16), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+  --grid-line: rgba(37, 99, 235, 0.06);
 }
 
 html.dark {
-  --bg-primary: #0f172a;
-  --bg-secondary: #131c31;
+  /* MODO OSCURO: Fondo Azul Noche (#0b1120) vs Cuadros Azul Pizarra (#1e293b) */
+  --bg-page: #0b1120;
+  --bg-section-alt: #0f172a;
+  --bg-header: rgba(15, 23, 42, 0.92);
   --bg-card: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
+  --bg-card-hover: #243247;
+  --bg-card-inner: #0f172a;
+  --bg-chip: #0f172a;
+  --bg-input: #0f172a;
+
+  /* Tipografía en Modo Oscuro (Alto Contraste) */
+  --text-heading: #ffffff;
+  --text-body: #e2e8f0;
   --text-muted: #94a3b8;
-  --border-subtle: rgba(255, 255, 255, 0.09);
-  --border-hover: rgba(96, 165, 250, 0.4);
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
-  --shadow-hover: 0 12px 28px -4px rgba(37, 99, 235, 0.2);
+  --text-accent: #60a5fa;
+
+  /* Bordes y Sombras en Modo Oscuro */
+  --border-card: #334155;
+  --border-card-hover: #60a5fa;
+  --border-subtle: #1e293b;
+  --shadow-card: 0 12px 28px -6px rgba(0, 0, 0, 0.45), 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 20px 34px -8px rgba(37, 99, 235, 0.28), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+  --grid-line: rgba(148, 163, 184, 0.06);
 }
 
+/* Base Document */
 html,
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Keyboard Accessibility Focus Indicator */
-:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
+/* Semantic Theme Classes (Guaranteed contrast regardless of OS setting) */
+.theme-page {
+  background-color: var(--bg-page);
+  color: var(--text-body);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+.theme-section-alt {
+  background-color: var(--bg-section-alt);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+.theme-header {
+  background-color: var(--bg-header);
+  border-bottom: 1px solid var(--border-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 4px;
+.theme-heading {
+  color: var(--text-heading) !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+.theme-body {
+  color: var(--text-body) !important;
 }
 
-/* Subtle Architectural Grid Background */
-.bg-blueprint {
-  background-image:
-    linear-gradient(to right, rgba(37, 99, 235, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
-  background-size: 32px 32px;
+.theme-muted {
+  color: var(--text-muted) !important;
 }
 
-html.dark .bg-blueprint {
-  background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
+.theme-accent {
+  color: var(--text-accent) !important;
 }
 
-/* Elevated Identity Card */
+.theme-border {
+  border-color: var(--border-card) !important;
+}
+
+/* Cuadros / Tarjetas con contraste real frente al fondo */
 .identity-card {
   background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  border: 1.5px solid var(--border-card);
   box-shadow: var(--shadow-card);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .identity-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-hover);
+  background-color: var(--bg-card-hover);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 
-/* Brand Gradient Text */
+/* Sub-cuadros internos dentro de las tarjetas */
+.identity-subcard {
+  background-color: var(--bg-card-inner);
+  border: 1px solid var(--border-card);
+}
+
+/* Chips / Etiquetas de tecnologías */
+.identity-chip {
+  background-color: var(--bg-chip);
+  border: 1px solid var(--border-card);
+  color: var(--text-heading);
+}
+
+/* Inputs del formulario */
+.identity-input {
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-card);
+  color: var(--text-heading);
+}
+
+.identity-input::placeholder {
+  color: var(--text-muted);
+}
+
+.identity-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Botón secundario adaptable al tema */
+.identity-btn-secondary {
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  color: var(--text-heading);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+.identity-btn-secondary:hover {
+  border-color: var(--border-card-hover);
+  color: var(--text-accent);
+}
+
+/* Fondo de cuadrícula arquitectónica */
+.bg-blueprint {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Degradado de marca en texto */
 .text-brand-gradient {
   background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #0d9488 100%);
   -webkit-background-clip: text;
@@ -106,7 +186,27 @@ html.dark .text-brand-gradient {
   background-clip: text;
 }
 
-/* Smooth fade-in animation */
+/* Foco de teclado accesible */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 4px;
+}
+
+/* Animación de entrada */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -120,15 +220,4 @@ html.dark .text-brand-gradient {
 
 .animate-fade-in {
   animation: fadeIn 0.24s ease-out forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
