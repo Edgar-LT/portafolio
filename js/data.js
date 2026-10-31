@@ -40,29 +40,29 @@ window.PORTFOLIO_DATA = {
       demoUrl: "#proyectos"
     },
     {
-      id: "proyecto-02",
-      categoryLabel: "Aplicaciones",
-      status: "Plantilla lista",
-      categories: ["app"],
+      id: "voxpdf-studio",
+      categoryLabel: "Aplicaciones & Python",
+      status: "Desplegado",
+      categories: ["app", "web"],
       accent: "indigo",
-      icon: "smartphone",
-      title: "Aplicación Multiplataforma 02",
+      icon: "graphic_eq",
+      title: "VoxPDF Studio — Conversor de PDF a Audiolibro",
       shortDescription:
-        "Espacio reservado para una aplicación móvil o de escritorio. Detalla su propósito, la fluidez de su interfaz y las integraciones implementadas.",
+        "Aplicación híbrida en Python (FastAPI + PyMuPDF + edge-tts) e interfaz web interactiva que transforma libros y documentación técnica en audiolibros con limpieza inteligente y seguimiento visual.",
       image: null,
-      role: "Desarrollador de Aplicaciones",
+      role: "Arquitectura & Desarrollo Full-Stack Python",
       problem:
-        "Describe qué flujo o tarea cotidiana buscabas simplificar para el usuario final mediante una aplicación dedicada.",
+        "Convertir libros, manuales de ingeniería y datasheets extensos en formato PDF a audiolibros fluidos sin que los encabezados repetitivos, números de página o palabras cortadas por guion interrumpan la narración.",
       architecture:
-        "Detalla cómo construiste las vistas, la navegación, el manejo de estado y el almacenamiento local o en la nube.",
+        "Backend modular en Python 3.12 con FastAPI, extracción geométrica por coordenadas (bbox) mediante PyMuPDF (fitz), síntesis neuronal con Microsoft Edge TTS y caché SHA-256, acoplado a un reproductor de estudio con PDF.js y modo live en GitHub Pages.",
       features: [
-        "Interfaz intuitiva enfocada en usabilidad y rapidez.",
-        "Sincronización de datos y manejo de estados de carga.",
-        "Diseño adaptable a múltiples resoluciones de pantalla."
+        "Limpieza inteligente por coordenadas: omite encabezados/pies repetidos, números de página y reconstruye palabras con guion.",
+        "Reproductor interactivo con vista dividida PDF + Guion, resaltado oración por oración y precarga asíncrona sin pausas.",
+        "Control de velocidad (0.5x–2.0x), catálogo de 8 voces neuronales (ES/EN), guardado automático de progreso y exportación a MP3."
       ],
-      tags: ["Desarrollo Móvil", "UI / UX", "APIs"],
-      repoUrl: "https://github.com/Edgar-LT",
-      demoUrl: "#proyectos"
+      tags: ["Python 3.12", "FastAPI", "PyMuPDF", "Edge-TTS", "PDF.js"],
+      repoUrl: "https://github.com/Edgar-LT/lector-de-pdf",
+      demoUrl: "https://edgar-lt.github.io/lector-de-pdf/"
     },
     {
       id: "proyecto-03",
@@ -142,11 +142,11 @@ window.PORTFOLIO_DATA = {
       accent: "indigo",
       icon: "smartphone",
       skills: [
+        "Python & FastAPI",
         "Desarrollo Multiplataforma",
         "Diseño de Interfaces (UI/UX)",
-        "Gestión de Estado",
-        "Integración de Servicios",
-        "[ Agregar Lenguaje / SDK ]"
+        "Procesamiento PDF & Síntesis TTS",
+        "Gestión de Estado & Persistencia"
       ]
     },
     {
