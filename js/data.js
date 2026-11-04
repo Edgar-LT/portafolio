@@ -165,7 +165,7 @@ window.PORTFOLIO_DATA = {
       ],
       tags: ["Control PID", "Sistemas Dinámicos", "JavaScript ES6+", "HTML5 Canvas", "Telemetría"],
       repoUrl: "https://github.com/Edgar-LT/portafolio",
-      demoUrl: "#laboratorio-pid"
+      demoUrl: "https://github.com/Edgar-LT/portafolio"
     },
     {
       id: "portfolio-architecture",

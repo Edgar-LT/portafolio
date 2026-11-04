@@ -292,8 +292,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   initScrollSpy();
   initProjectModal(data.projects);
-  initVoxPdfPreview();
-  initPidSimulator();
   initGithubTelemetry(data.profile?.githubUser || "Edgar-LT");
   initContactForm();
 });

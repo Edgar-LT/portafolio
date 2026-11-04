@@ -60,9 +60,6 @@ if ($indexHtml -notmatch 'property="og:image"') {
 if ($cvHtml -notmatch 'property="og:image"') {
   throw "Falta etiqueta og:image en cv.html."
 }
-if ($indexHtml -notmatch 'id="pid-canvas"') {
-  throw "No se encontro el simulador interactivo PID (#pid-canvas) en index.html."
-}
 
 Write-Host "==> [4/4] Verificando sintaxis de archivos JSON (site.webmanifest)..." -ForegroundColor Cyan
 $null = Get-Content "site.webmanifest" -Raw -Encoding UTF8 | ConvertFrom-Json
