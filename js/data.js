@@ -118,8 +118,8 @@ window.PORTFOLIO_DATA = {
         { label: "Entorno", value: "Gemelo Digital" }
       ],
       tags: ["Robótica", "Cinemática", "Modelado 3D", "Pick & Place", "Gemelo Digital"],
-      repoUrl: "https://github.com/Edgar-LT",
-      demoUrl: "#proyectos"
+      repoUrl: "https://github.com/Edgar-LT/simulador-brazo-robotico",
+      demoUrl: "https://edgar-lt.github.io/simulador-brazo-robotico/"
     },
     {
       id: "pid-telemetry-lab",
@@ -164,8 +164,8 @@ window.PORTFOLIO_DATA = {
         { label: "Telemetría", value: "Mp% · Ts · ess · PWM" }
       ],
       tags: ["Control PID", "Sistemas Dinámicos", "JavaScript ES6+", "HTML5 Canvas", "Telemetría"],
-      repoUrl: "https://github.com/Edgar-LT/portafolio",
-      demoUrl: "https://github.com/Edgar-LT/portafolio"
+      repoUrl: "https://github.com/Edgar-LT/laboratorio-pid",
+      demoUrl: "https://edgar-lt.github.io/laboratorio-pid/"
     },
     {
       id: "portfolio-architecture",
