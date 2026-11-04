@@ -45,7 +45,7 @@ window.PORTFOLIO_DATA = {
         "Aplicación híbrida en Python (FastAPI + PyMuPDF + edge-tts) e interfaz web interactiva que transforma libros y documentación técnica en audiolibros con limpieza geométrica y seguimiento visual.",
       shortDescriptionEn:
         "Hybrid Python application (FastAPI + PyMuPDF + edge-tts) and interactive web studio that converts books and technical documentation into audiobooks with geometric text cleaning and live visual tracking.",
-      image: "assets/projects/voxpdf-studio.svg",
+      image: "assets/projects/voxpdf-studio.png",
       role: "Arquitectura & Desarrollo Full-Stack Python",
       roleEn: "Full-Stack Python Architecture & Development",
       problem:
