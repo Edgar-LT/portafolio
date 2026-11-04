@@ -19,7 +19,9 @@ $requiredFiles = @(
   "assets/logo.svg",
   "assets/og-preview.svg",
   "assets/projects/voxpdf-studio.png",
+  "assets/projects/voxpdf-studio-card.png",
   "assets/projects/robotic-arm-simulation.png",
+  "assets/projects/robotic-arm-simulation-card.png",
   "assets/projects/pid-telemetry-lab.svg",
   "assets/projects/portfolio-architecture.svg"
 )

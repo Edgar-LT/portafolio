@@ -45,7 +45,7 @@ window.PORTFOLIO_DATA = {
         "Aplicación híbrida en Python (FastAPI + PyMuPDF + edge-tts) e interfaz web interactiva que transforma libros y documentación técnica en audiolibros con limpieza geométrica y seguimiento visual.",
       shortDescriptionEn:
         "Hybrid Python application (FastAPI + PyMuPDF + edge-tts) and interactive web studio that converts books and technical documentation into audiobooks with geometric text cleaning and live visual tracking.",
-      image: "assets/projects/voxpdf-studio.png",
+      image: "assets/projects/voxpdf-studio-card.png",
       role: "Arquitectura & Desarrollo Full-Stack Python",
       roleEn: "Full-Stack Python Architecture & Development",
       problem:
@@ -91,7 +91,7 @@ window.PORTFOLIO_DATA = {
         "Entorno virtual de simulación y control para brazo robótico articulado orientado a tareas industriales de Pick & Place, con cálculo cinemático y manipulación de piezas entre estaciones.",
       shortDescriptionEn:
         "Virtual simulation and control environment for an articulated robotic arm designed for industrial Pick & Place operations, featuring kinematics calculation and workpiece handling.",
-      image: "assets/projects/robotic-arm-simulation.png",
+      image: "assets/projects/robotic-arm-simulation-card.png",
       role: "Modelado 3D, Cinemática & Control",
       roleEn: "3D Modeling, Kinematics & Control",
       problem:

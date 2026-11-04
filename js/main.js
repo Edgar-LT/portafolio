@@ -430,15 +430,15 @@ function renderProjectPreview(project, styles) {
 
   if (project.image) {
     return `
-      <div class="w-full h-44 rounded-xl overflow-hidden relative mb-4 identity-subcard">
-        <img alt="${title}" width="640" height="360" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-300" src="${project.image}" />
+      <div class="w-full aspect-video rounded-xl overflow-hidden relative mb-4 identity-subcard bg-slate-950 flex items-center justify-center">
+        <img alt="${title}" width="1200" height="675" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300" src="${project.image}" />
         <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-xs font-semibold shadow-sm ${styles.badge}">${categoryLabel}</span>
       </div>
     `;
   }
 
   return `
-    <div class="w-full h-44 rounded-xl identity-subcard bg-blueprint mb-4 p-5 flex flex-col justify-between relative overflow-hidden">
+    <div class="w-full aspect-video rounded-xl identity-subcard bg-blueprint mb-4 p-5 flex flex-col justify-between relative overflow-hidden">
       <div class="flex items-center justify-end">
         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${styles.badge}">${categoryLabel}</span>
       </div>
@@ -715,7 +715,7 @@ function initProjectModal(projects) {
 
     const modalImageHtml = project.image
       ? `
-        <div class="w-full max-h-64 rounded-xl overflow-hidden identity-subcard">
+        <div class="w-full aspect-video max-h-72 sm:max-h-80 rounded-xl overflow-hidden identity-subcard bg-slate-950 flex items-center justify-center">
           <img src="${project.image}" alt="${title}" class="w-full h-full object-cover object-center" loading="lazy" />
         </div>
       `
