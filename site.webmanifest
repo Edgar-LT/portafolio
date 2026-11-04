@@ -4,8 +4,8 @@
   "description": "Portafolio profesional de Edgar López — Estudiante de Ingeniería Mecatrónica y Desarrollador Web y de Aplicaciones en Caracas, Venezuela.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f131c",
-  "theme_color": "#0f131c",
+  "background_color": "#0b1120",
+  "theme_color": "#2563eb",
   "icons": [
     {
       "src": "assets/favicon.svg",

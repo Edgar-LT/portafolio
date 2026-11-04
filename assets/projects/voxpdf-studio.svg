@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgVox" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accentIndigo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <pattern id="gridVox" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#334155" stroke-width="0.6" stroke-opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bgVox)"/>
+  <rect width="800" height="450" fill="url(#gridVox)"/>
+
+  <!-- Window Frame -->
+  <rect x="44" y="36" width="712" height="378" rx="14" fill="#0b1120" stroke="#334155" stroke-width="1.5"/>
+  <rect x="44" y="36" width="712" height="38" rx="14" fill="#1e293b"/>
+  <circle cx="68" cy="55" r="5.5" fill="#ef4444"/>
+  <circle cx="86" cy="55" r="5.5" fill="#f59e0b"/>
+  <circle cx="104" cy="55" r="5.5" fill="#10b981"/>
+  <text x="130" y="59" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="600">voxpdf-studio // FastAPI + PyMuPDF + Edge-TTS</text>
+
+  <!-- Left Pane: PDF BBox Extractor -->
+  <rect x="64" y="92" width="310" height="248" rx="10" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="80" y="114" fill="#60a5fa" font-family="monospace" font-size="10" font-weight="700">PDF.js // BBOX GEOMETRIC FILTER</text>
+
+  <!-- Excluded Header Box -->
+  <rect x="80" y="126" width="278" height="22" rx="4" fill="#7f1d1d" fill-opacity="0.3" stroke="#ef4444" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="90" y="141" fill="#fca5a5" font-family="monospace" font-size="9">HEADER OMITIDO (y &lt; 0.08h)</text>
+
+  <!-- Active Document Paragraphs -->
+  <rect x="80" y="158" width="278" height="54" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
+  <rect x="90" y="168" width="240" height="7" rx="3.5" fill="#818cf8"/>
+  <rect x="90" y="182" width="255" height="7" rx="3.5" fill="#c7d2fe"/>
+  <rect x="90" y="196" width="190" height="7" rx="3.5" fill="#818cf8"/>
+
+  <rect x="80" y="222" width="278" height="68" rx="6" fill="#1e293b"/>
+  <rect x="90" y="234" width="250" height="6" rx="3" fill="#475569"/>
+  <rect x="90" y="248" width="230" height="6" rx="3" fill="#475569"/>
+  <rect x="90" y="262" width="245" height="6" rx="3" fill="#475569"/>
+  <rect x="90" y="276" width="160" height="6" rx="3" fill="#475569"/>
+
+  <!-- Excluded Footer Box -->
+  <rect x="80" y="300" width="278" height="22" rx="4" fill="#7f1d1d" fill-opacity="0.3" stroke="#ef4444" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="90" y="315" fill="#fca5a5" font-family="monospace" font-size="9">PÁGINA #42 OMITIDA</text>
+
+  <!-- Right Pane: Neural Audio Synthesis & Script -->
+  <rect x="392" y="92" width="344" height="248" rx="10" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="410" y="114" fill="#a5b4fc" font-family="monospace" font-size="10" font-weight="700">NEURAL TTS STREAM // SHA-256 CACHE</text>
+
+  <!-- Waveform Graphic -->
+  <g transform="translate(412, 132)">
+    <rect x="0" y="24" width="6" height="20" rx="3" fill="#6366f1"/>
+    <rect x="12" y="12" width="6" height="44" rx="3" fill="#818cf8"/>
+    <rect x="24" y="4" width="6" height="60" rx="3" fill="#38bdf8"/>
+    <rect x="36" y="16" width="6" height="36" rx="3" fill="#818cf8"/>
+    <rect x="48" y="8" width="6" height="52" rx="3" fill="#6366f1"/>
+    <rect x="60" y="20" width="6" height="28" rx="3" fill="#6366f1"/>
+    <rect x="72" y="2" width="6" height="64" rx="3" fill="#38bdf8"/>
+    <rect x="84" y="14" width="6" height="40" rx="3" fill="#818cf8"/>
+    <rect x="96" y="10" width="6" height="48" rx="3" fill="#6366f1"/>
+    <rect x="108" y="22" width="6" height="24" rx="3" fill="#818cf8"/>
+    <rect x="120" y="6" width="6" height="56" rx="3" fill="#38bdf8"/>
+    <rect x="132" y="18" width="6" height="32" rx="3" fill="#6366f1"/>
+    <rect x="144" y="12" width="6" height="44" rx="3" fill="#818cf8"/>
+    <rect x="156" y="24" width="6" height="20" rx="3" fill="#475569"/>
+    <rect x="168" y="16" width="6" height="36" rx="3" fill="#475569"/>
+    <rect x="180" y="26" width="6" height="16" rx="3" fill="#475569"/>
+    <rect x="192" y="14" width="6" height="40" rx="3" fill="#475569"/>
+    <rect x="204" y="22" width="6" height="24" rx="3" fill="#475569"/>
+    <rect x="216" y="28" width="6" height="12" rx="3" fill="#475569"/>
+    <rect x="228" y="18" width="6" height="32" rx="3" fill="#475569"/>
+    <rect x="240" y="24" width="6" height="20" rx="3" fill="#475569"/>
+    <rect x="252" y="20" width="6" height="28" rx="3" fill="#475569"/>
+    <rect x="264" y="26" width="6" height="16" rx="3" fill="#475569"/>
+    <rect x="276" y="22" width="6" height="24" rx="3" fill="#475569"/>
+    <rect x="288" y="28" width="6" height="12" rx="3" fill="#475569"/>
+  </g>
+
+  <!-- Active Sentence Card -->
+  <rect x="410" y="216" width="308" height="62" rx="8" fill="#1e293b" stroke="#4f46e5" stroke-width="1.2"/>
+  <text x="424" y="238" fill="#e2e8f0" font-family="sans-serif" font-size="11" font-weight="600">"La extracción geométrica reconstruye oraciones</text>
+  <text x="424" y="256" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="600">cortadas por guion y sincroniza el audio neuronal."</text>
+
+  <!-- Badges Row -->
+  <rect x="410" y="292" width="88" height="28" rx="6" fill="#1e1b4b" stroke="#6366f1"/>
+  <text x="425" y="310" fill="#a5b4fc" font-family="monospace" font-size="11" font-weight="700">1.25x SPD</text>
+  <rect x="508" y="292" width="102" height="28" rx="6" fill="#0f291e" stroke="#10b981"/>
+  <text x="522" y="310" fill="#6ee7b7" font-family="monospace" font-size="11" font-weight="700">8 VOCES ES/EN</text>
+  <rect x="620" y="292" width="98" height="28" rx="6" fill="#1e293b" stroke="#475569"/>
+  <text x="636" y="310" fill="#cbd5e1" font-family="monospace" font-size="11" font-weight="700">EXPORT MP3</text>
+
+  <!-- Bottom Player Bar -->
+  <rect x="64" y="354" width="672" height="42" rx="10" fill="#1e293b"/>
+  <circle cx="92" cy="375" r="13" fill="url(#accentIndigo)"/>
+  <polygon points="89,369 89,381 99,375" fill="#ffffff"/>
+  <rect x="122" y="371" width="440" height="8" rx="4" fill="#0f172a"/>
+  <rect x="122" y="371" width="265" height="8" rx="4" fill="url(#accentIndigo)"/>
+  <text x="582" y="379" fill="#94a3b8" font-family="monospace" font-size="11">04:18 / 07:45 · LIVE</text>
+</svg>

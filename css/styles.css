@@ -120,6 +120,12 @@ body {
   transform: translateY(-2px);
 }
 
+.identity-card-static {
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+}
+
 /* Sub-cuadros internos dentro de las tarjetas */
 .identity-subcard {
   background-color: var(--bg-card-inner);
@@ -161,6 +167,71 @@ body {
 .identity-btn-secondary:hover {
   border-color: var(--border-card-hover);
   color: var(--text-accent);
+}
+
+/* Controles deslizantes del simulador PID y VoxPDF */
+.pid-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border-card);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Ondas del ecualizador de VoxPDF */
+.audio-bar {
+  transition: height 0.15s ease;
+}
+
+.playing .audio-bar:nth-child(1) { animation: wavePulse 0.6s infinite ease-in-out alternate; }
+.playing .audio-bar:nth-child(2) { animation: wavePulse 0.4s infinite ease-in-out alternate 0.15s; }
+.playing .audio-bar:nth-child(3) { animation: wavePulse 0.5s infinite ease-in-out alternate 0.05s; }
+.playing .audio-bar:nth-child(4) { animation: wavePulse 0.7s infinite ease-in-out alternate 0.2s; }
+
+@keyframes wavePulse {
+  0% { height: 4px; }
+  100% { height: 18px; }
+}
+
+.pid-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0d9488;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.pid-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  background: #14b8a6;
+}
+
+.pid-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0d9488;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+/* Evita saltos de diseño (CLS) mientras carga Material Symbols */
+.material-symbols-outlined {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+  user-select: none;
 }
 
 /* Fondo de cuadrícula arquitectónica */
@@ -220,4 +291,38 @@ html.dark .text-brand-gradient {
 
 .animate-fade-in {
   animation: fadeIn 0.24s ease-out forwards;
+}
+
+/* Optimización estricta para impresión y exportación a PDF (cv.html) */
+@media print {
+  :root,
+  html,
+  html.dark,
+  body {
+    --bg-page: #ffffff !important;
+    --bg-card: #ffffff !important;
+    --bg-card-inner: #f8fafc !important;
+    --bg-chip: #f8fafc !important;
+    --text-heading: #0f172a !important;
+    --text-body: #334155 !important;
+    --text-muted: #475569 !important;
+    --text-accent: #1d4ed8 !important;
+    --border-card: #cbd5e1 !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
 }
