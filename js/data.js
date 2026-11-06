@@ -68,6 +68,7 @@ window.PORTFOLIO_DATA = {
       ],
       metrics: [
         { label: "Motor PDF", value: "PyMuPDF (bbox)" },
+        { label: "Latencia Síntesis", value: "< 250ms (Cache)" },
         { label: "Caché Audio", value: "SHA-256" },
         { label: "Voces TTS", value: "8 Neuronales" }
       ],
