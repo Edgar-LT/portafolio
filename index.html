@@ -81,8 +81,8 @@
     })();
   </script>
 
-  <!-- Tailwind CSS & Unified Design Tokens -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS & Unified Design Tokens (Compiled Static CSS) -->
+  <link rel="stylesheet" href="css/tailwind.min.css" />
   <script src="js/config.tailwind.js"></script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -110,7 +110,7 @@
 
       <!-- Desktop Navigation -->
       <nav aria-label="Navegación principal" class="hidden lg:flex items-center gap-1" id="desktop-nav">
-        <a aria-current="page" class="nav-link text-sm px-3 py-1.5 rounded-lg bg-blue-600 text-white font-semibold transition-all" href="#inicio" data-i18n="nav_home">Inicio</a>
+        <a aria-current="page" class="nav-link text-sm px-3.5 py-1.5 rounded-full nav-pill-active font-semibold transition-all" href="#inicio" data-i18n="nav_home">Inicio</a>
         <a class="nav-link text-sm px-3 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#disciplinas" data-i18n="nav_areas">Áreas</a>
         <a class="nav-link text-sm px-3 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#proyectos" data-i18n="nav_projects">Proyectos</a>
         <a class="nav-link text-sm px-3 py-1.5 rounded-lg theme-body hover:underline transition-all" href="#stack" data-i18n="nav_stack">Stack</a>
@@ -133,7 +133,7 @@
         <a class="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold px-3.5 py-1.5 rounded-xl identity-btn-secondary transition-all" href="cv.html" data-i18n="nav_cv">
           Ver CV
         </a>
-        <a class="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-1.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-sm shadow-blue-600/20 btn-primary-action transition-all" href="#contacto" data-i18n="nav_cta">
+        <a class="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-1.5 rounded-full btn-primary-action transition-all" href="#contacto" data-i18n="nav_cta">
           Contactar
         </a>
 
@@ -183,11 +183,11 @@
             </p>
 
             <div class="flex flex-wrap items-center gap-3 pt-1">
-              <a class="btn-primary-action inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/25 transition-all" href="#proyectos">
+              <a class="btn-primary-action inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full transition-all" href="#proyectos">
                 <span data-i18n="hero_cta_projects">Explorar proyectos</span>
                 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
               </a>
-              <a class="btn-primary-action inline-flex items-center gap-2 text-sm font-semibold px-5 py-3 rounded-xl identity-btn-secondary transition-all" href="cv.html">
+              <a class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-3 rounded-full identity-btn-secondary transition-all" href="cv.html">
                 <span data-i18n="hero_cta_cv">Currículum Vitae</span>
                 <span class="material-symbols-outlined text-base theme-accent" aria-hidden="true">description</span>
               </a>
@@ -348,10 +348,10 @@
 
             <!-- Interactive Category Filter -->
             <div aria-label="Filtrar proyectos por categoría" class="flex flex-wrap items-center gap-2" id="project-filters" role="group">
-              <button aria-pressed="true" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-md shadow-blue-600/20 transition-all cursor-pointer" data-filter="all" data-i18n="filter_all" type="button">Todos</button>
-              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all cursor-pointer" data-filter="web" data-i18n="filter_web" type="button">Desarrollo Web</button>
-              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all cursor-pointer" data-filter="app" data-i18n="filter_app" type="button">Aplicaciones</button>
-              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all cursor-pointer" data-filter="mecatronica" data-i18n="filter_meca" type="button">Mecatrónica</button>
+              <button aria-pressed="true" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold nav-pill-active transition-all cursor-pointer" data-filter="all" data-i18n="filter_all" type="button">Todos</button>
+              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-full text-sm font-medium identity-btn-secondary transition-all cursor-pointer" data-filter="web" data-i18n="filter_web" type="button">Desarrollo Web</button>
+              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-full text-sm font-medium identity-btn-secondary transition-all cursor-pointer" data-filter="app" data-i18n="filter_app" type="button">Aplicaciones</button>
+              <button aria-pressed="false" class="filter-btn px-4 py-2 rounded-full text-sm font-medium identity-btn-secondary transition-all cursor-pointer" data-filter="mecatronica" data-i18n="filter_meca" type="button">Mecatrónica</button>
             </div>
           </div>
 
@@ -547,11 +547,11 @@
               </div>
 
               <div class="flex flex-wrap items-center justify-end gap-3 pt-2">
-                <button id="whatsapp-send-btn" class="btn-primary-action w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3 rounded-xl bg-teal-600 text-white hover:bg-teal-700 shadow-md shadow-teal-600/20 transition-all cursor-pointer" type="button">
+                <button id="whatsapp-send-btn" class="inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3 rounded-full identity-btn-secondary transition-all cursor-pointer w-full sm:w-auto" type="button">
                   <span data-i18n="form_btn_wa">Enviar por WhatsApp</span>
                   <span class="material-symbols-outlined text-base" aria-hidden="true">chat</span>
                 </button>
-                <button class="btn-primary-action w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all cursor-pointer" type="submit">
+                <button class="btn-primary-action w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3 rounded-full transition-all cursor-pointer" type="submit">
                   <span data-i18n="form_btn_mail">Enviar por correo</span>
                   <span class="material-symbols-outlined text-base" aria-hidden="true">send</span>
                 </button>

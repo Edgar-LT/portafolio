@@ -1,12 +1,4 @@
 /* ==========================================================================
-   HIGH-CONTRAST IDENTITY THEME SYSTEM — STYLESHEET
-   Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
-   --------------------------------------------------------------------------
-   Controla todos los fondos, cuadros, bordes y tipografía mediante variables
-   vinculadas a `html` (Modo Claro) y `html.dark` (Modo Azul Noche).
-   ========================================================================== */
-
-/* ==========================================================================
    HIGH-CONTRAST LUXURY & EDITORIAL SYSTEM — STYLESHEET
    Edgar López // Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    --------------------------------------------------------------------------
@@ -15,10 +7,10 @@
    ========================================================================== */
 
 :root {
-  /* MODO CLARO: Alabastro Puro + Cristal Esmaltado */
+  /* MODO CLARO: Alabastro Puro (#f5f5f7) + Porcelana (#ffffff) */
   --bg-page: #f5f5f7;
   --bg-section-alt: #ebebed;
-  --bg-header: rgba(245, 245, 247, 0.82);
+  --bg-header: rgba(245, 245, 247, 0.85);
   --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
   --bg-card-inner: #f2f2f6;
@@ -26,41 +18,41 @@
   --bg-input: #ffffff;
 
   /* Tipografía en Modo Claro (Carbón Suizo y Gris Editorial) */
-  --text-heading: #11141a;
-  --text-body: #3c4049;
-  --text-muted: #646a78;
+  --text-heading: #0a0a0c;
+  --text-body: #32363f;
+  --text-muted: #666d7e;
   --text-accent: #0066cc;
 
-  /* Bordes & Bisel Especular Cenital (Luz natural) */
+  /* Bordes & Bisel Especular Cenital (Luz natural 1px) */
   --border-card: rgba(0, 0, 0, 0.08);
-  --border-card-hover: rgba(0, 102, 204, 0.4);
+  --border-card-hover: rgba(0, 102, 204, 0.45);
   --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-specular: rgba(255, 255, 255, 0.85);
+  --border-specular: rgba(255, 255, 255, 0.9);
 
   /* Sombras Táctiles con amortiguación física */
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px -4px rgba(17, 20, 26, 0.05);
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.05), 0 20px 36px -8px rgba(0, 102, 204, 0.12);
+  --shadow-card-hover: 0 4px 14px rgba(0, 0, 0, 0.06), 0 20px 36px -8px rgba(0, 102, 204, 0.12);
   --grid-line: rgba(0, 102, 204, 0.04);
 }
 
 html.dark {
-  /* MODO OSCURO: Obsidiana OLED (#090b10) + Titanio Anodizado (#121620) */
-  --bg-page: #090b10;
-  --bg-section-alt: #0d1017;
-  --bg-header: rgba(9, 11, 16, 0.78);
-  --bg-card: #131722;
-  --bg-card-hover: #181d2b;
-  --bg-card-inner: #0d1017;
-  --bg-chip: #0d1017;
-  --bg-input: #0d1017;
+  /* MODO OSCURO: Obsidiana OLED (#0a0a0c) + Titanio Cepillado (#141417) */
+  --bg-page: #0a0a0c;
+  --bg-section-alt: #0f1013;
+  --bg-header: rgba(10, 10, 12, 0.82);
+  --bg-card: #141417;
+  --bg-card-hover: #191a1e;
+  --bg-card-inner: #0f1013;
+  --bg-chip: #191a1e;
+  --bg-input: #0f1013;
 
-  /* Tipografía en Modo Oscuro (Plata Nítida y Zafiro) */
-  --text-heading: #f8fafc;
-  --text-body: #cbd5e1;
-  --text-muted: #8492a6;
+  /* Tipografía en Modo Oscuro (Plata Nítida y Zafiro Óptico) */
+  --text-heading: #fbfbfd;
+  --text-body: #d2d5dc;
+  --text-muted: #8b92a2;
   --text-accent: #38bdf8;
 
-  /* Bordes & Bisel Especular Cenital (Reflejo metálico sutil) */
+  /* Bordes & Bisel Especular Cenital (Reflejo metálico de 1px) */
   --border-card: rgba(255, 255, 255, 0.09);
   --border-card-hover: rgba(56, 189, 248, 0.45);
   --border-subtle: rgba(255, 255, 255, 0.06);
@@ -173,8 +165,13 @@ body {
 
 .identity-input:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18), inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.18), inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+html.dark .identity-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18), inset 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Botón secundario táctil amortiguado */
@@ -196,17 +193,50 @@ body {
   transform: scale(0.98);
 }
 
-/* Botón principal estilo Apple con micro-escala táctil */
+/* Botón principal estilo Alta Relojería / Apple (Titanio & Alabastro con Bisel Especular) */
 .btn-primary-action {
-  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  background-color: #11141a;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s ease;
 }
 
 .btn-primary-action:hover {
+  background-color: #1a1e27;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 6px 16px -2px rgba(0, 0, 0, 0.18);
   transform: translateY(-1.5px);
 }
 
 .btn-primary-action:active {
   transform: scale(0.98);
+}
+
+html.dark .btn-primary-action {
+  background-color: #f5f5f7;
+  color: #0a0a0c;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 0 0 #ffffff, 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .btn-primary-action:hover {
+  background-color: #ffffff;
+  box-shadow: inset 0 1px 0 0 #ffffff, 0 6px 18px rgba(255, 255, 255, 0.15);
+}
+
+/* Pill / Cápsula activa de navegación con contraste editorial */
+.nav-pill-active {
+  background-color: #11141a !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+html.dark .nav-pill-active {
+  background-color: #f5f5f7 !important;
+  color: #0a0a0c !important;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 0 #ffffff;
 }
 
 /* Micro-puntos de estado para categorías de proyecto */
@@ -226,16 +256,16 @@ body {
   background-size: 36px 36px;
 }
 
-/* Degradado de marca editorial refinado (Zafiro, Índigo, Esmeralda) */
+/* Degradado de marca editorial refinado (Titanio Grafito a Óptico) */
 .text-brand-gradient {
-  background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 50%, #0f766e 100%);
+  background: linear-gradient(135deg, #11141a 0%, #1e293b 50%, #0066cc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 html.dark .text-brand-gradient {
-  background: linear-gradient(135deg, #60a5fa 0%, #a5b4fc 50%, #2dd4bf 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 50%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -248,7 +278,12 @@ html.dark .text-brand-gradient {
 
 /* Foco de teclado accesible con halo fino */
 :focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #0066cc;
+  outline-offset: 3px;
+}
+
+html.dark :focus-visible {
+  outline: 2px solid #38bdf8;
   outline-offset: 3px;
 }
 
@@ -263,12 +298,12 @@ html.dark .text-brand-gradient {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.45);
+  background: rgba(100, 116, 139, 0.35);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 116, 139, 0.75);
+  background: rgba(100, 116, 139, 0.65);
 }
 
 /* Animación de entrada amortiguada */
@@ -285,6 +320,23 @@ html.dark .text-brand-gradient {
 
 .animate-fade-in {
   animation: fadeIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Respeto estricto a la accesibilidad del sistema */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .identity-card:hover,
+  .btn-primary-action:hover,
+  .identity-btn-secondary:hover {
+    transform: none !important;
+  }
 }
 
 /* Optimización estricta para impresión y exportación a PDF (cv.html) */

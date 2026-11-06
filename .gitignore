@@ -8,3 +8,5 @@ Desktop.ini
 # Dependencies & Logs
 node_modules/
 *.log
+tailwindcss.exe
+

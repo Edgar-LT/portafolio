@@ -399,17 +399,17 @@ function getAccentClasses(accent) {
       };
     case "teal":
       return {
-        badge: "bg-teal-600 text-white",
-        iconBox: "bg-teal-600 text-white shadow-sm",
+        badge: "bg-teal-700/15 text-teal-800 dark:text-teal-300 border border-teal-500/25",
+        iconBox: "bg-teal-700/15 text-teal-700 dark:text-teal-300 border border-teal-500/30",
         topBar: "bg-teal-600",
-        linkText: "text-teal-600 dark:text-teal-400"
+        linkText: "text-teal-700 dark:text-teal-400"
       };
     default:
       return {
-        badge: "bg-blue-600 text-white",
-        iconBox: "bg-blue-600 text-white shadow-sm",
-        topBar: "bg-blue-600",
-        linkText: "text-blue-600 dark:text-blue-400"
+        badge: "bg-neutral-800/10 text-neutral-900 dark:bg-white/10 dark:text-neutral-200 border border-neutral-300 dark:border-white/10",
+        iconBox: "bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 shadow-sm",
+        topBar: "bg-neutral-900 dark:bg-white",
+        linkText: "theme-heading"
       };
   }
 }
@@ -541,11 +541,11 @@ function initProjects(projects) {
       filterBtns.forEach((b) => {
         b.setAttribute("aria-pressed", "false");
         b.className =
-          "filter-btn px-4 py-2 rounded-xl text-sm font-medium identity-btn-secondary transition-all cursor-pointer";
+          "filter-btn px-4 py-2 rounded-full text-sm font-medium identity-btn-secondary transition-all cursor-pointer";
       });
       btn.setAttribute("aria-pressed", "true");
       btn.className =
-        "filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-blue-600 text-white shadow-md shadow-blue-600/20 transition-all cursor-pointer";
+        "filter-btn px-4 py-2 rounded-full text-sm font-semibold nav-pill-active transition-all cursor-pointer";
 
       renderProjects(projects, currentProjectFilter);
     });
@@ -758,11 +758,11 @@ function initProjectModal(projects) {
         </div>
 
         <div class="flex flex-wrap items-center justify-end gap-3 pt-3 border-t theme-border">
-          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl identity-btn-secondary transition-all">
+          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-full identity-btn-secondary transition-all">
             <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
             <span>${t("modal_repo_btn")}</span>
           </a>
-          <a href="${project.demoUrl}" ${demoAttrs} class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all">
+          <a href="${project.demoUrl}" ${demoAttrs} class="btn-primary-action inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all">
             <span>${t("modal_demo_btn")}</span>
             <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
           </a>
@@ -1458,11 +1458,11 @@ function initScrollSpy() {
       if (link.getAttribute("href") === `#${currentSection}`) {
         link.setAttribute("aria-current", "page");
         link.className =
-          "nav-link text-sm px-3 py-1.5 rounded-lg bg-blue-600 text-white font-semibold transition-all";
+          "nav-link text-sm px-3.5 py-1.5 rounded-full nav-pill-active font-semibold transition-all";
       } else {
         link.removeAttribute("aria-current");
         link.className =
-          "nav-link text-sm px-3 py-1.5 rounded-lg theme-body hover:underline transition-all";
+          "nav-link text-sm px-3.5 py-1.5 rounded-full theme-body hover:underline transition-all";
       }
     });
     ticking = false;
