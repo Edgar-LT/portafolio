@@ -169,50 +169,51 @@ window.PORTFOLIO_DATA = {
       demoUrl: "https://edgar-lt.github.io/laboratorio-pid/"
     },
     {
-      id: "portfolio-architecture",
+      id: "chemblind",
       published: true,
-      categoryLabel: "Desarrollo Web",
-      categoryLabelEn: "Web Development",
-      status: "Producción",
-      statusEn: "Production",
+      categoryLabel: "Desarrollo Web & App",
+      categoryLabelEn: "Web Development & App",
+      status: "Desplegado en Producción",
+      statusEn: "Deployed to Production",
       categories: ["web", "app"],
       accent: "blue",
-      icon: "layers",
-      title: "Arquitectura de Portafolio & Motor CV Data-Driven",
-      titleEn: "Data-Driven Portfolio Architecture & CV Engine",
+      icon: "favorite",
+      title: "ChemBlind — Chemistry Unfiltered",
+      titleEn: "ChemBlind — Chemistry Unfiltered",
       shortDescription:
-        "Plataforma web modular con fuente única de datos (SSOT), internacionalización instantánea (ES/EN), sincronización con GitHub REST API y generador dinámico de Currículum Vitae imprimible en PDF.",
+        "Juego web interactivo de conexión interpersonal, dinámicas de preguntas íntimas y retos para dos personas, construido con diseño editorial de alta gama, sincronización de turnos y métricas de química emocional.",
       shortDescriptionEn:
-        "Modular web platform powered by a Single Source of Truth (SSOT), instant internationalization (ES/EN), live GitHub REST API telemetry, and a dynamic printable PDF résumé engine.",
-      image: "assets/projects/portfolio-architecture.svg",
-      role: "Arquitectura Frontend & Accesibilidad WCAG 2.1 AA",
-      roleEn: "Frontend Architecture & WCAG 2.1 AA Accessibility",
+        "Interactive web experience for interpersonal connection, questions, and shared challenges for couples/friends, designed with luxury editorial craft, turn synchronization, and live chemistry progression metrics.",
+      image: "assets/projects/chemblind-card.png",
+      role: "Diseño UX/UI Editorial & Desarrollo Frontend",
+      roleEn: "Luxury UX/UI Editorial Design & Frontend Development",
       problem:
-        "Mantener sincronizados un portafolio web interactivo, múltiples idiomas (Español/Inglés) y una hoja de vida técnica en formato PDF suele requerir editar varios archivos manualmente, generando inconsistencias.",
+        "Las aplicaciones de preguntas y juegos de cartas para parejas suelen tener interfaces saturadas de anuncios, diseños infantiles o mecánicas monótonas que rompen el ambiente de intimidad y conversación.",
       problemEn:
-        "Keeping an interactive web portfolio, multiple languages (Spanish/English), and a printable technical PDF résumé in sync usually requires manual edits across multiple files, leading to inconsistencies.",
+        "Icebreaker and couple question games often suffer from ad-saturated interfaces, juvenile visuals, or flat linear mechanics that disrupt genuine atmosphere and emotional intimacy.",
       architecture:
-        "Arquitectura desacoplada basada en un esquema central (`js/data.js`) que alimenta simultáneamente la SPA principal (`index.html`) y el documento de impresión (`cv.html`), con temas de alto contraste, datos estructurados Schema.org y script de auditoría CI en PowerShell.",
+        "Arquitectura frontend reactiva con JavaScript moderno, máquina de estados para turnos y fases (Romper el Hielo, Conexión, Chispa), motor de progresión de química en porcentaje, selector de temas Marfil/Obsidiana y soporte para chat grupal interactivo.",
       architectureEn:
-        "Decoupled architecture driven by a central schema (`js/data.js`) that simultaneously hydrates the main interface (`index.html`) and print sheet (`cv.html`), with high-contrast theming, Schema.org JSON-LD, and a PowerShell QA audit script.",
+        "Reactive client-side architecture in modern JavaScript, phase state machine (Icebreaker, Deep Connection, Spark), live chemistry percentage progression engine, Ivory/Obsidian dual theme engine, and interactive room chat support.",
       features: [
-        "Fuente única de datos (`js/data.js`) que actualiza automáticamente el sitio web y el CV imprimible en Español e Inglés.",
-        "Accesibilidad WCAG 2.1 AA: navegación completa por teclado, Focus Trap en modales, contraste verificado y soporte de tema Claro/Oscuro.",
-        "Integración con la API pública de GitHub con caché local y pipeline de verificación de integridad (`scripts/verify.ps1`)."
+        "Fases dinámicas de interacción: Progresión por niveles desde 'Romper el Hielo' hasta 'Conexión Profunda' y 'Chispa'.",
+        "Métricas de química en tiempo real con cálculo visual de afinidad según respuestas y dinámicas completadas.",
+        "Experiencia inmersiva con microinteracciones refinadas, tipografía editorial y selector de temas Marfil / Carbón."
       ],
       featuresEn: [
-        "Single Source of Truth (`js/data.js`) that automatically updates both the web portfolio and printable CV in Spanish and English.",
-        "WCAG 2.1 AA accessibility: full keyboard navigation, modal Focus Trap, verified contrast tokens, and Light/Dark theme persistence.",
-        "Live GitHub API integration with session caching and automated integrity verification (`scripts/verify.ps1`)."
+        "Progressive interaction tiers: Multi-stage dynamics progressing from Icebreakers to Deep Connection and Spark.",
+        "Real-time chemistry metrics calculating affinity progression based on turns and completed challenges.",
+        "Immersive luxury experience featuring refined microinteractions, editorial typography, and Ivory/Charcoal theme switching."
       ],
       metrics: [
-        { label: "Arquitectura", value: "SSOT Data-Driven" },
-        { label: "Estándar", value: "WCAG 2.1 AA + SEO" },
-        { label: "Idiomas", value: "ES / EN Simultáneo" }
+        { label: "Experiencia", value: "3 Fases Dinámicas" },
+        { label: "Química", value: "Motor Progresivo" },
+        { label: "Diseño", value: "Editorial & Marfil" },
+        { label: "Despliegue", value: "GitHub Pages" }
       ],
-      tags: ["HTML5 Semántico", "CSS Variables", "JavaScript Modular", "GitHub API", "WCAG 2.1 AA"],
-      repoUrl: "https://github.com/Edgar-LT/portafolio",
-      demoUrl: "cv.html"
+      tags: ["JavaScript ES6+", "Diseño Editorial", "State Machine", "UI/UX High-End", "Web App"],
+      repoUrl: "https://github.com/Edgar-LT/chemblind",
+      demoUrl: "https://edgar-lt.github.io/chemblind/"
     },
     {
       id: "plantilla-futuro-proyecto",

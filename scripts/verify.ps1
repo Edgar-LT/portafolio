@@ -25,6 +25,8 @@ $requiredFiles = @(
   "assets/projects/pid-telemetry-lab.png",
   "assets/projects/pid-telemetry-lab-card.png",
   "assets/projects/pid-telemetry-lab.svg",
+  "assets/projects/chemblind.png",
+  "assets/projects/chemblind-card.png",
   "assets/projects/portfolio-architecture.svg"
 )
 
