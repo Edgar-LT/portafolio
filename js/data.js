@@ -138,7 +138,7 @@ window.PORTFOLIO_DATA = {
         "Simulador interactivo en lazo cerrado para sintonización de controladores PID (Kp, Ki, Kd) sobre un actuador electromecánico de segundo orden con inyección de perturbaciones y osciloscopio digital.",
       shortDescriptionEn:
         "Interactive closed-loop simulator for tuning PID controllers (Kp, Ki, Kd) on a second-order electromechanical actuator with load disturbance injection and real-time digital oscilloscope.",
-      image: "assets/projects/pid-telemetry-lab.svg",
+      image: "assets/projects/pid-telemetry-lab-card.png",
       role: "Ingeniería de Control & Simulación Numérica",
       roleEn: "Control Engineering & Numerical Simulation",
       problem:
