@@ -9,4 +9,6 @@ Desktop.ini
 node_modules/
 *.log
 tailwindcss.exe
+*.exe
+
 
