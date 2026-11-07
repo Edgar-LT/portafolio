@@ -511,6 +511,9 @@
             </div>
 
             <form class="flex flex-col gap-4" id="contact-form">
+              <!-- Honeypot anti-spam invisible para bots -->
+              <input type="checkbox" name="botcheck" id="form-botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+              
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                   <label class="text-sm font-semibold theme-heading" for="name" data-i18n="form_name_label">Nombre o empresa</label>

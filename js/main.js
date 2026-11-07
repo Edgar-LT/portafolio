@@ -817,6 +817,8 @@ function initContactForm() {
 
   if (!contactForm || !formStatus) return;
 
+  const WEB3FORMS_ACCESS_KEY = "551d61b0-68ae-4f52-8a68-33785b5d67ff";
+
   function buildPayload() {
     const name = document.getElementById("name")?.value.trim() || "";
     const email = document.getElementById("email")?.value.trim() || "";
@@ -824,24 +826,80 @@ function initContactForm() {
     const projectType =
       projectSelect?.options[projectSelect.selectedIndex]?.text || "";
     const message = document.getElementById("message")?.value.trim() || "";
+    const botcheck = document.getElementById("form-botcheck")?.checked || false;
 
     const formattedText = `Hola Edgar, te contacto desde tu portafolio web:\n\n• Nombre / Empresa: ${name}\n• Correo: ${email}\n• Área: ${projectType}\n\nMensaje:\n${message}`;
-    return { name, email, projectType, message, formattedText };
+    return { name, email, projectType, message, botcheck, formattedText };
   }
 
-  contactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const { name, projectType, formattedText } = buildPayload();
-
+  function triggerMailtoFallback(formattedText, name, projectType) {
     const subject = encodeURIComponent(`Contacto Portafolio: ${projectType} - ${name}`);
     const body = encodeURIComponent(formattedText);
-
     window.location.href = `mailto:Socialedgar0710@gmail.com?subject=${subject}&body=${body}`;
-
     if (formStatusText) {
       formStatusText.textContent = t("form_status_mail");
     }
+    formStatus.className = "p-3.5 rounded-xl bg-blue-600/15 text-blue-800 dark:text-blue-300 border border-blue-500/30 text-sm font-medium flex flex-wrap items-center justify-between gap-2";
     formStatus.classList.remove("hidden");
+  }
+
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const { name, email, projectType, message, botcheck, formattedText } = buildPayload();
+    if (botcheck) return;
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnHtml = submitBtn ? submitBtn.innerHTML : "";
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add("opacity-70", "pointer-events-none");
+      submitBtn.innerHTML = `
+        <span>${t("form_btn_sending")}</span>
+        <span class="material-symbols-outlined text-base animate-spin" aria-hidden="true">progress_activity</span>
+      `;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: name,
+          email: email,
+          subject: `Nuevo contacto de ${name} [${projectType}]`,
+          message: message,
+          project_area: projectType,
+          from_name: "Portafolio Edgar López"
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        if (formStatusText) {
+          formStatusText.textContent = t("form_status_success");
+        }
+        formStatus.className = "p-3.5 rounded-xl bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-sm font-medium flex flex-wrap items-center justify-between gap-2";
+        formStatus.classList.remove("hidden");
+        contactForm.reset();
+      } else {
+        throw new Error(result.message || "Error al procesar el envío");
+      }
+    } catch (err) {
+      console.warn("[ContactForm] Error despachando vía Web3Forms API, activando fallback mailto:", err);
+      triggerMailtoFallback(formattedText, name, projectType);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("opacity-70", "pointer-events-none");
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+    }
   });
 
   if (whatsappBtn) {

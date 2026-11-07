@@ -135,6 +135,8 @@ export const I18N_DICTIONARY = {
     form_msg_ph: "Cuéntame sobre tu proyecto, objetivos o idea...",
     form_btn_wa: "Enviar por WhatsApp",
     form_btn_mail: "Enviar por correo",
+    form_btn_sending: "Enviando mensaje...",
+    form_status_success: "¡Mensaje enviado con éxito! Te responderé a la brevedad.",
     form_status_mail:
       "Cliente de correo abierto. Si usas Gmail web, puedes copiar el mensaje con el botón a la derecha.",
     form_status_wa: "Abriendo conversación en WhatsApp con los detalles de tu proyecto...",
@@ -268,6 +270,8 @@ export const I18N_DICTIONARY = {
     form_msg_ph: "Tell me about your project, goals, or timeline...",
     form_btn_wa: "Send via WhatsApp",
     form_btn_mail: "Send via Email",
+    form_btn_sending: "Sending message...",
+    form_status_success: "Message sent successfully! I will get back to you shortly.",
     form_status_mail:
       "Email client triggered. If you use webmail, you can also copy your formatted message with the button on the right.",
     form_status_wa: "Opening WhatsApp chat with your structured project details...",
