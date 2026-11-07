@@ -299,21 +299,35 @@ function t(key) {
   return langDict[key] || esDict[key] || key;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function bootstrapPortfolio() {
   const data = window.PORTFOLIO_DATA;
-  if (!data) return;
+  if (!data) {
+    console.warn("[Portfolio] PORTFOLIO_DATA no disponible todavia, reintentando en 50ms...");
+    setTimeout(bootstrapPortfolio, 50);
+    return;
+  }
 
-  initTheme();
-  initLanguage(data);
-  initProjects(data.projects);
-  initSkills(data.skillCategories);
-  initTimeline(data.timeline);
-  initMobileMenu();
-  initScrollSpy();
-  initProjectModal(data.projects);
-  initGithubTelemetry(data.profile?.githubUser || "Edgar-LT");
-  initContactForm();
-});
+  try {
+    initTheme();
+    initLanguage(data);
+    initProjects(data.projects);
+    initSkills(data.skillCategories);
+    initTimeline(data.timeline);
+    initMobileMenu();
+    initScrollSpy();
+    initProjectModal(data.projects);
+    initGithubTelemetry(data.profile?.githubUser || "Edgar-LT");
+    initContactForm();
+  } catch (err) {
+    console.error("[Portfolio] Error inicializando modulos:", err);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootstrapPortfolio);
+} else {
+  bootstrapPortfolio();
+}
 
 /* ==========================================================================
    0. GESTIÓN DE TEMA (CLARO LUMINOSO / AZUL NOCHE) Y LENGUAJE (ES / EN)
