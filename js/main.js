@@ -276,6 +276,22 @@ let currentLang = localStorage.getItem("edgar_lang") === "en" ? "en" : "es";
 let currentProjectFilter = "all";
 let cachedGithubRepos = null;
 
+/**
+ * Sanitiza cualquier cadena de texto para evitar vulnerabilidades XSS
+ * al renderizar contenido dinámico interpolado en plantillas HTML.
+ * @param {unknown} str
+ * @returns {string}
+ */
+function escapeHtml(str) {
+  if (str === null || str === undefined) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function t(key) {
   return (I18N_DICTIONARY[currentLang] && I18N_DICTIONARY[currentLang][key]) || I18N_DICTIONARY.es[key] || key;
 }
@@ -422,11 +438,16 @@ function getPublishedProjects(projects) {
    1. RENDERIZADO DINÁMICO Y FILTRADO DE PROYECTOS (WCAG 2.1 AA COMPLIANT)
    ========================================================================== */
 function renderProjectPreview(project, styles) {
-  const title = currentLang === "en" && project.titleEn ? project.titleEn : project.title;
-  const categoryLabel =
+  const rawTitle = currentLang === "en" && project.titleEn ? project.titleEn : project.title;
+  const rawCategoryLabel =
     currentLang === "en" && project.categoryLabelEn ? project.categoryLabelEn : project.categoryLabel;
-  const role = currentLang === "en" && project.roleEn ? project.roleEn : project.role;
-  const status = currentLang === "en" && project.statusEn ? project.statusEn : project.status;
+  const rawRole = currentLang === "en" && project.roleEn ? project.roleEn : project.role;
+  const rawStatus = currentLang === "en" && project.statusEn ? project.statusEn : project.status;
+
+  const title = escapeHtml(rawTitle);
+  const categoryLabel = escapeHtml(rawCategoryLabel);
+  const role = escapeHtml(rawRole);
+  const status = escapeHtml(rawStatus);
 
   if (project.image) {
     return `
@@ -481,10 +502,11 @@ function renderProjects(projects, activeFilter = "all") {
       const isExternalDemo = /^https?:\/\//i.test(project.demoUrl || "");
       const demoAttrs = isExternalDemo ? 'target="_blank" rel="noopener noreferrer"' : "";
 
-      const tagsHtml = (project.tags || [])
+      const safeTags = Array.isArray(project.tags) ? project.tags : [];
+      const tagsHtml = safeTags
         .map(
           (tag) =>
-            `<span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">${tag}</span>`
+            `<span class="px-2.5 py-1 rounded-md identity-chip font-mono text-xs font-medium">${escapeHtml(tag)}</span>`
         )
         .join("");
 
@@ -684,30 +706,31 @@ function initProjectModal(projects) {
       )
       .join("");
 
-    const metricsHtml =
-      project.metrics && project.metrics.length
-        ? `
+    const safeMetrics = Array.isArray(project.metrics) ? project.metrics : [];
+    const metricsHtml = safeMetrics.length
+      ? `
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          ${project.metrics
+          ${safeMetrics
             .map(
               (m) => `
               <div class="identity-subcard p-3 rounded-xl flex flex-col">
-                <span class="font-mono text-[11px] theme-muted">${m.label}</span>
-                <span class="font-mono font-bold text-sm theme-heading">${m.value}</span>
+                <span class="font-mono text-[11px] theme-muted">${escapeHtml(m.label)}</span>
+                <span class="font-mono font-bold text-sm theme-heading">${escapeHtml(m.value)}</span>
               </div>
             `
             )
             .join("")}
         </div>
       `
-        : "";
+      : "";
 
-    const featuresHtml = features
+    const safeFeatures = Array.isArray(features) ? features : [];
+    const featuresHtml = safeFeatures
       .map(
         (feat) => `
         <li class="flex items-start gap-2.5 text-sm theme-body">
           <span class="material-symbols-outlined theme-accent text-lg mt-0.5" aria-hidden="true">check_circle</span>
-          <span>${feat}</span>
+          <span>${escapeHtml(feat)}</span>
         </li>
       `
       )
@@ -855,18 +878,21 @@ function renderGithubRepos(repos) {
   const topRepos = (repos || []).slice(0, 3);
   container.innerHTML = topRepos
     .map((repo) => {
-      const lang = repo.language || "Code";
-      const desc =
+      const lang = escapeHtml(repo.language || "Code");
+      const rawDesc =
         repo.description ||
         (currentLang === "en"
           ? "Public source code repository on GitHub."
           : "Repositorio público de código en GitHub.");
+      const desc = escapeHtml(rawDesc);
+      const name = escapeHtml(repo.name);
+      const safeUrl = encodeURI(repo.html_url || "https://github.com/Edgar-LT");
 
       return `
-        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="identity-subcard p-4 rounded-xl flex flex-col justify-between gap-2.5 hover:border-blue-500 transition-all group">
+        <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="identity-subcard p-4 rounded-xl flex flex-col justify-between gap-2.5 hover:border-blue-500 transition-all group">
           <div class="flex flex-col gap-1">
             <div class="flex items-center justify-between gap-2">
-              <span class="font-mono font-bold text-xs sm:text-sm theme-heading group-hover:underline truncate">${repo.name}</span>
+              <span class="font-mono font-bold text-xs sm:text-sm theme-heading group-hover:underline truncate">${name}</span>
               <span class="material-symbols-outlined text-sm theme-muted shrink-0" aria-hidden="true">open_in_new</span>
             </div>
             <p class="text-xs theme-body line-clamp-2">${desc}</p>
@@ -905,7 +931,8 @@ async function initGithubTelemetry(username) {
     cachedGithubRepos = clean.length ? clean : FALLBACK_GITHUB_REPOS;
     sessionStorage.setItem(cacheKey, JSON.stringify(cachedGithubRepos));
     renderGithubRepos(cachedGithubRepos);
-  } catch (_err) {
+  } catch (err) {
+    console.warn("[GitHubTelemetry] Error consultando API de GitHub, aplicando fallback seguro:", err);
     cachedGithubRepos = FALLBACK_GITHUB_REPOS;
     renderGithubRepos(cachedGithubRepos);
   }
@@ -1000,7 +1027,8 @@ function initContactForm() {
             copyEmailLabel.textContent = t("copy_btn");
           }, 2200);
         }
-      } catch (_e) {
+      } catch (err) {
+        console.warn("[ClipboardService] Acceso al portapapeles denegado, redirigiendo a cliente nativo de correo:", err);
         window.location.href = "mailto:Socialedgar0710@gmail.com";
       }
     });
@@ -1058,8 +1086,8 @@ function initContactForm() {
         setTimeout(() => {
           copyFormMsgBtn.textContent = "Copiar mensaje";
         }, 2000);
-      } catch (_e) {
-        // Fallback silencioso
+      } catch (err) {
+        console.warn("[ClipboardService] Fallo al copiar el mensaje formateado:", err);
       }
     });
   }
