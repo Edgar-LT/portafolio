@@ -18,6 +18,7 @@ $requiredFiles = @(
   "site.webmanifest",
   "assets/favicon.svg",
   "assets/logo.svg",
+  "assets/profile.webp",
   "assets/og-preview.svg",
   "assets/projects/voxpdf-studio.png",
   "assets/projects/voxpdf-studio-card.png",
