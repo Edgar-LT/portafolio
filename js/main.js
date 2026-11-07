@@ -3,7 +3,7 @@
    Edgar López — Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
-const I18N_DICTIONARY = {
+var I18N_FALLBACK = (typeof window !== "undefined" && window.I18N_DICTIONARY) || {
   es: {
     skip_link: "Saltar al contenido principal",
     brand_subtitle: "Web · Apps · Mecatrónica",
@@ -271,7 +271,9 @@ const I18N_DICTIONARY = {
     footer_mail: "Email"
   }
 };
-window.I18N_DICTIONARY = I18N_DICTIONARY;
+if (typeof window !== "undefined") {
+  window.I18N_DICTIONARY = window.I18N_DICTIONARY || I18N_FALLBACK;
+}
 let currentLang = localStorage.getItem("edgar_lang") === "en" ? "en" : "es";
 let currentProjectFilter = "all";
 let cachedGithubRepos = null;
