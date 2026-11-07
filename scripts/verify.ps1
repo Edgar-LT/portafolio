@@ -11,6 +11,7 @@ $requiredFiles = @(
   "css/styles.css",
   "js/config.tailwind.js",
   "js/data.js",
+  "js/i18n.js",
   "js/main.js",
   "robots.txt",
   "sitemap.xml",

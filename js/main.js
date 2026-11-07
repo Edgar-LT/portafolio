@@ -3,275 +3,7 @@
    Edgar López — Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
-const I18N_DICTIONARY = {
-  es: {
-    skip_link: "Saltar al contenido principal",
-    brand_subtitle: "Web · Apps · Mecatrónica",
-    nav_home: "Inicio",
-    nav_areas: "Áreas",
-    nav_projects: "Proyectos",
-    nav_voxpdf: "VoxPDF Demo",
-    nav_lab: "Laboratorio PID",
-    nav_stack: "Stack",
-    nav_timeline: "Trayectoria",
-    nav_contact: "Contacto",
-    nav_cv: "Ver CV",
-    nav_cv_full: "Ver Currículum Vitae (PDF)",
-    nav_cta: "Contactar",
-    theme_dark: "Oscuro",
-    theme_light: "Claro",
-    hero_badge: "Edgar López · Caracas, Venezuela",
-    hero_title:
-      'Desarrollo <span class="text-brand-gradient">Web y Aplicaciones</span> con visión de Ingeniería Mecatrónica.',
-    hero_desc:
-      "Estudiante de Ingeniería Mecatrónica y desarrollador de software. Diseño y construyo páginas web modernas, aplicaciones en Python/JavaScript y sistemas de control combinando estética limpia con precisión técnica.",
-    hero_cta_projects: "Explorar proyectos",
-    hero_cta_lab: "Simulador PID",
-    hero_cta_cv: "Currículum Vitae",
-    card_role: "Ingeniería & Desarrollo de Software",
-    card_status: "Disponible",
-    pillar1_title: "Desarrollo Web Full-Stack",
-    pillar1_sub: "Sitios responsivos, paneles modernos y APIs REST.",
-    pillar2_title: "Aplicaciones & Python",
-    pillar2_sub: "Software multiplataforma, automatización y TTS neuronal.",
-    pillar3_title: "Ingeniería Mecatrónica",
-    pillar3_sub: "Electrónica, control PID, microcontroladores y telemetría.",
-    card_cta: "Iniciar conversación →",
-    triad_eyebrow: "Especialidades",
-    triad_title: "La Tríada Tecnológica",
-    triad_desc:
-      "Mi perfil une tres áreas complementarias para desarrollar proyectos de extremo a extremo, desde la lógica de control físico hasta la aplicación que utiliza el usuario.",
-    triad1_title: "Desarrollo Web",
-    triad1_desc:
-      "Diseño y programación de páginas web modernas, paneles interactivos y plataformas escalables enfocadas en velocidad, SEO y claridad visual.",
-    triad2_title: "Aplicaciones & Python",
-    triad2_desc:
-      "Creación de aplicaciones multiplataforma y servicios en Python (FastAPI, procesamiento documental y síntesis neuronal) con manejo eficiente de estado.",
-    triad3_title: "Ingeniería Mecatrónica",
-    triad3_desc:
-      "Integración de electrónica, sensores, actuadores, control clásico (PID) y programación de microcontroladores para automatización y telemetría.",
-    projects_eyebrow: "Portafolio de trabajo",
-    projects_title: "Proyectos Destacados",
-    filter_all: "Todos",
-    filter_web: "Desarrollo Web",
-    filter_app: "Aplicaciones",
-    filter_meca: "Mecatrónica",
-    project_status_prefix: "Estado",
-    project_details_btn: "Ficha técnica",
-    project_code_btn: "Código",
-    project_demo_btn: "Demo",
-    modal_challenge: "El Reto de Ingeniería",
-    modal_arch: "Solución & Arquitectura",
-    modal_features: "Aspectos Técnicos Destacados",
-    modal_repo_btn: "Ver código en GitHub",
-    modal_demo_btn: "Abrir demostración",
-    gh_title: "Actividad en Vivo · GitHub (@Edgar-LT)",
-    gh_subtitle: "Repositorios públicos y código fuente sincronizados desde GitHub.",
-    gh_profile_btn: "Ver perfil en GitHub",
-    gh_updated: "Actualizado",
-    vox_eyebrow: "Demostración en Vivo · Python + FastAPI + Web Studio",
-    vox_title: "VoxPDF Studio — Mini Preview Interactivo",
-    vox_desc:
-      "Experimenta la interfaz de lectura con vista dividida, limpieza geométrica de encabezados y síntesis de voz con resaltado sincronizado oración por oración.",
-    pid_eyebrow: "Demostración Interactiva · Ingeniería Mecatrónica + Software",
-    pid_title: "Laboratorio de Control PID & Telemetría en Tiempo Real",
-    pid_desc:
-      "Ajusta las ganancias del controlador (Kp, Ki, Kd) o inyecta una perturbación de par sobre el actuador virtual para observar la respuesta dinámica en lazo cerrado a 60 FPS.",
-    pid_preset_opt: "Óptimo (Rápido)",
-    pid_preset_osc: "Subamortiguado",
-    pid_preset_smooth: "Sobreamortiguado",
-    pid_legend_pv: "Salida PV(t)",
-    pid_legend_sp: "Referencia SP",
-    pid_legend_pwm: "Esfuerzo PWM",
-    pid_kpi_mp: "Sobreimpulso (Mp)",
-    pid_kpi_ts: "Establecimiento (Ts)",
-    pid_kpi_ess: "Error Estacionario",
-    pid_kpi_pwm: "Señal Control PWM",
-    pid_panel_title: "Parámetros del Lazo",
-    pid_label_sp: "Setpoint (Referencia)",
-    pid_btn_disturb: "Inyectar Perturbación de Carga",
-    pid_btn_reset: "Reiniciar Respuesta al Escalón",
-    stack_eyebrow: "Competencias técnicas",
-    stack_title: "Stack & Habilidades",
-    stack_desc:
-      "Lenguajes, tecnologías y herramientas organizados por especialidad, sincronizados automáticamente con mi hoja de vida técnica.",
-    phil_eyebrow: "Filosofía de trabajo",
-    phil_title: "Mentalidad de ingeniería en cada línea de código",
-    phil_desc:
-      "La Ingeniería Mecatrónica exige entender cómo interactúan todas las piezas de un sistema. Llevo ese mismo enfoque estructurado al desarrollo de páginas web y aplicaciones:",
-    phil1_title: "Arquitectura limpia y modular",
-    phil1_desc: "Código organizado, desacoplado y fácil de escalar o mantener en equipo.",
-    phil2_title: "Enfoque en la experiencia de usuario",
-    phil2_desc: "Interfaces claras, rápidas y accesibles tanto en móvil como en escritorio.",
-    phil3_title: "Conexión físico-digital",
-    phil3_desc: "Capacidad de integrar sensores, control y hardware con aplicaciones modernas.",
-    timeline_eyebrow: "Formación y evolución",
-    contact_eyebrow: "Contacto directo",
-    contact_title: "Hablemos de tu proyecto",
-    contact_desc:
-      "Si buscas desarrollar una página web, una aplicación o colaborar en un proyecto de ingeniería y software, contáctame por cualquiera de estos medios.",
-    contact_email_label: "Correo electrónico",
-    copy_btn: "Copiar",
-    copied_btn: "¡Copiado!",
-    form_title: "Enviar un mensaje directo",
-    form_subtitle:
-      "Completa los datos y elige si prefieres enviarlo por correo electrónico o directamente a mi WhatsApp.",
-    form_name_label: "Nombre o empresa",
-    form_name_ph: "Tu nombre o empresa",
-    form_email_label: "Correo electrónico",
-    form_email_ph: "correo@ejemplo.com",
-    form_area_label: "Área del proyecto",
-    form_opt_web: "Desarrollo Web",
-    form_opt_app: "Desarrollo de Aplicación / Python",
-    form_opt_meca: "Ingeniería Mecatrónica / IoT",
-    form_opt_integral: "Proyecto Integral (Hardware + Software)",
-    form_opt_other: "Otra consulta",
-    form_msg_label: "Mensaje",
-    form_msg_ph: "Cuéntame sobre tu proyecto, objetivos o idea...",
-    form_btn_wa: "Enviar por WhatsApp",
-    form_btn_mail: "Enviar por correo",
-    form_status_mail:
-      "Cliente de correo abierto. Si usas Gmail web, puedes copiar el mensaje con el botón a la derecha.",
-    form_status_wa: "Abriendo conversación en WhatsApp con los detalles de tu proyecto...",
-    footer_cv: "Currículum (PDF)",
-    footer_lab: "Simulador PID",
-    footer_mail: "Correo"
-  },
-  en: {
-    skip_link: "Skip to main content",
-    brand_subtitle: "Web · Apps · Mechatronics",
-    nav_home: "Home",
-    nav_areas: "Specialties",
-    nav_projects: "Projects",
-    nav_voxpdf: "VoxPDF Demo",
-    nav_lab: "PID Lab",
-    nav_stack: "Stack",
-    nav_timeline: "Background",
-    nav_contact: "Contact",
-    nav_cv: "Resume / CV",
-    nav_cv_full: "View Printable Resume (PDF)",
-    nav_cta: "Get in Touch",
-    theme_dark: "Dark",
-    theme_light: "Light",
-    hero_badge: "Edgar López · Caracas, Venezuela",
-    hero_title:
-      '<span class="text-brand-gradient">Web &amp; Application</span> Development with a Mechatronics Engineering mindset.',
-    hero_desc:
-      "Mechatronics Engineering student and software developer. I design and build modern websites, Python/JavaScript applications, and control systems combining clean aesthetics with technical precision.",
-    hero_cta_projects: "Explore projects",
-    hero_cta_lab: "PID Simulator",
-    hero_cta_cv: "Printable CV",
-    card_role: "Engineering & Software Development",
-    card_status: "Available",
-    pillar1_title: "Full-Stack Web Development",
-    pillar1_sub: "Responsive websites, modern dashboards, and REST APIs.",
-    pillar2_title: "Applications & Python",
-    pillar2_sub: "Cross-platform software, automation, and neural TTS.",
-    pillar3_title: "Mechatronics Engineering",
-    pillar3_sub: "Electronics, PID control, microcontrollers, and telemetry.",
-    card_cta: "Start a conversation →",
-    triad_eyebrow: "Core Disciplines",
-    triad_title: "The Technology Triad",
-    triad_desc:
-      "My profile bridges three complementary areas to build end-to-end solutions, from physical control logic to the user-facing application.",
-    triad1_title: "Web Development",
-    triad1_desc:
-      "Design and engineering of modern websites, interactive dashboards, and scalable platforms focused on speed, SEO, and visual clarity.",
-    triad2_title: "Applications & Python",
-    triad2_desc:
-      "Creation of cross-platform apps and Python backend services (FastAPI, document processing, and neural speech synthesis) with reliable state management.",
-    triad3_title: "Mechatronics Engineering",
-    triad3_desc:
-      "Integration of electronics, sensors, actuators, classical PID control, and microcontroller programming for automation and live telemetry.",
-    projects_eyebrow: "Selected Work",
-    projects_title: "Featured Projects",
-    filter_all: "All",
-    filter_web: "Web Dev",
-    filter_app: "Applications",
-    filter_meca: "Mechatronics",
-    project_status_prefix: "Status",
-    project_details_btn: "Technical Spec",
-    project_code_btn: "Code",
-    project_demo_btn: "Live Demo",
-    modal_challenge: "The Engineering Challenge",
-    modal_arch: "Solution & Architecture",
-    modal_features: "Key Technical Highlights",
-    modal_repo_btn: "View GitHub Repository",
-    modal_demo_btn: "Open Live Demo",
-    gh_title: "Live Activity · GitHub (@Edgar-LT)",
-    gh_subtitle: "Public repositories and source code synced directly from GitHub.",
-    gh_profile_btn: "View GitHub Profile",
-    gh_updated: "Updated",
-    vox_eyebrow: "Live Interactive Demo · Python + FastAPI + Web Studio",
-    vox_title: "VoxPDF Studio — Interactive Mini Preview",
-    vox_desc:
-      "Experience the split-screen reading interface with geometric header filtering and synchronized speech synthesis highlighting sentence by sentence.",
-    pid_eyebrow: "Interactive Demo · Mechatronics Engineering + Software",
-    pid_title: "Real-Time PID Control & Telemetry Laboratory",
-    pid_desc:
-      "Tune the controller gains (Kp, Ki, Kd) or inject a load torque disturbance onto the virtual actuator to observe the closed-loop dynamic response at 60 FPS.",
-    pid_preset_opt: "Optimal (Fast)",
-    pid_preset_osc: "Underdamped",
-    pid_preset_smooth: "Overdamped",
-    pid_legend_pv: "Output PV(t)",
-    pid_legend_sp: "Setpoint SP",
-    pid_legend_pwm: "PWM Effort",
-    pid_kpi_mp: "Overshoot (Mp)",
-    pid_kpi_ts: "Settling Time (Ts)",
-    pid_kpi_ess: "Steady-State Error",
-    pid_kpi_pwm: "PWM Control Signal",
-    pid_panel_title: "Loop Parameters",
-    pid_label_sp: "Setpoint (Target)",
-    pid_btn_disturb: "Inject Load Disturbance",
-    pid_btn_reset: "Reset Step Response",
-    stack_eyebrow: "Technical Competencies",
-    stack_title: "Tech Stack & Skills",
-    stack_desc:
-      "Languages, frameworks, and engineering tools organized by discipline and automatically synced with my printable resume.",
-    phil_eyebrow: "Engineering Philosophy",
-    phil_title: "Engineering mindset in every line of code",
-    phil_desc:
-      "Mechatronics Engineering requires understanding how every subsystem interacts. I bring that same structured systems thinking to web and application development:",
-    phil1_title: "Clean & modular architecture",
-    phil1_desc: "Well-organized, decoupled code that is easy to scale and maintain.",
-    phil2_title: "User-centered experience",
-    phil2_desc: "Clear, fast, and accessible interfaces across mobile and desktop.",
-    phil3_title: "Physical-digital integration",
-    phil3_desc: "Ability to bridge sensors, control loops, and hardware with modern software.",
-    timeline_eyebrow: "Education & Evolution",
-    contact_eyebrow: "Direct Contact",
-    contact_title: "Let's talk about your project",
-    contact_desc:
-      "Whether you need a modern website, a custom application, or a hardware-software engineering collaboration, reach out through any channel below.",
-    contact_email_label: "Email address",
-    copy_btn: "Copy",
-    copied_btn: "Copied!",
-    form_title: "Send a direct message",
-    form_subtitle:
-      "Fill out the details below and choose whether to send via email or directly to my WhatsApp.",
-    form_name_label: "Name or company",
-    form_name_ph: "Your name or company",
-    form_email_label: "Email address",
-    form_email_ph: "you@example.com",
-    form_area_label: "Project area",
-    form_opt_web: "Web Development",
-    form_opt_app: "Application / Python Development",
-    form_opt_meca: "Mechatronics Engineering / IoT",
-    form_opt_integral: "Full System (Hardware + Software)",
-    form_opt_other: "General Inquiry",
-    form_msg_label: "Message",
-    form_msg_ph: "Tell me about your project, goals, or timeline...",
-    form_btn_wa: "Send via WhatsApp",
-    form_btn_mail: "Send via Email",
-    form_status_mail:
-      "Email client triggered. If you use webmail, you can also copy your formatted message with the button on the right.",
-    form_status_wa: "Opening WhatsApp chat with your structured project details...",
-    footer_cv: "Resume (PDF)",
-    footer_lab: "PID Simulator",
-    footer_mail: "Email"
-  }
-};
-
+const I18N_DICTIONARY = window.I18N_DICTIONARY || {};
 let currentLang = localStorage.getItem("edgar_lang") === "en" ? "en" : "es";
 let currentProjectFilter = "all";
 let cachedGithubRepos = null;
@@ -968,19 +700,11 @@ function initMobileMenu() {
 function initScrollSpy() {
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll("#desktop-nav .nav-link");
-  let ticking = false;
+  if (!sections.length || !navLinks.length) return;
 
-  function updateActiveNav() {
-    let currentSection = "inicio";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 150;
-      if (window.scrollY >= sectionTop) {
-        currentSection = section.getAttribute("id");
-      }
-    });
-
+  function setActiveLink(sectionId) {
     navLinks.forEach((link) => {
-      if (link.getAttribute("href") === `#${currentSection}`) {
+      if (link.getAttribute("href") === `#${sectionId}`) {
         link.setAttribute("aria-current", "page");
         link.className =
           "nav-link text-sm px-3.5 py-1.5 rounded-full nav-pill-active font-semibold transition-all";
@@ -990,19 +714,64 @@ function initScrollSpy() {
           "nav-link text-sm px-3.5 py-1.5 rounded-full theme-body hover:underline transition-all";
       }
     });
-    ticking = false;
   }
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateActiveNav);
-        ticking = true;
+  // Modern IntersectionObserver implementation: 0% layout computation on scroll thread
+  if ("IntersectionObserver" in window) {
+    const visibleSections = new Map();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+
+        if (visibleSections.size > 0) {
+          let bestSection = "inicio";
+          let maxRatio = -1;
+          visibleSections.forEach((ratio, id) => {
+            if (ratio > maxRatio) {
+              maxRatio = ratio;
+              bestSection = id;
+            }
+          });
+          setActiveLink(bestSection);
+        }
+      },
+      {
+        rootMargin: "-80px 0px -40% 0px",
+        threshold: [0.1, 0.3, 0.6]
       }
-    },
-    { passive: true }
-  );
+    );
+
+    sections.forEach((sec) => observer.observe(sec));
+  } else {
+    // Fallback para navegadores antiguos sin IntersectionObserver
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            let currentSection = "inicio";
+            sections.forEach((section) => {
+              if (window.scrollY >= section.offsetTop - 150) {
+                currentSection = section.getAttribute("id");
+              }
+            });
+            setActiveLink(currentSection);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
 }
 
 /* ==========================================================================
