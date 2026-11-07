@@ -11,7 +11,8 @@
    automáticamente tanto en `index.html` como en el CV imprimible (`cv.html`).
    ========================================================================== */
 
-window.PORTFOLIO_DATA = {
+export const PORTFOLIO_DATA = {
+
   profile: {
     name: "Edgar López",
     location: "Caracas, Venezuela",
@@ -386,3 +387,9 @@ window.PORTFOLIO_DATA = {
     }
   ]
 };
+
+// Retrocompatibilidad global para páginas que usen scripts clásicos (ej. cv.html)
+if (typeof window !== "undefined") {
+  window.PORTFOLIO_DATA = PORTFOLIO_DATA;
+}
+

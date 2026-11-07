@@ -8,7 +8,7 @@
    Edgar López — Ingeniería Mecatrónica, Desarrollo Web & Aplicaciones
    ========================================================================== */
 
-const I18N_DICTIONARY = {
+export const I18N_DICTIONARY = {
   es: {
     skip_link: "Saltar al contenido principal",
     brand_subtitle: "Web · Apps · Mecatrónica",

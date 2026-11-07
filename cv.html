@@ -114,11 +114,13 @@
     </section>
   </main>
 
-  <script src="js/data.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const data = window.PORTFOLIO_DATA;
+  <script type="module">
+    import { PORTFOLIO_DATA } from "./js/data.js";
+
+    function bootstrapCV() {
+      const data = PORTFOLIO_DATA;
       if (!data) return;
+
 
       let lang = localStorage.getItem("edgar_lang") === "en" ? "en" : "es";
 
@@ -272,7 +274,13 @@
         localStorage.setItem("edgar_theme", isDark ? "dark" : "light");
         syncCvTheme();
       });
-    });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bootstrapCV);
+    } else {
+      bootstrapCV();
+    }
   </script>
 </body>
 </html>
