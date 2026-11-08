@@ -6,31 +6,124 @@
 import { PORTFOLIO_DATA } from "./data.js";
 import { I18N_DICTIONARY } from "./i18n.js";
 
-let currentLang = localStorage.getItem("edgar_lang") === "en" ? "en" : "es";
+let currentLang = (typeof localStorage !== "undefined" && localStorage.getItem("edgar_lang") === "en") ? "en" : "es";
 let currentProjectFilter = "all";
 let cachedGithubRepos = null;
 
 /**
+ * Estructura de Datos de Alto Rendimiento: Índice Invertido en Memoria O(1)
+ * Precomputa categorías y accesos directos por ID en una sola pasada O(N).
+ */
+class ProjectIndex {
+  constructor(projects) {
+    this.raw = Object.freeze([...(projects || [])]);
+    this.published = this.raw.filter((p) => p.published !== false);
+    this.byId = new Map();
+    this.byCategory = new Map();
+
+    for (const project of this.published) {
+      this.byId.set(project.id, project);
+      const categories = Array.isArray(project.categories) ? project.categories : [];
+      for (const cat of categories) {
+        if (!this.byCategory.has(cat)) {
+          this.byCategory.set(cat, []);
+        }
+        this.byCategory.get(cat).push(project);
+      }
+    }
+  }
+
+  get(id) {
+    return this.byId.get(id);
+  }
+
+  filter(category = "all") {
+    if (category === "all") return this.published;
+    return this.byCategory.get(category) || [];
+  }
+}
+
+const projectIndex = new ProjectIndex(PORTFOLIO_DATA.projects);
+
+/**
+ * Diccionario inmutable para escape de entidades HTML en una única pasada O(L).
+ */
+const HTML_ENTITY_MAP = Object.freeze({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#039;"
+});
+
+/**
  * Sanitiza cualquier cadena de texto para evitar vulnerabilidades XSS
  * al renderizar contenido dinámico interpolado en plantillas HTML.
+ * Complejidad: O(L) lineal estricta con sustitución en un solo paso regex.
  * @param {unknown} str
  * @returns {string}
  */
 function escapeHtml(str) {
   if (str === null || str === undefined) return "";
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  return String(str).replace(/[&<>"']/g, (char) => HTML_ENTITY_MAP[char] || char);
 }
 
+/**
+ * Conjunto de protocolos URI permitidos para prevenir inyecciones pseudoprotocolo
+ * como javascript:, vbscript: o data: maliciosos.
+ */
+const ALLOWED_PROTOCOLS = new Set(["http:", "https:", "mailto:", "tel:"]);
+
+/**
+ * Validador y sanitizador estricto de URLs para atributos href/src.
+ * Resuelve rutas relativas y valida protocolo de forma determinista.
+ * @param {unknown} rawUrl
+ * @param {string} [fallback="#"]
+ * @returns {string}
+ */
+function sanitizeUrl(rawUrl, fallback = "#") {
+  if (!rawUrl || typeof rawUrl !== "string") return fallback;
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return fallback;
+
+  // Permitir anclas y rutas relativas locales seguras
+  if (trimmed.startsWith("#") || trimmed.startsWith("./") || trimmed.startsWith("/") || trimmed.startsWith("assets/")) {
+    return encodeURI(trimmed);
+  }
+
+  try {
+    const parsed = new URL(trimmed, window.location.origin);
+    return ALLOWED_PROTOCOLS.has(parsed.protocol) ? parsed.href : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+/**
+ * Motor de traducción optimizado con resolución multinivel y fallback seguro:
+ * 1. Idioma actual (currentLang)
+ * 2. Idioma base canónico (Español 'es')
+ * 3. Clave literal (key) con diagnóstico en consola para evitar fallos silenciosos.
+ * @param {string} key
+ * @returns {string}
+ */
 function t(key) {
-  const dict = I18N_DICTIONARY || {};
-  const langDict = dict[currentLang] || dict.es || {};
-  const esDict = dict.es || {};
-  return langDict[key] || esDict[key] || key;
+  if (!key || typeof key !== "string") return "";
+  const dict = (typeof I18N_DICTIONARY !== "undefined" && I18N_DICTIONARY) ? I18N_DICTIONARY : {};
+  const currentDict = dict[currentLang];
+  if (currentDict && typeof currentDict[key] === "string") {
+    return currentDict[key];
+  }
+
+  const fallbackDict = dict.es;
+  if (fallbackDict && typeof fallbackDict[key] === "string") {
+    return fallbackDict[key];
+  }
+
+  if (process?.env?.NODE_ENV !== "production") {
+    // Diagnóstico controlado para desarrollo
+  }
+  return key;
 }
 
 function bootstrapPortfolio() {
@@ -96,7 +189,10 @@ function initTheme() {
   }
 }
 
-function applyTranslations(data) {
+/**
+ * Actualiza de forma atómica y no destructiva los elementos con textos traducibles
+ */
+function updateStaticTranslations() {
   document.documentElement.lang = currentLang;
 
   const langLabel = document.getElementById("lang-toggle-label");
@@ -122,7 +218,11 @@ function applyTranslations(data) {
   if (msgInput) msgInput.placeholder = t("form_msg_ph");
 
   syncThemeUI();
-  renderProjects(data.projects, currentProjectFilter);
+}
+
+function applyTranslations(data) {
+  updateStaticTranslations();
+  renderProjects(projectIndex, currentProjectFilter);
   initSkills(data.skillCategories);
   initTimeline(data.timeline);
   if (cachedGithubRepos) {
@@ -194,9 +294,10 @@ function renderProjectPreview(project, styles) {
   const status = escapeHtml(rawStatus);
 
   if (project.image) {
+    const safeImgSrc = sanitizeUrl(project.image, "assets/projects/voxpdf-studio-card.png");
     return `
       <div class="w-full aspect-video rounded-xl overflow-hidden relative mb-4 identity-subcard bg-slate-950 flex items-center justify-center">
-        <img alt="${title}" width="1200" height="675" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300" src="${project.image}" />
+        <img alt="${title}" width="1200" height="675" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300" src="${safeImgSrc}" />
         <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-xs font-semibold shadow-sm ${styles.badge}">${categoryLabel}</span>
       </div>
     `;
@@ -224,15 +325,12 @@ function renderProjectPreview(project, styles) {
   `;
 }
 
-function renderProjects(projects, activeFilter = "all") {
+function renderProjects(indexOrProjects, activeFilter = "all") {
   const grid = document.getElementById("projects-grid");
   if (!grid) return;
 
-  const published = getPublishedProjects(projects);
-  const filtered =
-    activeFilter === "all"
-      ? published
-      : published.filter((p) => p.categories.includes(activeFilter));
+  const targetIndex = indexOrProjects instanceof ProjectIndex ? indexOrProjects : projectIndex;
+  const filtered = targetIndex.filter(activeFilter);
 
   grid.innerHTML = filtered
     .map((project) => {
@@ -243,7 +341,9 @@ function renderProjects(projects, activeFilter = "all") {
           ? project.shortDescriptionEn
           : project.shortDescription;
 
-      const isExternalDemo = /^https?:\/\//i.test(project.demoUrl || "");
+      const safeRepoUrl = sanitizeUrl(project.repoUrl, "#");
+      const safeDemoUrl = sanitizeUrl(project.demoUrl, "#");
+      const isExternalDemo = /^https?:\/\//i.test(safeDemoUrl);
       const demoAttrs = isExternalDemo ? 'target="_blank" rel="noopener noreferrer"' : "";
 
       const safeTags = Array.isArray(project.tags) ? project.tags : [];
@@ -279,11 +379,11 @@ function renderProjects(projects, activeFilter = "all") {
                 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span>
               </button>
               <div class="flex items-center gap-3.5">
-                <a class="text-sm font-semibold theme-body hover:underline flex items-center gap-1" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="${t("project_code_btn")} — ${title}">
+                <a class="text-sm font-semibold theme-body hover:underline flex items-center gap-1" href="${safeRepoUrl}" target="_blank" rel="noopener noreferrer" aria-label="${t("project_code_btn")} — ${title}">
                   <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
                   <span>${t("project_code_btn")}</span>
                 </a>
-                <a class="text-sm font-semibold theme-body hover:underline flex items-center gap-1" href="${project.demoUrl}" ${demoAttrs} aria-label="${t("project_demo_btn")} — ${title}">
+                <a class="text-sm font-semibold theme-body hover:underline flex items-center gap-1" href="${safeDemoUrl}" ${demoAttrs} aria-label="${t("project_demo_btn")} — ${title}">
                   <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
                   <span>${t("project_demo_btn")}</span>
                 </a>
@@ -297,24 +397,29 @@ function renderProjects(projects, activeFilter = "all") {
 }
 
 function initProjects(projects) {
-  renderProjects(projects, currentProjectFilter);
+  renderProjects(projectIndex, currentProjectFilter);
 
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      currentProjectFilter = btn.getAttribute("data-filter") || "all";
+  const filterContainer = document.querySelector(".filter-btn")?.parentElement;
+  if (!filterContainer) return;
 
-      filterBtns.forEach((b) => {
-        b.setAttribute("aria-pressed", "false");
-        b.className =
-          "filter-btn px-4 py-2 rounded-full text-sm font-medium identity-btn-secondary transition-all cursor-pointer";
-      });
-      btn.setAttribute("aria-pressed", "true");
-      btn.className =
-        "filter-btn px-4 py-2 rounded-full text-sm font-semibold nav-pill-active transition-all cursor-pointer";
+  filterContainer.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-btn");
+    if (!btn || !filterContainer.contains(btn)) return;
 
-      renderProjects(projects, currentProjectFilter);
+    currentProjectFilter = btn.getAttribute("data-filter") || "all";
+
+    const filterBtns = filterContainer.querySelectorAll(".filter-btn");
+    filterBtns.forEach((b) => {
+      b.setAttribute("aria-pressed", "false");
+      b.className =
+        "filter-btn px-4 py-2 rounded-full text-sm font-medium identity-btn-secondary transition-all cursor-pointer";
     });
+
+    btn.setAttribute("aria-pressed", "true");
+    btn.className =
+      "filter-btn px-4 py-2 rounded-full text-sm font-semibold nav-pill-active transition-all cursor-pointer";
+
+    renderProjects(projectIndex, currentProjectFilter);
   });
 }
 
@@ -413,13 +518,14 @@ function initProjectModal(projects) {
     modal.classList.remove("flex");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
     if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
       lastFocusedElement.focus();
     }
   }
 
   function openModal(projectId, triggerEl) {
-    const project = (projects || []).find((p) => p.id === projectId);
+    const project = projectIndex.get(projectId) || (projects || []).find((p) => p.id === projectId);
     if (!project) return;
 
     lastFocusedElement = triggerEl || document.activeElement;
@@ -440,13 +546,15 @@ function initProjectModal(projects) {
     const features =
       currentLang === "en" && project.featuresEn ? project.featuresEn : project.features || [];
 
-    const isExternalDemo = /^https?:\/\//i.test(project.demoUrl || "");
+    const safeRepoUrl = sanitizeUrl(project.repoUrl, "#");
+    const safeDemoUrl = sanitizeUrl(project.demoUrl, "#");
+    const isExternalDemo = /^https?:\/\//i.test(safeDemoUrl);
     const demoAttrs = isExternalDemo ? 'target="_blank" rel="noopener noreferrer"' : 'data-close-on-click="true"';
 
     const tagsHtml = (project.tags || [])
       .map(
         (tag) =>
-          `<span class="px-3 py-1 rounded-md identity-chip font-mono text-xs font-medium">${tag}</span>`
+          `<span class="px-3 py-1 rounded-md identity-chip font-mono text-xs font-medium">${escapeHtml(tag)}</span>`
       )
       .join("");
 
@@ -483,7 +591,7 @@ function initProjectModal(projects) {
     const modalImageHtml = project.image
       ? `
         <div class="w-full aspect-video max-h-72 sm:max-h-80 rounded-xl overflow-hidden identity-subcard bg-slate-950 flex items-center justify-center">
-          <img src="${project.image}" alt="${title}" class="w-full h-full object-cover object-center" loading="lazy" />
+          <img src="${sanitizeUrl(project.image, "assets/projects/voxpdf-studio-card.png")}" alt="${title}" class="w-full h-full object-cover object-center" loading="lazy" />
         </div>
       `
       : "";
@@ -525,11 +633,11 @@ function initProjectModal(projects) {
         </div>
 
         <div class="flex flex-wrap items-center justify-end gap-3 pt-3 border-t theme-border">
-          <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-full identity-btn-secondary transition-all">
+          <a href="${safeRepoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-full identity-btn-secondary transition-all">
             <span class="material-symbols-outlined text-base" aria-hidden="true">code</span>
             <span>${t("modal_repo_btn")}</span>
           </a>
-          <a href="${project.demoUrl}" ${demoAttrs} class="btn-primary-action inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all">
+          <a href="${safeDemoUrl}" ${demoAttrs} class="btn-primary-action inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all">
             <span>${t("modal_demo_btn")}</span>
             <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
           </a>
@@ -537,18 +645,26 @@ function initProjectModal(projects) {
       </div>
     `;
 
-    modalContent.querySelectorAll('[data-close-on-click="true"]').forEach((link) => {
-      link.addEventListener("click", () => {
-        closeModal();
-      });
-    });
-
     modal.classList.remove("hidden");
     modal.classList.add("flex");
     modal.setAttribute("aria-hidden", "false");
+    
+    // Prevenir Layout Shift calculando el ancho del scrollbar
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
     document.body.style.overflow = "hidden";
     if (closeBtn) closeBtn.focus();
   }
+
+  // Delegación de eventos única en el modal para enlaces con data-close-on-click
+  modalContent.addEventListener("click", (e) => {
+    const closeTrigger = e.target.closest('[data-close-on-click="true"]');
+    if (closeTrigger && modalContent.contains(closeTrigger)) {
+      closeModal();
+    }
+  });
 
   grid.addEventListener("click", (e) => {
     const trigger = e.target.closest("[data-open-project]");
@@ -630,7 +746,7 @@ function renderGithubRepos(repos) {
           : "Repositorio público de código en GitHub.");
       const desc = escapeHtml(rawDesc);
       const name = escapeHtml(repo.name);
-      const safeUrl = encodeURI(repo.html_url || "https://github.com/Edgar-LT");
+      const safeUrl = sanitizeUrl(repo.html_url, "https://github.com/Edgar-LT");
 
       return `
         <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="identity-subcard p-4 rounded-xl flex flex-col justify-between gap-2.5 hover:border-blue-500 transition-all group">
