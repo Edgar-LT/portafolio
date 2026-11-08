@@ -282,4 +282,6 @@ export const I18N_DICTIONARY = {
 };
 
 
-window.I18N_DICTIONARY = I18N_DICTIONARY;
+if (typeof window !== "undefined") {
+  window.I18N_DICTIONARY = I18N_DICTIONARY;
+}
